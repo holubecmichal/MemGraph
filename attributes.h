@@ -12,13 +12,13 @@
 
 class attributes {
 protected:
-	std::map<std::string, attribute> attrs;
+	//std::map<std::string, attribute> attrs;
 
 public:
-	int setAttrs(std::map<std::string, attribute>);
-	int setAttr(std::string, attribute);
-	std::map<std::string, attribute> getAttrs(std::string);
-	attribute getAttr(std::string);
+	//int setAttrs(std::map<std::string, attribute>);
+	//int setAttr(std::string, attribute);
+	//std::map<std::string, attribute> getAttrs(std::string);
+	//attribute getAttr(std::string);
 };
 
 

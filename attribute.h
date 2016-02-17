@@ -7,34 +7,58 @@
 
 
 #include <string>
+#include <iostream>
 
 enum attr_type {
+	type_null,
 	type_int,
 	type_double,
 	type_string,
 	type_bool
 };
 
-class attribute {
+template <typename T>
+class attribute{
 private:
-	int type;
-	int tint;
-	double tdouble;
-	std::string tstring;
-	bool tbool;
-
-	void setType();
+	T value;
+	attr_type type;
+	void setType(T val) {
+		if(typeid(val) == typeid(int)) {
+			type = type_int;
+		} else if(typeid(val) == typeid(double)) {
+			type = type_double;
+		} else if(typeid(val) == typeid(std::string)) {
+			type = type_string;
+		} else if(typeid(val) == typeid(bool)) {
+			type = type_bool;
+		} else {
+			type = type_null;
+		}
+	};
 
 public:
-	int setValue(int value);
-	int setValue(double value);
-	int setValue(std::string value);
-	int setValue(bool value);
+	attribute() {
+		type = type_null;
+		value = type_null;
+	};
 
-	attr_type getType();
+	attribute(T val) {
+		value = val;
+		setType(val);
+	};
 
-	template <typename varType>
-		varType getValue();
+	void setValue(T val) {
+		value = val;
+		setType(val);
+	};
+
+	T getValue() {
+		return value;
+	};
+
+	attr_type getType() {
+		return type;
+	};
 };
 
 
