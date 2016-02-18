@@ -11,14 +11,22 @@
 #include "attribute.h"
 
 class attributes {
+private:
+	void insert(std::string name, base_attribute attr);
+
 protected:
-	//std::map<std::string, attribute> attrs;
+	std::map<std::string, base_attribute> attrs;
 
 public:
-	//int setAttrs(std::map<std::string, attribute>);
-	//int setAttr(std::string, attribute);
-	//std::map<std::string, attribute> getAttrs(std::string);
-	//attribute getAttr(std::string);
+	attributes() { attrs.empty(); }
+
+	void setAttr(std::string name, base_attribute attr);
+	void setAttr(std::string name, int value);
+	void setAttr(std::string name, double value);
+	void setAttr(std::string name, std::string value);
+	void setAttr(std::string name, bool value);
+	std::map<std::string, base_attribute> getAttrs();
+//	attribute getAttr(std::string name);
 };
 
 

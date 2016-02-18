@@ -17,11 +17,14 @@ enum attr_type {
 	type_bool
 };
 
+class base_attribute{ };
+
 template <typename T>
-class attribute{
+class attribute : public base_attribute{
 private:
 	T value;
 	attr_type type;
+
 	void setType(T val) {
 		if(typeid(val) == typeid(int)) {
 			type = type_int;
@@ -45,20 +48,23 @@ public:
 	attribute(T val) {
 		value = val;
 		setType(val);
-	};
+	}
+
 
 	void setValue(T val) {
 		value = val;
 		setType(val);
-	};
+	}
+
 
 	T getValue() {
 		return value;
-	};
+	}
+
 
 	attr_type getType() {
 		return type;
-	};
+	}
 };
 
 
