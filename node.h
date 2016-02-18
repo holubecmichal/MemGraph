@@ -15,10 +15,18 @@ private:
 public:
 	attributes attrs;
 
-	std::string getName();
-	void setName(std::string name);
+	node() {
+		name = "";
+	}
 
-	// TODO attrs getter setter
+	node(std::string value) {
+		name = value;
+	}
+
+	std::string getName();
+	void setName(std::string value);
+
+
 };
 
 

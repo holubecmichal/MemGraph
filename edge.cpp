@@ -4,18 +4,19 @@
 
 #include "edge.h"
 
-void edge::setFrom(node from) {
 
+void edge::setFrom(node *from_node) {
+	from = from_node;
 }
 
-node edge::getFrom() {
+node *edge::getFrom() {
 	return from;
 }
 
-void edge::setTo(node to) {
-
+void edge::setTo(node *to_node) {
+	to = to_node;
 }
 
-node edge::getTo() {
+node *edge::getTo() {
 	return to;
 }

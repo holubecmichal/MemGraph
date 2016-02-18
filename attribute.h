@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <utility>
 #include <iostream>
 
 enum attr_type {
@@ -17,54 +18,49 @@ enum attr_type {
 	type_bool
 };
 
-class base_attribute{ };
-
-template <typename T>
-class attribute : public base_attribute{
+class attribute{
 private:
-	T value;
+	int i_value_;
+	double d_value_;
+	std::string s_value_;
+	bool b_value_;
+
 	attr_type type;
 
-	void setType(T val) {
-		if(typeid(val) == typeid(int)) {
-			type = type_int;
-		} else if(typeid(val) == typeid(double)) {
-			type = type_double;
-		} else if(typeid(val) == typeid(std::string)) {
-			type = type_string;
-		} else if(typeid(val) == typeid(bool)) {
-			type = type_bool;
-		} else {
-			type = type_null;
-		}
-	};
+	void setType(int value) { type = type_int; }
+	void setType(double value) { type = type_double; }
+	void setType(const char * value) { type = type_string; }
+	void setType(bool value) { type = type_bool; }
+
+	void init() {
+		type = type_null;
+		i_value_ = 0;
+		d_value_ = 0;
+		s_value_ = "";
+		b_value_ = false;
+	}
 
 public:
-	attribute() {
-		type = type_null;
-		value = type_null;
+	const int &i_value;
+	const double &d_value;
+	const std::string &s_value;
+	const bool &b_value;
+
+	attribute() : i_value(i_value_), d_value(d_value_), s_value(s_value_), b_value(b_value_) {
+		init();
 	};
 
-	attribute(T val) {
-		value = val;
-		setType(val);
+	template <typename T>
+	attribute(T value) : i_value(i_value_), d_value(d_value_), s_value(s_value_), b_value(b_value_) {
+		setValue(value);
 	}
 
+	void setValue(int value) { init(); i_value_ = value; setType(value); }
+	void setValue(double value) { init(); d_value_ = value; setType(value); }
+	void setValue(const char * value) { init();	s_value_ = value; setType(value); }
+	void setValue(bool value) { init();	b_value_ = value; setType(value); }
 
-	void setValue(T val) {
-		value = val;
-		setType(val);
-	}
-
-
-	T getValue() {
-		return value;
-	}
-
-
-	attr_type getType() {
-		return type;
-	}
+//	attr_type getType()
 };
 
 

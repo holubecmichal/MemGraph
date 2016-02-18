@@ -4,8 +4,8 @@
 
 #include "node.h"
 
-void node::setName(std::string name) {
-
+void node::setName(std::string value) {
+	name = value;
 }
 
 std::string node::getName() {

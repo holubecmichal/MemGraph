@@ -12,21 +12,19 @@
 
 class attributes {
 private:
-	void insert(std::string name, base_attribute attr);
-
-protected:
-	std::map<std::string, base_attribute> attrs;
+	void insert(std::string name, attribute attr);
+	std::map<std::string, attribute> attrs;
 
 public:
 	attributes() { attrs.empty(); }
 
-	void setAttr(std::string name, base_attribute attr);
-	void setAttr(std::string name, int value);
-	void setAttr(std::string name, double value);
-	void setAttr(std::string name, std::string value);
-	void setAttr(std::string name, bool value);
-	std::map<std::string, base_attribute> getAttrs();
-//	attribute getAttr(std::string name);
+	void setAttr(std::string name, attribute attr);
+	template <typename T>
+	void setAttr(std::string name, T value) {
+		insert(name, attribute(value));
+	}
+
+	attribute *getAttr(std::string name);
 };
 
 

@@ -11,18 +11,23 @@
 
 class edge {
 private:
-	node from;
-	node to;
+	node *from;
+	node *to;
 
 public:
 	attributes attrs;
 
-	void setFrom(node from);
-	node getFrom();
-	void setTo(node to);
-	node getTo();
+	edge() {
+		from = NULL;
+		to = NULL;
+	}
 
-	// TODO attrs getter setter
+	edge(node *from, node *to) : from(from), to(to) { }
+
+	void setFrom(node *from_node);
+	node *getFrom();
+	void setTo(node *to_node);
+	node *getTo();
 
 };
 
