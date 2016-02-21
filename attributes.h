@@ -21,7 +21,13 @@ public:
 	void setAttr(std::string name, attribute attr);
 	template <typename T>
 	void setAttr(std::string name, T value) {
-		insert(name, attribute(value));
+		attribute *attr = getAttr(name);
+
+		if(attr != NULL) {
+			attr->setValue(value);
+		} else {
+			insert(name, attribute(value));
+		}
 	}
 
 	attribute *getAttr(std::string name);

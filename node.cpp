@@ -11,3 +11,7 @@ void node::setName(std::string value) {
 std::string node::getName() {
 	return name;
 }
+
+attribute *node::getAttr(std::string name) {
+	return attrs.getAttr(name);
+}

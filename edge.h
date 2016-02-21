@@ -21,6 +21,10 @@ public:
 		from = NULL;
 		to = NULL;
 	}
+	~edge() {
+		delete(from);
+		delete(to);
+	}
 
 	edge(node *from, node *to) : from(from), to(to) { }
 

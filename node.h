@@ -26,6 +26,12 @@ public:
 	std::string getName();
 	void setName(std::string value);
 
+	template <typename T>
+	void setAttr(std::string name, T value) {
+		attrs.setAttr(name, value);
+	}
+
+	attribute *getAttr(std::string name);
 
 };
 

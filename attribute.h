@@ -43,22 +43,28 @@ private:
 public:
 	const int &i_value;
 	const double &d_value;
-	const std::string &s_value;
+	//const std::string &s_value;
 	const bool &b_value;
 
-	attribute() : i_value(i_value_), d_value(d_value_), s_value(s_value_), b_value(b_value_) {
+	attribute() : i_value(i_value_), d_value(d_value_), b_value(b_value_) {
+		s_value_.reserve(32);
 		init();
 	};
 
 	template <typename T>
-	attribute(T value) : i_value(i_value_), d_value(d_value_), s_value(s_value_), b_value(b_value_) {
+	attribute(T value) : i_value(i_value_), d_value(d_value_), b_value(b_value_) {
 		setValue(value);
 	}
 
 	void setValue(int value) { init(); i_value_ = value; setType(value); }
 	void setValue(double value) { init(); d_value_ = value; setType(value); }
-	void setValue(const char * value) { init();	s_value_ = value; setType(value); }
+	void setValue(const char * value) { init(); s_value_ = value; setType(value); }
 	void setValue(bool value) { init();	b_value_ = value; setType(value); }
+
+	int getIValue() { return i_value_; }
+	double getDValue() { return d_value_; }
+	std::string getSValue() { return s_value_; };
+	bool getBValue() {return b_value_; };
 
 //	attr_type getType()
 };
