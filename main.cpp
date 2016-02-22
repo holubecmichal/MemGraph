@@ -3,30 +3,22 @@
 #include "attributes.h"
 #include "node.h"
 #include "edge.h"
+#include "graph.h"
 
 using namespace std;
 
+// todo - construct, destruct
+
 int main() {
-	node *Node = new node("node 1");
-	edge *Edge = new edge();
+	graph Graph;
 
-	Node->setName("prvni node");
+	Graph.setType(digraph);
+	Graph.setDefaultNodeAttr("string", "asd");
+	Graph.setDefaultNodeAttr("int", 10);
+	Graph.setDefaultNodeAttr("double", 10.333);
+	Graph.setDefaultNodeAttr("bool", true);
 
-	Node->setAttr("string_1", "ahoooj");
-	Node->setAttr("string_2", "nazdaaar");
-
-	Edge->setFrom(Node);
-
-	Node = new node("node 2");
-	Node->setAttr("asd", 10);
-	Node->setAttr("bflm", true);
-	Node->setAttr("psvz", "aeiou");
-
-	Edge->setTo(Node);
-
-	cout << Edge->getFrom()->getAttr("string_1")->getSValue() << endl;
-	cout << Edge->getFrom()->getAttr("string_2")->getSValue() << endl;
-	cout << Edge->getTo()->getAttr("psvz")->getSValue() << endl;
+	Graph.addEdge("prvni", "druhy");
 
 	return 0;
 }

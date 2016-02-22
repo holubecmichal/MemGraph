@@ -20,3 +20,7 @@ void edge::setTo(node *to_node) {
 node *edge::getTo() {
 	return to;
 }
+
+attribute *edge::getAttr(std::string name) {
+	return attrs.getAttr(name);
+}

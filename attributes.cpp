@@ -23,6 +23,14 @@ attribute *attributes::getAttr(std::string name) {
 	}
 }
 
-unsigned long attributes::getSize() {
+unsigned long attributes::size() {
 	return attrs.size();
+}
+
+map_string_attr_it attributes::begin() {
+	return attrs.begin();
+}
+
+map_string_attr_it attributes::end() {
+	return attrs.end();
 }

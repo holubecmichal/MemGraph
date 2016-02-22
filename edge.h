@@ -33,6 +33,13 @@ public:
 	void setTo(node *to_node);
 	node *getTo();
 
+	template <typename T>
+	void setAttr(std::string name, T value) {
+		attrs.setAttr(name, value);
+	}
+
+	attribute *getAttr(std::string name);
+
 };
 
 

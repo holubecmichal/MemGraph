@@ -10,6 +10,8 @@
 #include <string>
 #include "attribute.h"
 
+typedef std::map<std::string, attribute>::iterator map_string_attr_it;
+
 class attributes {
 private:
 	void insert(std::string name, attribute attr);
@@ -31,7 +33,10 @@ public:
 	}
 
 	attribute *getAttr(std::string name);
-	unsigned long getSize();
+	unsigned long size();
+	map_string_attr_it begin();
+	map_string_attr_it end();
+
 };
 
 
