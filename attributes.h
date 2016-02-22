@@ -31,6 +31,7 @@ public:
 	}
 
 	attribute *getAttr(std::string name);
+	unsigned long getSize();
 };
 
 

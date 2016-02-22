@@ -9,6 +9,7 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <map>
 
 enum attr_type {
 	type_null,
@@ -47,7 +48,6 @@ public:
 	const bool &b_value;
 
 	attribute() : i_value(i_value_), d_value(d_value_), b_value(b_value_) {
-		s_value_.reserve(32);
 		init();
 	};
 

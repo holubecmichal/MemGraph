@@ -4,11 +4,11 @@
 
 #include "node.h"
 
-void node::setName(std::string value) {
+void node::setName(const char* value) {
 	name = value;
 }
 
-std::string node::getName() {
+const char* node::getName() {
 	return name;
 }
 

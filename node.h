@@ -10,7 +10,7 @@
 
 class node {
 private:
-	std::string name;
+	const char* name;
 
 public:
 	attributes attrs;
@@ -19,12 +19,12 @@ public:
 		name = "";
 	}
 
-	node(std::string value) {
+	node(const char* value) {
 		name = value;
 	}
 
-	std::string getName();
-	void setName(std::string value);
+	const char* getName();
+	void setName(const char* value);
 
 	template <typename T>
 	void setAttr(std::string name, T value) {

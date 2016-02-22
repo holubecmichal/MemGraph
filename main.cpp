@@ -24,5 +24,9 @@ int main() {
 
 	Edge->setTo(Node);
 
+	cout << Edge->getFrom()->getAttr("string_1")->getSValue() << endl;
+	cout << Edge->getFrom()->getAttr("string_2")->getSValue() << endl;
+	cout << Edge->getTo()->getAttr("psvz")->getSValue() << endl;
+
 	return 0;
 }

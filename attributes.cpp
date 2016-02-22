@@ -22,3 +22,7 @@ attribute *attributes::getAttr(std::string name) {
 		return NULL;
 	}
 }
+
+unsigned long attributes::getSize() {
+	return attrs.size();
+}
