@@ -57,14 +57,27 @@ int graphComponent::addEdge(edge *Edge) {
 }
 
 edge *graphComponent::addEdge(const char *from, const char *to) {
-	node *From = getNode(from);
-	node *To = getNode(to);
-
-	if(From == NULL) {
-		From = addNode(from);
+	if(from == NULL && to == NULL) {
+		throw "What does it means?";
 	}
-	if(To == NULL) {
-		To = addNode(to);
+
+	node *From = NULL;
+	node *To = NULL;
+
+	if(from != NULL) {
+		From = getNode(from);
+
+		if(From == NULL) {
+			From = addNode(from);
+		}
+	}
+
+	if(to != NULL) {
+		To = getNode(to);
+
+		if(To == NULL) {
+			To = addNode(to);
+		}
 	}
 
 	edge *Edge = new edge();
@@ -81,8 +94,18 @@ edge *graphComponent::getEdge(node *from, node *to) {
 	for(unsigned i = 0; i < edges.size(); i++) {
 		edge *Edge = edges.at(i);
 
-		if(Edge->getFrom() == from && Edge->getTo() == to) {
+		node *From = Edge->getFrom();
+		node *To = Edge->getTo();
+
+		if(
+				( From == NULL && from == NULL && To == NULL && to == NULL )            ||
+				( From != NULL && From == from && To == NULL && to == NULL ) ||
+				( From == NULL && from == NULL && To != NULL && To == to )   ||
+				( From != NULL && From == from && To != NULL && To == to ))
+		{
+
 			return Edge;
+
 		}
 	}
 
@@ -97,8 +120,18 @@ edge *graphComponent::getEdge(const char *from, const char *to) {
 	for(unsigned i = 0; i < edges.size(); i++) {
 		edge *Edge = edges.at(i);
 
-		if(Edge->getFrom()->getName() == from && Edge->getTo()->getName() == to) {
+		node *From = Edge->getFrom();
+		node *To = Edge->getTo();
+
+		if(
+			( From == NULL && from == NULL && To == NULL && to == NULL )            ||
+			( From != NULL && From->getName() == from && To == NULL && to == NULL ) ||
+			( From == NULL && from == NULL && To != NULL && To->getName() == to )   ||
+			( From != NULL && From->getName() == from && To != NULL && To->getName() == to ))
+		{
+
 			return Edge;
+
 		}
 	}
 
@@ -131,4 +164,39 @@ void graphComponent::setDefaultEdgeAttrs(edge *Edge) {
 	for(map_string_attr_it it = edge_attrs.begin(); it != edge_attrs.end(); ++it) {
 		Edge->setAttr(it->first, it->second);
 	}
+}
+
+edge *graphComponent::addEdge(node *from, node *to) {
+	if(from == NULL && to == NULL) {
+		throw "What does it means?";
+	}
+	// pokud budu z nejakeho uzlu tvorit hranu, pak musi byt soucasti grafu
+
+	node *From = NULL;
+	node *To = NULL;
+
+	if(from != NULL) {
+		From = getNode(from->getName());
+
+		if(From == NULL) {
+			addNode(from);
+		}
+	}
+
+	if(to != NULL) {
+		To = getNode(to->getName());
+
+		if(To == NULL) {
+			addNode(to);
+		}
+	}
+
+	edge *Edge = new edge();
+	setDefaultEdgeAttrs(Edge);
+	insertEdge(Edge);
+
+	Edge->setFrom(From);
+	Edge->setTo(To);
+
+	return Edge;
 }

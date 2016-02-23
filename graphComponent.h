@@ -12,6 +12,11 @@
 
 class subgraph;
 
+// todo metodu clear default_attrs pro vymazani aktualne nastavenych defaultnich atributu
+// todo metodu clear default_attr pro vymazani jednoho z defaultnich atributu
+// todo osetrit metody pro moznosti prijmuti null jako parametru
+// todo subgraphs metody
+
 class graphComponent {
 private:
 	std::map< const char *, node* > nodes;
@@ -37,10 +42,12 @@ public:
 	edge *addEdge();
 	int addEdge(edge *Edge);
 	edge *addEdge(const char *from, const char *to);
+	edge *addEdge(node *from, node* to);
 
 	//void setNodeAttrs(attributes *attrs);
 	//void setEdgeAttrs(attributes *attrs);
 	node *getNode(const char *name);
+
 	edge *getEdge(node *from, node *to);
 	edge *getEdge(const char *from, const char *to);
 	//subgraph *getSubgraph(const char *name);
@@ -55,6 +62,32 @@ public:
 	template <typename T>
 	void setDefaultEdgeAttr(const char *name, T value) {
 		edge_attrs.setAttr(name, value);
+	}
+
+	template <typename T>
+	// todo udelat tempalte i node_name => zmenit nazev na node a kod prizpusobit
+	int setNodeAttr(const char *node_name, const char *attr_name, T value) {
+		node *Node = getNode(node_name);
+
+		if(Node == NULL) {
+			return -1;
+		}
+
+		Node->setAttr(attr_name, value);
+
+		return 0;
+	}
+
+	template <typename T, typename U>
+	int setEdgeAttr(U *from_node, U *to_node, const char* attr_name, T value) {
+		edge *Edge = getEdge(from_node, to_node);
+
+		if(Edge == NULL) {
+			return -1;
+		}
+
+		Edge->setAttr(attr_name, value);
+		return 0;
 	}
 
 
