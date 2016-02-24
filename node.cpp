@@ -12,6 +12,6 @@ const char* node::getName() {
 	return name;
 }
 
-attribute *node::getAttr(std::string name) {
+attribute *node::getAttr(const char *name) {
 	return attrs.getAttr(name);
 }

@@ -12,24 +12,20 @@ using namespace std;
 
 int main() {
 	graph Graph;
+	attributes *attrs;
+	edge *Edge;
+	subgraph *Subgraph;
 
-	// todo inicializovat typ v konstruktoru
-	Graph.setType(digraph);
-	Graph.setDefaultNodeAttr("string", "asd");
-	Graph.setDefaultNodeAttr("int", 10);
-	Graph.setDefaultNodeAttr("double", 10.333);
-	Graph.setDefaultNodeAttr("bool", true);
+	Subgraph = Graph.addSubgraph("cluster_0");
+	Subgraph->setAttr("label", "Subgraph A");
+	Subgraph->addEdge("a", "b");
+	Subgraph->addEdge("b", "c");
+	Subgraph->addEdge("c", "d");
 
-	Graph.setDefaultEdgeAttr("string", "asd");
-	Graph.setDefaultEdgeAttr("int", 10);
-	Graph.setDefaultEdgeAttr("double", 10.333);
-	Graph.setDefaultEdgeAttr("bool", true);
-
-	Graph.addEdge("prvni", "druhy");
-	Graph.addEdge("zkouska", NULL);
-
-	node *Node = Graph.getNode("zkouska");
-	edge *Edge = Graph.getEdge(Node, NULL);
+	Subgraph = Graph.addSubgraph("cluster_1");
+	Subgraph->setAttr("label", "Subgraph B");
+	Subgraph->addEdge("a", "f");
+	Subgraph->addEdge("f", "c");
 
 	return 0;
 }

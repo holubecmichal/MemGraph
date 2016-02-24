@@ -155,13 +155,13 @@ void subgraph::setName(const char *value) {
 }
 
 void graphComponent::setDefaultNodeAttrs(node *Node) {
-	for(map_string_attr_it it = node_attrs.begin(); it != node_attrs.end(); ++it) {
+	for(attributes_it it = node_attrs.begin(); it != node_attrs.end(); ++it) {
 		Node->setAttr(it->first, it->second);
 	}
 }
 
 void graphComponent::setDefaultEdgeAttrs(edge *Edge) {
-	for(map_string_attr_it it = edge_attrs.begin(); it != edge_attrs.end(); ++it) {
+	for(attributes_it it = edge_attrs.begin(); it != edge_attrs.end(); ++it) {
 		Edge->setAttr(it->first, it->second);
 	}
 }
@@ -199,4 +199,54 @@ edge *graphComponent::addEdge(node *from, node *to) {
 	Edge->setTo(To);
 
 	return Edge;
+}
+
+void graphComponent::clearDefaultNodeAttrs() {
+	node_attrs.clear();
+}
+
+void graphComponent::clearDefaultEdgeAttrs() {
+	edge_attrs.clear();
+}
+
+void graphComponent::eraseDeafultNodeAttr(const char *name) {
+	if(node_attrs.getAttr(name) != NULL) {
+		node_attrs.erase(name);
+	}
+}
+
+void graphComponent::eraseDefaultEdgeAttr(const char *name) {
+	if(edge_attrs.getAttr(name) != NULL) {
+		edge_attrs.erase(name);
+	}
+}
+
+subgraph *graphComponent::addSubgraph(const char *name) {
+	subgraph *Subgraph = getSubgraph(name);
+
+	if(Subgraph == NULL) {
+		Subgraph = new subgraph(this, name);
+		subgraphs.insert(std::pair< const char *, subgraph * > (name, Subgraph));
+	}
+
+	return Subgraph;
+}
+
+subgraph *graphComponent::getSubgraph(const char *name) {
+	std::map<const char*, subgraph*>::iterator it;
+
+	it = subgraphs.find(name);
+	if(it != subgraphs.end()) {
+		return subgraphs[name];
+	} else {
+		return NULL;
+	}
+}
+
+void graphComponent::addSubgraph(subgraph *graph) {
+	subgraph *Subgraph = getSubgraph(graph->getName());
+
+	if(Subgraph != NULL) {
+		subgraphs.insert(std::pair< const char *, subgraph * > (graph->getName(), Subgraph));
+	}
 }

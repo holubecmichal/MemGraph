@@ -27,11 +27,11 @@ public:
 	void setName(const char* value);
 
 	template <typename T>
-	void setAttr(std::string name, T value) {
+	void setAttr(const char *name, T value) {
 		attrs.setAttr(name, value);
 	}
 
-	attribute *getAttr(std::string name);
+	attribute *getAttr(const char *name);
 
 };
 

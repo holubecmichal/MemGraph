@@ -18,6 +18,9 @@ private:
 	graph_type type;
 
 public:
+	graph() { type = digraph; }
+	graph(graph_type value) { type = value; };
+
 	void setType(graph_type value);
 	graph_type getType();
 };

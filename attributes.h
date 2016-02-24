@@ -10,19 +10,19 @@
 #include <string>
 #include "attribute.h"
 
-typedef std::map<std::string, attribute>::iterator map_string_attr_it;
+typedef std::map<const char *, attribute>::iterator attributes_it;
 
 class attributes {
 private:
-	void insert(std::string name, attribute attr);
-	std::map<std::string, attribute> attrs;
+	void insert(const char *name, attribute attr);
+	std::map<const char *, attribute> attrs;
 
 public:
 	attributes() { attrs.empty(); }
 
-	void setAttr(std::string name, attribute attr);
+	void setAttr(const char *name, attribute attr);
 	template <typename T>
-	void setAttr(std::string name, T value) {
+	void setAttr(const char *name, T value) {
 		attribute *attr = getAttr(name);
 
 		if(attr != NULL) {
@@ -32,10 +32,12 @@ public:
 		}
 	}
 
-	attribute *getAttr(std::string name);
+	attribute *getAttr(const char *name);
 	unsigned long size();
-	map_string_attr_it begin();
-	map_string_attr_it end();
+	attributes_it begin();
+	attributes_it end();
+	void clear();
+	void erase(const char *name);
 
 };
 

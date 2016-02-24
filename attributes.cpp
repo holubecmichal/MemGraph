@@ -4,16 +4,17 @@
 
 #include "attributes.h"
 
-void attributes::insert(std::string name, attribute attr) {
-	attrs.insert( std::pair<std::string, attribute>(name, attr) );
+// todo osetrit moznost prepsani atributu, tj pokud zapisuju atribut jmena, ktery uz v map je, pak prepisu jeji second hodnotu
+void attributes::insert(const char *name, attribute attr) {
+	attrs.insert( std::pair<const char *, attribute>(name, attr) );
 }
 
-void attributes::setAttr(std::string name, attribute attr) {
+void attributes::setAttr(const char *name, attribute attr) {
 	insert(name, attr);
 }
 
-attribute *attributes::getAttr(std::string name) {
-	std::map<std::string, attribute>::iterator it;
+attribute *attributes::getAttr(const char *name) {
+	attributes_it it;
 
 	it = attrs.find(name);
 	if(it != attrs.end()) {
@@ -27,10 +28,18 @@ unsigned long attributes::size() {
 	return attrs.size();
 }
 
-map_string_attr_it attributes::begin() {
+attributes_it attributes::begin() {
 	return attrs.begin();
 }
 
-map_string_attr_it attributes::end() {
+attributes_it attributes::end() {
 	return attrs.end();
+}
+
+void attributes::clear() {
+	attrs.clear();
+}
+
+void attributes::erase(const char *name) {
+	attrs.erase(name);
 }

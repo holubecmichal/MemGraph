@@ -12,8 +12,6 @@
 
 class subgraph;
 
-// todo metodu clear default_attrs pro vymazani aktualne nastavenych defaultnich atributu
-// todo metodu clear default_attr pro vymazani jednoho z defaultnich atributu
 // todo osetrit metody pro moznosti prijmuti null jako parametru
 // todo subgraphs metody
 
@@ -21,7 +19,7 @@ class graphComponent {
 private:
 	std::map< const char *, node* > nodes;
 	std::vector< edge* > edges;
-	std::map<std::string, subgraph*> subgraphs;
+	std::map< const char *, subgraph* > subgraphs;
 	attributes node_attrs;
 	attributes edge_attrs;
 
@@ -33,8 +31,8 @@ private:
 public:
 	attributes attrs;
 
-	//subgraph *addSubgraph(const char * name);
-	//void addSubgraph(subgraph *graph);
+	subgraph *addSubgraph(const char * name);
+	void addSubgraph(subgraph *graph);
 
 	node *addNode(const char *name);
 	int addNode(node *Node);
@@ -50,7 +48,8 @@ public:
 
 	edge *getEdge(node *from, node *to);
 	edge *getEdge(const char *from, const char *to);
-	//subgraph *getSubgraph(const char *name);
+
+	subgraph *getSubgraph(const char *name);
 
 	void setDefaultNodeAttr(const char *name, attribute attr);
 	template <typename T>
@@ -90,6 +89,18 @@ public:
 		return 0;
 	}
 
+	void clearDefaultNodeAttrs();
+	void clearDefaultEdgeAttrs();
+	void eraseDeafultNodeAttr(const char *name);
+	void eraseDefaultEdgeAttr(const char *name);
+
+	void setAttr(const char *name, attribute attr) {
+		attrs.setAttr(name, attr);
+	}
+	template <typename T>
+	void setAttr(const char *name, T value) {
+		attrs.setAttr(name, value);
+	}
 
 };
 
@@ -98,6 +109,10 @@ private:
 	const char *name;
 	graphComponent *parent;
 public:
+	subgraph(graphComponent *parent) { this->parent = parent; };
+	subgraph(graphComponent *parent, const char *name) { this->parent = parent; this->name = name; }
+
+	// todo prepsat metodu pro pridavani node, aby se nejdriv podiva rekurzivne pres parenty a sve subgraphy, jestli ten node nahodou uz neexistuje
 	const char *getName();
 	void setName(const char *value);
 };
