@@ -5,27 +5,27 @@
 #include "edge.h"
 
 
-void edge::setFrom(node *from_node) {
-	from = from_node;
+void Edge::setFrom(Node *node) {
+	from = node;
 }
 
-node *edge::getFrom() {
+Node *Edge::getFrom() {
 	return from;
 }
 
-void edge::setTo(node *to_node) {
-	to = to_node;
+void Edge::setTo(Node *node) {
+	to = node;
 }
 
-node *edge::getTo() {
+Node *Edge::getTo() {
 	return to;
 }
 
-attribute *edge::getAttr(const char *name) {
+Attribute *Edge::getAttr(const char *name) {
 	return attrs.getAttr(name);
 }
 
-void edge::setAttrs(attributes *attrs) {
+void Edge::setAttrs(Attributes *attrs) {
 	for(attributes_it it = attrs->begin(); it != attrs->end(); ++it) {
 		this->attrs.setAttr(it->first, it->second);
 	}

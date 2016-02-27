@@ -19,19 +19,18 @@ enum attr_type {
 	type_bool
 };
 
-class attribute{
+class Attribute {
 private:
 	int i_value_;
 	double d_value_;
 	std::string s_value_;
 	bool b_value_;
-
 	attr_type type;
 
-	void setType(int value) { type = type_int; }
-	void setType(double value) { type = type_double; }
+	void setType(int value)          { type = type_int; }
+	void setType(double value)       { type = type_double; }
 	void setType(const char * value) { type = type_string; }
-	void setType(bool value) { type = type_bool; }
+	void setType(bool value)         { type = type_bool; }
 
 	void init() {
 		type = type_null;
@@ -42,29 +41,29 @@ private:
 	}
 
 public:
-	const int &i_value;
+	const int    &i_value;
 	const double &d_value;
+	const bool   &b_value;
 	//const std::string &s_value;
-	const bool &b_value;
 
-	attribute() : i_value(i_value_), d_value(d_value_), b_value(b_value_) {
+	Attribute() : i_value(i_value_), d_value(d_value_), b_value(b_value_) {
 		init();
 	};
 
 	template <typename T>
-	attribute(T value) : i_value(i_value_), d_value(d_value_), b_value(b_value_) {
+	Attribute(T value) : i_value(i_value_), d_value(d_value_), b_value(b_value_) {
 		setValue(value);
 	}
 
-	void setValue(int value) { init(); i_value_ = value; setType(value); }
-	void setValue(double value) { init(); d_value_ = value; setType(value); }
+	void setValue(int value)          { init(); i_value_ = value; setType(value); }
+	void setValue(double value)       { init(); d_value_ = value; setType(value); }
 	void setValue(const char * value) { init(); s_value_ = value; setType(value); }
-	void setValue(bool value) { init();	b_value_ = value; setType(value); }
+	void setValue(bool value)         { init();	b_value_ = value; setType(value); }
 
-	int getIValue() { return i_value_; }
-	double getDValue() { return d_value_; }
+	int         getIValue() { return i_value_; }
+	double      getDValue() { return d_value_; }
 	std::string getSValue() { return s_value_; };
-	bool getBValue() {return b_value_; };
+	bool        getBValue() { return b_value_; };
 
 //	attr_type getType()
 };

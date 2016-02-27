@@ -9,40 +9,42 @@
 #include "node.h"
 #include "attributes.h"
 
-class edge {
+class Edge {
 private:
-	node *from;
-	node *to;
+	Node *from;
+	Node *to;
 
 public:
-	attributes attrs;
+	Attributes attrs;
 
-	edge() {
+	Edge() {
 		from = NULL;
 		to = NULL;
 	}
-	~edge() {
+
+	Edge(Node *from, Node *to) : from(from), to(to) { }
+
+	~Edge() {
 		delete(from);
 		delete(to);
 	}
 
-	edge(node *from, node *to) : from(from), to(to) { }
-
-	void setFrom(node *from_node);
-	node *getFrom();
-	void setTo(node *to_node);
-	node *getTo();
-
+	void setFrom(Node *node);
+	void setTo(Node *node);
+	Node *getFrom();
+	Node *getTo();
+	void setAttrs(Attributes *attrs);
+	Attribute *getAttr(const char *name);
 	template <typename T>
 	void setAttr(const char *name, T value) {
 		attrs.setAttr(name, value);
 	}
 
-	void setAttrs(attributes *attrs);
-
-	attribute *getAttr(const char *name);
-
 };
+
+typedef std::map< const char *, Edge* > edges_map;
+typedef nodes_map::iterator edges_it;
+typedef std::pair< const char *, Edge* > edges_pair;
 
 
 #endif //BACHELOR_EDGE_H

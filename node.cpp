@@ -4,14 +4,14 @@
 
 #include "node.h"
 
-void node::setName(const char* value) {
+void Node::setName(const char* value) {
 	name = value;
 }
 
-const char* node::getName() {
+const char*Node::getName() {
 	return name;
 }
 
-attribute *node::getAttr(const char *name) {
+Attribute *Node::getAttr(const char *name) {
 	return attrs.getAttr(name);
 }

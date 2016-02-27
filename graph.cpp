@@ -4,10 +4,10 @@
 
 #include "graph.h"
 
-void graph::setType(graph_type value) {
+void Graph::setType(graph_type value) {
 	type = value;
 }
 
-graph_type graph::getType() {
+graph_type Graph::getType() {
 	return type;
 }

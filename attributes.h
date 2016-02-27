@@ -10,34 +10,36 @@
 #include <string>
 #include "attribute.h"
 
-typedef std::map<const char *, attribute>::iterator attributes_it;
+typedef std::map< const char *, Attribute* > attributes_map;
+typedef attributes_map::iterator attributes_it;
+typedef std::pair< const char *, Attribute* > attributes_pair;
 
-class attributes {
+class Attributes {
 private:
-	void insert(const char *name, attribute attr);
-	std::map<const char *, attribute> attrs;
+	attributes_map attrs;
+
+	void insert(const char *name, Attribute *attr);
 
 public:
-	attributes() { attrs.empty(); }
+	Attributes() { attrs.empty(); }
 
-	void setAttr(const char *name, attribute attr);
-	template <typename T>
-	void setAttr(const char *name, T value) {
-		attribute *attr = getAttr(name);
-
-		if(attr != NULL) {
-			attr->setValue(value);
-		} else {
-			insert(name, attribute(value));
-		}
-	}
-
-	attribute *getAttr(const char *name);
+	Attribute *getAttr(const char *name);
 	unsigned long size();
 	attributes_it begin();
 	attributes_it end();
 	void clear();
 	void erase(const char *name);
+	void setAttr(const char *name, Attribute *attr);
+	template <typename T>
+	void setAttr(const char *name, T value) {
+		Attribute *attr = getAttr(name);
+
+		if(attr != NULL) {
+			attr->setValue(value);
+		} else {
+			insert(name, new Attribute(value));
+		}
+	}
 
 };
 

@@ -5,41 +5,41 @@
 #include "attributes.h"
 
 // todo osetrit moznost prepsani atributu, tj pokud zapisuju atribut jmena, ktery uz v map je, pak prepisu jeji second hodnotu
-void attributes::insert(const char *name, attribute attr) {
-	attrs.insert( std::pair<const char *, attribute>(name, attr) );
+void Attributes::insert(const char *name, Attribute *attr) {
+	attrs.insert( attributes_pair(name, attr) );
 }
 
-void attributes::setAttr(const char *name, attribute attr) {
+void Attributes::setAttr(const char *name, Attribute *attr) {
 	insert(name, attr);
 }
 
-attribute *attributes::getAttr(const char *name) {
+Attribute *Attributes::getAttr(const char *name) {
 	attributes_it it;
 
 	it = attrs.find(name);
 	if(it != attrs.end()) {
-		return &attrs[name];
+		return attrs[name];
 	} else {
 		return NULL;
 	}
 }
 
-unsigned long attributes::size() {
+unsigned long Attributes::size() {
 	return attrs.size();
 }
 
-attributes_it attributes::begin() {
+attributes_it Attributes::begin() {
 	return attrs.begin();
 }
 
-attributes_it attributes::end() {
+attributes_it Attributes::end() {
 	return attrs.end();
 }
 
-void attributes::clear() {
+void Attributes::clear() {
 	attrs.clear();
 }
 
-void attributes::erase(const char *name) {
+void Attributes::erase(const char *name) {
 	attrs.erase(name);
 }

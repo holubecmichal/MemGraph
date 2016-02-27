@@ -8,34 +8,34 @@
 #include <string>
 #include "attributes.h"
 
-class node {
+class Node {
 private:
 	const char* name;
 
 public:
-	attributes attrs;
+	Attributes attrs;
 
-	node() {
+	Node() {
 		name = "";
 	}
 
-	node(const char* value) {
+	Node(const char *value) {
 		name = value;
 	}
 
+	Attribute *getAttr(const char *name);
 	const char* getName();
-	void setName(const char* value);
-
+	void setName(const char *value);
 	template <typename T>
 	void setAttr(const char *name, T value) {
 		attrs.setAttr(name, value);
 	}
 
-	attribute *getAttr(const char *name);
-
 };
 
-typedef std::map< const char *, node* >::iterator node_it;
+typedef std::map< const char *, Node* > nodes_map;
+typedef nodes_map::iterator nodes_it;
+typedef std::pair< const char *, Node* > nodes_pair;
 
 
 #endif //BACHELOR_NODE_H

@@ -6,20 +6,20 @@
 #define BACHELOR_GRAPH_H
 
 
-#include "graphComponent.h"
+#include "graph_component.h"
 
 enum graph_type {
 	std_graph,
 	digraph
 };
 
-class graph : public graphComponent {
+class Graph : public GraphComponent {
 private:
 	graph_type type;
 
 public:
-	graph() { type = digraph; parent = NULL; }
-	graph(graph_type value) { type = value; parent = NULL; };
+	Graph() { type = digraph; parent = NULL; }
+	Graph(graph_type value) { type = value; parent = NULL; };
 
 	void setType(graph_type value);
 	graph_type getType();
