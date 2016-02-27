@@ -35,5 +35,7 @@ public:
 
 };
 
+typedef std::map< const char *, node* >::iterator node_it;
+
 
 #endif //BACHELOR_NODE_H

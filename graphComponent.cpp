@@ -65,7 +65,7 @@ edge *graphComponent::addEdge(const char *from, const char *to) {
 	node *To = NULL;
 
 	if(from != NULL) {
-		From = getNode(from);
+		From = getNodeInGraph(from);
 
 		if(From == NULL) {
 			From = addNode(from);
@@ -73,7 +73,7 @@ edge *graphComponent::addEdge(const char *from, const char *to) {
 	}
 
 	if(to != NULL) {
-		To = getNode(to);
+		To = getNodeInGraph(to);
 
 		if(To == NULL) {
 			To = addNode(to);
@@ -98,7 +98,7 @@ edge *graphComponent::getEdge(node *from, node *to) {
 		node *To = Edge->getTo();
 
 		if(
-				( From == NULL && from == NULL && To == NULL && to == NULL )            ||
+				( From == NULL && from == NULL && To == NULL && to == NULL ) ||
 				( From != NULL && From == from && To == NULL && to == NULL ) ||
 				( From == NULL && from == NULL && To != NULL && To == to )   ||
 				( From != NULL && From == from && To != NULL && To == to ))
@@ -176,7 +176,7 @@ edge *graphComponent::addEdge(node *from, node *to) {
 	node *To = NULL;
 
 	if(from != NULL) {
-		From = getNode(from->getName());
+		From = getNodeInGraph(from->getName());
 
 		if(From == NULL) {
 			addNode(from);
@@ -184,7 +184,7 @@ edge *graphComponent::addEdge(node *from, node *to) {
 	}
 
 	if(to != NULL) {
-		To = getNode(to->getName());
+		To = getNodeInGraph(to->getName());
 
 		if(To == NULL) {
 			addNode(to);
@@ -248,5 +248,61 @@ void graphComponent::addSubgraph(subgraph *graph) {
 
 	if(Subgraph != NULL) {
 		subgraphs.insert(std::pair< const char *, subgraph * > (graph->getName(), Subgraph));
+	}
+}
+
+node *graphComponent::getNodeInSubgraphs(const char *name) {
+	if(subgraphs.empty()) {
+		return NULL;
+	}
+
+	// prohledavani prostoru
+	for(subgraph_it it = subgraphs.begin(); it != subgraphs.end(); ++it) {
+		subgraph *Subgraph = it->second;
+		node *Node = Subgraph->getNode(name);
+
+		if(Node != NULL) {
+			return Node;
+		}
+	}
+
+	// rekurze o jeden krok dolu;
+	for(subgraph_it it = subgraphs.begin(); it != subgraphs.end(); ++it) {
+		subgraph *Subgraph = it->second;
+		node *Node = Subgraph->getNodeInSubgraphs(name);
+
+		if(Node != NULL) {
+			return Node;
+		}
+	}
+
+	return NULL;
+}
+
+node *graphComponent::getNodeInGraph(const char *name) {
+	node *Node;
+	Node = getNode(name);
+
+	if(Node != NULL) {
+		return Node;
+	}
+
+	graphComponent *main_parent = getMainParent();
+	Node = main_parent->getNode(name);
+
+	if(Node != NULL) {
+		return Node;
+	} else {
+		return main_parent->getNodeInSubgraphs(name);
+	}
+}
+
+graphComponent *graphComponent::getMainParent() {
+	graphComponent *graph = this;
+
+	if(graph->parent != NULL) {
+		return graph->parent->getMainParent();
+	} else {
+		return graph;
 	}
 }

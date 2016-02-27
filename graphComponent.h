@@ -23,14 +23,20 @@ private:
 	attributes node_attrs;
 	attributes edge_attrs;
 
-
 	void insertEdge(edge *Edge);
 	void setDefaultNodeAttrs(node *Node);
 	void setDefaultEdgeAttrs(edge *Edge);
 
+protected:
+	graphComponent *parent;
+	node *getNodeInGraph(const char *name);
+	node *getNodeInSubgraphs(const char *name);
+	graphComponent *getMainParent();
+
 public:
 	attributes attrs;
 
+	// todo vyzkouset v graphvizu, jestli muzou byt v sobe vnoreny subgraphs se stejnym cluster jmenem
 	subgraph *addSubgraph(const char * name);
 	void addSubgraph(subgraph *graph);
 
@@ -104,10 +110,12 @@ public:
 
 };
 
+typedef std::map< const char *, subgraph * >::iterator subgraph_it;
+
 class subgraph : public graphComponent {
 private:
 	const char *name;
-	graphComponent *parent;
+
 public:
 	subgraph(graphComponent *parent) { this->parent = parent; };
 	subgraph(graphComponent *parent, const char *name) { this->parent = parent; this->name = name; }
