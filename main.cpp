@@ -89,9 +89,15 @@ int main() {
 
 //	(graph.getSubgraph("cluster_2"))->getSubgraph("cluster_2_2")->getSubgraph("cluster_2_2_2")->addNode("node_1");
 
-	//Node = (graph.getSubgraph("cluster_0"))->getSubgraph("cluster_0_0")->getSubgraph("cluster_0_0_2")->getNodeInGraph("node_1");
+	node = graph.getNode("node_1");
 
 	graph.addEdge("node_1", "node_2");
+
+	graph.addNode("node_3");
+	graph.setNodeAttr("node_3", "asd", "asd");
+
+	node = graph.getNode("node_3");
+	graph.setNodeAttr(node, "bflmpsvz", 10);
 
 	return 0;
 }

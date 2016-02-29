@@ -13,7 +13,6 @@
 class Subgraph;
 
 // todo osetrit metody pro moznosti prijmuti null jako parametru
-// todo subgraphs metody
 
 class GraphComponent {
 private:
@@ -30,16 +29,17 @@ private:
 protected:
 	GraphComponent *parent;
 
-	Node *getNodeInGraph(const char *name);
 	Node *getNodeInSubgraphs(const char *name);
+	Node *getLocalNode(const char *name);
 	GraphComponent *getMainParent();
 
 public:
 	Attributes attrs;
 
-	// todo vyzkouset v graphvizu, jestli muzou byt v sobe vnoreny subgraphs se stejnym cluster jmenem
-	// todo vyzkouset - pridani duplicitniho node
-	// todo vyzkouset - pridani duplicitni edge
+	// todo vyzkouset v graphvizu, jestli muzou byt v sobe vnoreny subgraphs se stejnym cluster jmenem => muzou, ale musi byt vnoreny. pokud vnoren neni a pridame subgraph cluster stejneho jmena na stejnou uroven, pak se vsechny prikazy pripisou jiz existujicimu subgraphu
+	// todo vyzkouset - pridani duplicitniho node => vyhleda v celem prostoru grafu, pokud node existuje, pak novy nepridava. Pokud priradime atribut, pak se priradi existujicimu uzlu v celem grafovem prostoru
+	// todo vyzkouset - pridani duplicitni edge => kolik edge, tolik sipek
+	// todo vyzkouset - pridani atributu duplicitnimu edge => ma vliv pouze na jeden dany edge => nelze edge shrnout pod jeden edge s pocitadlem
 
 	// ===== SUBGRAPHS METHODS ======
 	Subgraph *addSubgraph(const char * name);
@@ -47,23 +47,11 @@ public:
 	Subgraph *getSubgraph(const char *name);
 
 	// ===== NODES METHODS =====
-	// todo pridat node teprve az po vyhledani existence jineho node se stejnym jmenem v prostoru grafu?
 	Node *addNode(const char *name);
 	int addNode(Node *node);
 	Node *getNode(const char *name);
-	template <typename T>
-	// todo udelat tempalte i node_name => zmenit nazev na Node a kod prizpusobit
-	int setNodeAttr(const char *node_name, const char *attr_name, T value) {
-		Node *Node = getNode(node_name);
-
-		if(Node == NULL) {
-			return -1;
-		}
-
-		Node->setAttr(attr_name, value);
-
-		return 0;
-	}
+	// metoda zatim urcena pouze pro prekladac
+	Node *getNode(Node *node);
 
 	// ===== EDGES METHODS =====
 	int addEdge(Edge *edge);
@@ -85,14 +73,26 @@ public:
 		edge_attrs.setAttr(name, value);
 	}
 	template <typename T, typename U>
-	int setEdgeAttr(U *from_node, U *to_node, const char* attr_name, T value) {
-		Edge *Edge = getEdge(from_node, to_node);
+	int setNodeAttr(U *node, const char *attr_name, T value) {
+		Node *temp_node = getNode(node);
 
-		if(Edge == NULL) {
+		if(temp_node == NULL) {
 			return -1;
 		}
 
-		Edge->setAttr(attr_name, value);
+		temp_node->setAttr(attr_name, value);
+
+		return 0;
+	}
+	template <typename T, typename U>
+	int setEdgeAttr(U *from_node, U *to_node, const char* attr_name, T value) {
+		Edge *edge = getEdge(from_node, to_node);
+
+		if(edge == NULL) {
+			return -1;
+		}
+
+		edge->setAttr(attr_name, value);
 		return 0;
 	}
 	void clearDefaultNodeAttrs();
