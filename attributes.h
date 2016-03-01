@@ -22,6 +22,11 @@ private:
 
 public:
 	Attributes() { attrs.empty(); }
+	virtual ~Attributes() {
+		for(attributes_it it = attrs.begin(); it != attrs.end(); ++it) {
+			delete it->second;
+		}
+	}
 
 	Attribute *getAttr(const char *name);
 	unsigned long size();

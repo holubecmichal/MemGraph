@@ -12,13 +12,17 @@
 
 class Subgraph;
 
+typedef std::map< const char *, Subgraph* > subgraphs_map;
+typedef subgraphs_map::iterator subgraphs_it;
+typedef std::pair< const char *, Subgraph* > subgraphs_pair;
+
 // todo osetrit metody pro moznosti prijmuti null jako parametru
 
 class GraphComponent {
 private:
 	nodes_map nodes;
-	std::vector< Edge* > edges;
-	std::map< const char *, Subgraph* > subgraphs;
+	edges_vect edges;
+	subgraphs_map subgraphs;
 	Attributes node_attrs;
 	Attributes edge_attrs;
 
@@ -36,12 +40,9 @@ protected:
 public:
 	Attributes attrs;
 
-	// todo vyzkouset v graphvizu, jestli muzou byt v sobe vnoreny subgraphs se stejnym cluster jmenem => muzou, ale musi byt vnoreny. pokud vnoren neni a pridame subgraph cluster stejneho jmena na stejnou uroven, pak se vsechny prikazy pripisou jiz existujicimu subgraphu
-	// todo vyzkouset - pridani duplicitniho node => vyhleda v celem prostoru grafu, pokud node existuje, pak novy nepridava. Pokud priradime atribut, pak se priradi existujicimu uzlu v celem grafovem prostoru
-	// todo vyzkouset - pridani duplicitni edge => kolik edge, tolik sipek
-	// todo vyzkouset - pridani atributu duplicitnimu edge => ma vliv pouze na jeden dany edge => nelze edge shrnout pod jeden edge s pocitadlem
+	virtual ~GraphComponent() { }
 
-	// ===== SUBGRAPHS METHODS ======
+// ===== SUBGRAPHS METHODS ======
 	Subgraph *addSubgraph(const char * name);
 	void addSubgraph(Subgraph *graph);
 	Subgraph *getSubgraph(const char *name);
@@ -55,11 +56,18 @@ public:
 
 	// ===== EDGES METHODS =====
 	int addEdge(Edge *edge);
+	int addEdge(Edge *edge, Attributes *attrs);
 	Edge *addEdge(const char *from, const char *to);
 	Edge *addEdge(Node *from, Node * to);
+	template <typename T>
+	Edge *addEdge(T *from, T *to, Attributes *attrs) {
+		Edge *edge = addEdge(from, to);
+		edge->setAttrs(attrs);
+
+		return edge;
+	};
 	Edge *getEdge(Node *from, Node *to);
 	Edge *getEdge(const char *from, const char *to);
-
 
 	// ===== ATTRIBUTES METHODS =====
 	void setDefaultNodeAttr(const char *name, Attribute *attr);
@@ -120,9 +128,6 @@ public:
 	const char *getName();
 	void setName(const char *value);
 };
-
-typedef std::map< const char *, Subgraph* >::iterator subgraphs_it;
-typedef std::pair< const char *, Subgraph* > subgraphs_pair;
 
 
 #endif //BACHELOR_GRAPHCOMPONENT_H

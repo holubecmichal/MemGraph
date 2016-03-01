@@ -23,7 +23,7 @@ class Attribute {
 private:
 	int i_value_;
 	double d_value_;
-	std::string s_value_;
+	const char *s_value_;
 	bool b_value_;
 	attr_type type;
 
@@ -62,7 +62,7 @@ public:
 
 	int         getIValue() { return i_value_; }
 	double      getDValue() { return d_value_; }
-	std::string getSValue() { return s_value_; };
+	const char *getSValue() { return s_value_; };
 	bool        getBValue() { return b_value_; };
 
 //	attr_type getType()

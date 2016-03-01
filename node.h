@@ -18,10 +18,10 @@ public:
 	Node() {
 		name = "";
 	}
-
 	Node(const char *value) {
 		name = value;
 	}
+	virtual ~Node() { }
 
 	Attribute *getAttr(const char *name);
 	const char* getName();

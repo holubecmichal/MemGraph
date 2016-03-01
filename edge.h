@@ -6,6 +6,7 @@
 #define BACHELOR_EDGE_H
 
 
+#include <vector>
 #include "node.h"
 #include "attributes.h"
 
@@ -25,8 +26,8 @@ public:
 	Edge(Node *from, Node *to) : from(from), to(to) { }
 
 	~Edge() {
-		delete(from);
-		delete(to);
+		delete from;
+		delete to;
 	}
 
 	void setFrom(Node *node);
@@ -42,9 +43,8 @@ public:
 
 };
 
-typedef std::map< const char *, Edge* > edges_map;
-typedef nodes_map::iterator edges_it;
-typedef std::pair< const char *, Edge* > edges_pair;
+typedef std::vector< Edge* > edges_vect;
+typedef edges_vect::iterator edges_it;
 
 
 #endif //BACHELOR_EDGE_H

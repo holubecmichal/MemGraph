@@ -4,8 +4,14 @@
 
 #include "attributes.h"
 
-// todo osetrit moznost prepsani atributu, tj pokud zapisuju atribut jmena, ktery uz v map je, pak prepisu jeji second hodnotu
 void Attributes::insert(const char *name, Attribute *attr) {
+	Attribute *attribute = getAttr(name);
+
+	if(attribute != NULL) {
+		attrs.erase(name);
+		delete attribute;
+	}
+
 	attrs.insert( attributes_pair(name, attr) );
 }
 

@@ -111,17 +111,13 @@ Node *GraphComponent::getNodeInSubgraphs(const char *name) {
 }
 
 int GraphComponent::addEdge(Edge *edge) {
-	if(edge->getFrom() == NULL && edge->getTo() == NULL) {
+	if(edge->getFrom() == NULL || edge->getTo() == NULL) {
 		throw "What does it means?";
 	}
 
-	if(getEdge(edge->getFrom(), edge->getTo()) == NULL) {
-		setDefaultEdgeAttrs(edge);
-		insertEdge(edge);
-		return 0;
-	} else {
-		return 1;
-	}
+	setDefaultEdgeAttrs(edge);
+	insertEdge(edge);
+	return 0;
 }
 
 Edge *GraphComponent::addEdge(const char *from, const char *to) {
@@ -316,4 +312,11 @@ const char *Subgraph::getName() {
 
 void Subgraph::setName(const char *value) {
 	name = value;
+}
+
+int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
+	int result = addEdge(edge);
+	edge->setAttrs(attrs);
+
+	return result;
 }
