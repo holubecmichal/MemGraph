@@ -115,6 +115,11 @@ public:
 		attrs.setAttr(name, value);
 	}
 
+	// ===== OTHERS =====
+	nodes_map *getNodes() { return &nodes; }
+	edges_vect *getEdges() { return &edges; }
+	subgraphs_map *getSubgraphs() { return &subgraphs; }
+
 };
 
 class Subgraph : public GraphComponent {

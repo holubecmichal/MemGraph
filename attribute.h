@@ -65,6 +65,10 @@ public:
 	const char *getSValue() { return s_value_; };
 	bool        getBValue() { return b_value_; };
 
+	// todo std::to_string
+	const char *getValue();
+	attr_type getType();
+
 //	attr_type getType()
 };
 

@@ -3,11 +3,13 @@
 #include "node.h"
 #include "edge.h"
 #include "graph.h"
+#include "plotter.h"
+#include "GraphvizPlotter.h"
 
 using namespace std;
 
 int main() {
-	Graph graph;
+//	Graph graph;
 	Attributes *attrs;
 	Edge *edge;
 	Subgraph *subgraph;
@@ -97,6 +99,24 @@ int main() {
 //	graph.setNodeAttr(node, "bflmpsvz", 10);
 //
 //	graph.addEdge("node_2", "node_3");
+
+//	Plotter plotter;
+//
+//	plotter.getDot();
+
+	Plotter *plotter = new GraphvizPlotter();
+
+	Graph *graph = plotter->graph;
+
+	graph->setDefaultNodeAttr("string", "asd");
+	graph->setDefaultNodeAttr("int", 10);
+	graph->setDefaultNodeAttr("double", 10.3);
+	graph->setDefaultNodeAttr("bool", true);
+
+	graph->addEdge("a", "b");
+	graph->addEdge("b","c");
+
+	plotter->getDot();
 
 	return 0;
 }
