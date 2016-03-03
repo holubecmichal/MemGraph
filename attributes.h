@@ -42,7 +42,7 @@ public:
 		if(attr != NULL) {
 			attr->setValue(value);
 		} else {
-			insert(name, new Attribute(value));
+			insert(name, new Attribute(name, value));
 		}
 	}
 

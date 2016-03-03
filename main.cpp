@@ -4,7 +4,7 @@
 #include "edge.h"
 #include "graph.h"
 #include "plotter.h"
-#include "GraphvizPlotter.h"
+#include "graphviz_plotter.h"
 
 using namespace std;
 
@@ -110,11 +110,26 @@ int main() {
 
 	graph->setDefaultNodeAttr("string", "asd");
 	graph->setDefaultNodeAttr("int", 10);
-	graph->setDefaultNodeAttr("double", 10.3);
+	graph->setDefaultNodeAttr("double", 10.3234);
 	graph->setDefaultNodeAttr("bool", true);
+
+	graph->setDefaultEdgeAttr("size", 10);
+	graph->setDefaultEdgeAttr("color", ".7 .3 .4");
 
 	graph->addEdge("a", "b");
 	graph->addEdge("b","c");
+
+	node = graph->getNode("a");
+	node->setAttr("label", "node_node");
+
+	subgraph = graph->addSubgraph("cluster_0");
+	subgraph->addEdge("x","y");
+	subgraph->addEdge("a","z");
+
+	subgraph = subgraph->addSubgraph("cluster_0_0");
+	subgraph->addEdge("petr", "mirek");
+	subgraph->addEdge("mirek", "b");
+	subgraph->addEdge("x", "petr");
 
 	plotter->getDot();
 

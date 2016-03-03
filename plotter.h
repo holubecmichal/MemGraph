@@ -10,6 +10,7 @@
 
 const std::string new_line = "\n";
 const std::string tab = "\t";
+const std::string q_mark = "\"";
 
 class Plotter {
 public:

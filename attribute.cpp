@@ -38,3 +38,22 @@ const char *Attribute::getValue() {
 
 	return value.c_str();
 }
+
+bool Attribute::useQuotationMarks() {
+	if(std::string(name) == "label") {
+		return true;
+	}
+
+	if(getType() == type_string) {
+		std::string value(s_value);
+		if(value.find(".") != std::string::npos) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void Attribute::setName(const char *name) {
+	this->name = name;
+}
