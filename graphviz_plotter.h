@@ -12,12 +12,14 @@ class GraphvizPlotter : public Plotter {
 private:
 	const char *print(std::string *content);
 	std::string getIdent();
-	const char *dotGraphHeader();
-	const char *dotAttribute(const char *name, Attribute *attr);
-	const char *dotNodes(nodes_map *nodes);
-	const char *dotEdges(edges_vect *edges);
-	const char *dotSubgraphs(subgraphs_map *subgraphs);
-	const char *dotSubgraph(Subgraph *subgraph);
+	std::string dotGraphHeader();
+	std::string dotAttribute(const char *name, Attribute *attr);
+	std::string dotNodes(nodes_map *nodes);
+	std::string dotEdges(edges_vect *edges);
+	std::string dotSubgraphs(subgraphs_map *subgraphs);
+	std::string dotSubgraph(Subgraph *subgraph);
+	std::string dotEdgeType();
+	std::string dotGraphAttrs(Attributes *attrs);
 	template <typename T>
 	const char *dotAttributes(T *element) {
 		if(element->attrs.size() == 0) {
@@ -43,7 +45,7 @@ private:
 
 public:
 
-	const char *getDot();
+	std::string getDot();
 	void plot(const char *file_name);
 	void setOutputFormat();
 };

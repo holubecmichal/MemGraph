@@ -5,11 +5,11 @@
 #include <sstream>
 #include "attribute.h"
 
-attr_type Attribute::getType() {
+Attribute::attr_type Attribute::getType() {
 	return type;
 }
 
-const char *Attribute::getValue() {
+std::string Attribute::getValue() {
 	std::string value;
 	std::ostringstream strs;
 
@@ -36,10 +36,16 @@ const char *Attribute::getValue() {
 			break;
 	}
 
-	return value.c_str();
+	if(useHtmlMark()) {
+		value = "<" + value + ">";
+	} else if(useQuotationMark()) {
+		value = "\"" + value + "\"";
+	}
+
+	return value;
 }
 
-bool Attribute::useQuotationMarks() {
+bool Attribute::useQuotationMark() {
 	if(std::string(name) == "label") {
 		return true;
 	}
@@ -56,4 +62,8 @@ bool Attribute::useQuotationMarks() {
 
 void Attribute::setName(const char *name) {
 	this->name = name;
+}
+
+bool Attribute::useHtmlMark() {
+	return isHtml();
 }

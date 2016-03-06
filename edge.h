@@ -37,8 +37,14 @@ public:
 	void setAttrs(Attributes *attrs);
 	Attribute *getAttr(const char *name);
 	template <typename T>
-	void setAttr(const char *name, T value) {
+	Edge *setAttr(const char *name, T value) {
 		attrs.setAttr(name, value);
+		return this;
+	}
+	template <typename T>
+	Edge *setHtmlAttr(const char *name, T value) {
+		attrs.setHtmlAttr(name, value);
+		return this;
 	}
 
 };

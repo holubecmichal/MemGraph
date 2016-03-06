@@ -18,7 +18,7 @@ class Attributes {
 private:
 	attributes_map attrs;
 
-	void insert(const char *name, Attribute *attr);
+	Attribute * insert(const char *name, Attribute *attr);
 
 public:
 	Attributes() { attrs.empty(); }
@@ -36,14 +36,23 @@ public:
 	void erase(const char *name);
 	void setAttr(const char *name, Attribute *attr);
 	template <typename T>
-	void setAttr(const char *name, T value) {
+	Attribute *setAttr(const char *name, T value) {
 		Attribute *attr = getAttr(name);
 
 		if(attr != NULL) {
 			attr->setValue(value);
 		} else {
-			insert(name, new Attribute(name, value));
+			attr = insert(name, new Attribute(name, value));
 		}
+
+		return attr;
+	}
+
+	template <typename T>
+	Attribute *setHtmlAttr(const char *name, T value) {
+		Attribute *attr = setAttr(name, value);
+		attr->setHtml();
+		return attr;
 	}
 
 };

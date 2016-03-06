@@ -4,7 +4,7 @@
 
 #include "attributes.h"
 
-void Attributes::insert(const char *name, Attribute *attr) {
+Attribute *Attributes::insert(const char *name, Attribute *attr) {
 	Attribute *attribute = getAttr(name);
 
 	if(attribute != NULL) {
@@ -13,6 +13,7 @@ void Attributes::insert(const char *name, Attribute *attr) {
 	}
 
 	attrs.insert( attributes_pair(name, attr) );
+	return attr;
 }
 
 void Attributes::setAttr(const char *name, Attribute *attr) {

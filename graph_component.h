@@ -107,13 +107,6 @@ public:
 	void clearDefaultEdgeAttrs();
 	void eraseDeafultNodeAttr(const char *name);
 	void eraseDefaultEdgeAttr(const char *name);
-	void setAttr(const char *name, Attribute *attr) {
-		attrs.setAttr(name, attr);
-	}
-	template <typename T>
-	void setAttr(const char *name, T value) {
-		attrs.setAttr(name, value);
-	}
 
 	// ===== OTHERS =====
 	nodes_map *getNodes() { return &nodes; }
@@ -132,6 +125,21 @@ public:
 
 	const char *getName();
 	void setName(const char *value);
+
+	Subgraph *setAttr(const char *name, Attribute *attr) {
+		attrs.setAttr(name, attr);
+		return this;
+	}
+	template <typename T>
+	Subgraph *setAttr(const char *name, T value) {
+		attrs.setAttr(name, value);
+		return this;
+	}
+	template <typename T>
+	Subgraph *setHtmlAttr(const char *name, T value) {
+		attrs.setHtmlAttr(name,value);
+		return this;
+	}
 };
 
 

@@ -2,6 +2,7 @@
 // Created by Michael Holubec on 21.02.16.
 //
 
+#include <sstream>
 #include "graph_component.h"
 
 // ===== GRAPH_COMPONENT CLASS =====

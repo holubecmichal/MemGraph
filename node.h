@@ -27,8 +27,14 @@ public:
 	const char* getName();
 	void setName(const char *value);
 	template <typename T>
-	void setAttr(const char *name, T value) {
+	Node *setAttr(const char *name, T value) {
 		attrs.setAttr(name, value);
+		return this;
+	}
+	template <typename T>
+	Node *setHtmlAttr(const char *name, T value) {
+		attrs.setHtmlAttr(name,value);
+		return this;
 	}
 
 };

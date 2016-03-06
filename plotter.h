@@ -20,7 +20,7 @@ public:
 	Plotter(Graph *graph) : graph(graph) { ident_step = 0; }
 	Plotter() { graph = new Graph; ident_step = 0; }
 
-	virtual const char *getDot() = 0;
+	virtual std::string getDot() = 0;
 	virtual void plot(const char *name) = 0;
 	virtual void setOutputFormat() = 0;
 

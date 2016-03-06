@@ -4,7 +4,7 @@
 
 #include "graphviz_plotter.h"
 
-const char *GraphvizPlotter::getDot() {
+std::string GraphvizPlotter::getDot() {
 	std::string dot = "";
 
 	dot += dotGraphHeader();
@@ -12,20 +12,20 @@ const char *GraphvizPlotter::getDot() {
 
 	ident_step++;
 
+	dot += std::string(dotGraphAttrs(&graph->attrs));
 	dot += std::string(dotNodes(graph->getNodes()));
 	dot += std::string(dotSubgraphs(graph->getSubgraphs()));
 	dot += std::string(dotEdges(graph->getEdges()));
-	// todo pridat atributy grafu
 
 	ident_step--;
 
 	dot += "}";
 
-	return dot.c_str();
+	return dot;
 }
 
 
-const char *GraphvizPlotter::dotGraphHeader() {
+std::string GraphvizPlotter::dotGraphHeader() {
 	std::string text = "";
 
 	if(graph->getType() == digraph) {
@@ -34,12 +34,31 @@ const char *GraphvizPlotter::dotGraphHeader() {
 		text += "graph";
 	}
 
-	text += " Graph ";
+	text += " G ";
 
-	return text.c_str();
+	return text;
 }
 
-const char *GraphvizPlotter::dotNodes(nodes_map *nodes) {
+std::string GraphvizPlotter::dotGraphAttrs(Attributes *attrs) {
+	std::string text = "";
+
+	if(attrs->size() > 0) {
+		attributes_it it = attrs->begin();
+
+		while( true ) {
+			text += getIdent() + dotAttribute(it->first, it->second) + ";" + new_line;
+
+			if(++it == attrs->end()) {
+				break;
+			}
+
+		}
+		text += new_line;
+	}
+	return text;
+}
+
+std::string GraphvizPlotter::dotNodes(nodes_map *nodes) {
 	std::string text = "";
 	std::string node = "";
 
@@ -55,16 +74,17 @@ const char *GraphvizPlotter::dotNodes(nodes_map *nodes) {
 		text += node;
 	}
 
-	return text.c_str();
+	text += new_line;
+	return text;
 }
 
-const char *GraphvizPlotter::dotEdges(edges_vect *edges) {
+std::string GraphvizPlotter::dotEdges(edges_vect *edges) {
 	std::string text = "";
 	std::string edge = "";
 
 	for(edges_it it = edges->begin(); it != edges->end(); ++it) {
 		Edge *e = (*it);
-		edge = getIdent() + std::string(e->getFrom()->getName()) + " -> " + std::string(e->getTo()->getName());
+		edge = getIdent() + std::string(e->getFrom()->getName()) + dotEdgeType() + std::string(e->getTo()->getName());
 
 		if(e->attrs.size() > 0) {
 			edge += " ";
@@ -75,31 +95,42 @@ const char *GraphvizPlotter::dotEdges(edges_vect *edges) {
 		text += edge;
 	}
 
-	return text.c_str();
+	return text;
 }
 
-const char *GraphvizPlotter::dotSubgraphs(subgraphs_map *subgraphs) {
+std::string GraphvizPlotter::dotEdgeType() {
+	if(graph->getType() == std_graph) {
+		return " -- ";
+	} else if(graph->getType() == digraph) {
+		return " -> ";
+	}
+
+	throw "Unknown graph type";
+}
+
+std::string GraphvizPlotter::dotSubgraphs(subgraphs_map *subgraphs) {
 	std::string text = "";
 
 	for(subgraphs_it it = subgraphs->begin(); it != subgraphs->end(); ++it) {
 		text += dotSubgraph(it->second);
 	}
 
-	return text.c_str();
+	return text;
 }
 
-const char *GraphvizPlotter::dotSubgraph(Subgraph *subgraph) {
+std::string GraphvizPlotter::dotSubgraph(Subgraph *subgraph) {
 	std::string text = "";
 
 	text += getIdent() + "subgraph " + std::string(subgraph->getName()) + " {" + new_line;
 	ident_step++;
+	text += std::string(dotGraphAttrs(&subgraph->attrs));
 	text += std::string(dotNodes(subgraph->getNodes()));
 	text += std::string(dotSubgraphs(subgraph->getSubgraphs()));
 	text += std::string(dotEdges(subgraph->getEdges()));
 	ident_step--;
-	text += getIdent() + "}" + new_line;
+	text += getIdent() + "}" + new_line + new_line;
 
-	return text.c_str();
+	return text;
 }
 
 //const char *GraphvizPlotter::dotNodeAttributes(Node *node) {
@@ -124,19 +155,14 @@ const char *GraphvizPlotter::dotSubgraph(Subgraph *subgraph) {
 //	return attributes.c_str();
 //}
 
-const char *GraphvizPlotter::dotAttribute(const char *name, Attribute *attr) {
+std::string GraphvizPlotter::dotAttribute(const char *name, Attribute *attr) {
 	std::string attribute = "";
 	std::string str_name = name;
 	std::string value = attr->getValue();
 
-	attribute += name;
-	attribute += "=";
+	attribute += str_name + "=" + value;
 
-	attribute += attr->useQuotationMarks() ? q_mark : "";
-	attribute += value;
-	attribute += attr->useQuotationMarks() ? q_mark : "";
-
-	return attribute.c_str();
+	return attribute;
 }
 
 std::string GraphvizPlotter::getIdent() {
@@ -146,7 +172,7 @@ std::string GraphvizPlotter::getIdent() {
 		text += tab;
 	}
 
-	return text.c_str();
+	return text;
 }
 
 const char *GraphvizPlotter::print(std::string *content) {
