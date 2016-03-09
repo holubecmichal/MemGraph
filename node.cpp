@@ -15,3 +15,7 @@ const char*Node::getName() {
 Attribute *Node::getAttr(const char *name) {
 	return attrs.getAttr(name);
 }
+
+void Node::setAttrs(Attributes *attrs) {
+	attrs->setAttrs(attrs);
+}

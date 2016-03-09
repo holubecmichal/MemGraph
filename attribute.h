@@ -11,7 +11,10 @@
 #include <iostream>
 #include <map>
 
+
+
 class Attribute {
+public:
 	enum attr_type {
 		type_null,
 		type_int,
@@ -58,6 +61,7 @@ public:
 	std::string getValue();
 	Attribute::attr_type getType();
 	void setName(const char *name);
+	const char *getName();
 	void setHtml() {
 		html_attr = true;
 	}

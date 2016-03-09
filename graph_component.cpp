@@ -236,14 +236,6 @@ Edge *GraphComponent::getEdge(const char *from, const char *to) {
 	return NULL;
 }
 
-void GraphComponent::setDefaultNodeAttr(const char *name, Attribute *attr) {
-	node_attrs.setAttr(name, attr);
-}
-
-void GraphComponent::setDefaultEdgeAttr(const char *name, Attribute *attr) {
-	edge_attrs.setAttr(name, attr);
-}
-
 void GraphComponent::setDefaultNodeAttrs(Node *node) {
 	for(attributes_it it = node_attrs.begin(); it != node_attrs.end(); ++it) {
 		node->setAttr(it->first, it->second);
@@ -265,15 +257,11 @@ void GraphComponent::clearDefaultEdgeAttrs() {
 }
 
 void GraphComponent::eraseDeafultNodeAttr(const char *name) {
-	if(node_attrs.getAttr(name) != NULL) {
-		node_attrs.erase(name);
-	}
+	node_attrs.erase(name);
 }
 
 void GraphComponent::eraseDefaultEdgeAttr(const char *name) {
-	if(edge_attrs.getAttr(name) != NULL) {
-		edge_attrs.erase(name);
-	}
+	edge_attrs.erase(name);
 }
 
 Subgraph *GraphComponent::addSubgraph(const char *name) {
@@ -320,4 +308,24 @@ int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
 	edge->setAttrs(attrs);
 
 	return result;
+}
+
+void GraphComponent::setGraphAttrs(Attributes *attrs) {
+	this->attrs.setAttrs(attrs);
+}
+
+void GraphComponent::setDefaultNodeAttr(Attribute *attr) {
+	node_attrs.setAttr(attr);
+}
+
+void GraphComponent::setDefaultNodeAttrs(Attributes *attrs) {
+	node_attrs.setAttrs(attrs);
+}
+
+void GraphComponent::setDefaultEdgeAttr(Attribute *attr) {
+	edge_attrs.setAttr(attr);
+}
+
+void GraphComponent::setDefaultEdgeAttrs(Attributes *attrs) {
+	edge_attrs.setAttrs(attrs);
 }

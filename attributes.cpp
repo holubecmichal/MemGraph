@@ -16,8 +16,27 @@ Attribute *Attributes::insert(const char *name, Attribute *attr) {
 	return attr;
 }
 
-void Attributes::setAttr(const char *name, Attribute *attr) {
-	insert(name, attr);
+void Attributes::setAttr(const char *name, Attribute *attribute) {
+	switch(attribute->getType()) {
+		case Attribute::type_int:
+			setAttr(name, attribute->getIValue());
+			break;
+		case Attribute::type_double:
+			setAttr(name, attribute->getDValue());
+			break;
+		case Attribute::type_bool:
+			setAttr(name, attribute->getBValue());
+			break;
+		case Attribute::type_string:
+			setAttr(name, attribute->getSValue());
+			break;
+		default:
+			throw "Unknown or uninitialized attribute";
+	}
+}
+
+void Attributes::setAttr(Attribute *attr) {
+	setAttr(attr->getName(), attr);
 }
 
 Attribute *Attributes::getAttr(const char *name) {
@@ -44,9 +63,24 @@ attributes_it Attributes::end() {
 }
 
 void Attributes::clear() {
+	for(attributes_it it = attrs.begin(); it != attrs.end(); ++it) {
+		delete(it->second);
+	}
+
 	attrs.clear();
 }
 
 void Attributes::erase(const char *name) {
-	attrs.erase(name);
+	Attribute *attr = getAttr(name);
+
+	if(attr != NULL) {
+		delete(attr);
+		attrs.erase(name);
+	}
+}
+
+void Attributes::setAttrs(Attributes *attrs) {
+	for(attributes_it it = attrs->begin(); it != attrs->end(); ++it) {
+		setAttr(it->first, it->second);
+	}
 }

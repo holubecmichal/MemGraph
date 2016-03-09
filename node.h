@@ -26,6 +26,7 @@ public:
 	Attribute *getAttr(const char *name);
 	const char* getName();
 	void setName(const char *value);
+	void setAttrs(Attributes *attrs);
 	template <typename T>
 	Node *setAttr(const char *name, T value) {
 		attrs.setAttr(name, value);

@@ -26,7 +26,5 @@ Attribute *Edge::getAttr(const char *name) {
 }
 
 void Edge::setAttrs(Attributes *attrs) {
-	for(attributes_it it = attrs->begin(); it != attrs->end(); ++it) {
-		this->attrs.setAttr(it->first, it->second);
-	}
+	attrs->setAttrs(attrs);
 }

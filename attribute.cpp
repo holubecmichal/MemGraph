@@ -67,3 +67,7 @@ void Attribute::setName(const char *name) {
 bool Attribute::useHtmlMark() {
 	return isHtml();
 }
+
+const char *Attribute::getName() {
+	return name;
+}

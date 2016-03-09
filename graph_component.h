@@ -27,7 +27,9 @@ private:
 	Attributes edge_attrs;
 
 	void insertEdge(Edge *edge);
+	//todo predelat pro vlozeni vlastni instance atributu
 	void setDefaultNodeAttrs(Node *node);
+	//todo predelat pro vlozeni vlastni instance atributu
 	void setDefaultEdgeAttrs(Edge *edge);
 
 protected:
@@ -42,7 +44,10 @@ public:
 
 	virtual ~GraphComponent() { }
 
-// ===== SUBGRAPHS METHODS ======
+	// ===== GRAPH_COMPONENT METHODS =====
+	void setGraphAttrs(Attributes *attrs);
+
+	// ===== SUBGRAPHS METHODS ======
 	Subgraph *addSubgraph(const char * name);
 	void addSubgraph(Subgraph *graph);
 	Subgraph *getSubgraph(const char *name);
@@ -69,29 +74,36 @@ public:
 	Edge *getEdge(Node *from, Node *to);
 	Edge *getEdge(const char *from, const char *to);
 
-	// ===== ATTRIBUTES METHODS =====
-	void setDefaultNodeAttr(const char *name, Attribute *attr);
+	// ===== NODE ATTRIBUTES METHODS =====
+
 	template <typename T>
 	void setDefaultNodeAttr(const char *name, T value) {
 		node_attrs.setAttr(name, value);
 	}
-	void setDefaultEdgeAttr(const char *name, Attribute *attr);
-	template <typename T>
-	void setDefaultEdgeAttr(const char *name, T value) {
-		edge_attrs.setAttr(name, value);
-	}
-	template <typename T, typename U>
-	int setNodeAttr(U *node, const char *attr_name, T value) {
-		Node *temp_node = getNode(node);
+	void setDefaultNodeAttr(Attribute *attr);
+	void setDefaultNodeAttrs(Attributes *attrs);
 
-		if(temp_node == NULL) {
+	template <typename T, typename U>
+	int setNodeAttr(U *arg_node, const char *attr_name, T value) {
+		Node *node = getNode(arg_node);
+
+		if(node == NULL) {
 			return -1;
 		}
 
-		temp_node->setAttr(attr_name, value);
-
+		node->setAttr(attr_name, value);
 		return 0;
 	}
+
+	// ===== EDGE ATTRIBUTES METHODS =====
+
+	template <typename T>
+	void setDeufalttEdgeAttr(const char *name, T value) {
+		edge_attrs.setAttr(name, value);
+	}
+	void setDefaultEdgeAttr(Attribute *attr);
+	void setDefaultEdgeAttrs(Attributes *attrs);
+
 	template <typename T, typename U>
 	int setEdgeAttr(U *from_node, U *to_node, const char* attr_name, T value) {
 		Edge *edge = getEdge(from_node, to_node);
@@ -103,15 +115,16 @@ public:
 		edge->setAttr(attr_name, value);
 		return 0;
 	}
+
+	// ===== OTHERS =====
+	nodes_map     *getNodes()     { return &nodes; }
+	edges_vect    *getEdges()     { return &edges; }
+	subgraphs_map *getSubgraphs() { return &subgraphs; }
+
 	void clearDefaultNodeAttrs();
 	void clearDefaultEdgeAttrs();
 	void eraseDeafultNodeAttr(const char *name);
 	void eraseDefaultEdgeAttr(const char *name);
-
-	// ===== OTHERS =====
-	nodes_map *getNodes() { return &nodes; }
-	edges_vect *getEdges() { return &edges; }
-	subgraphs_map *getSubgraphs() { return &subgraphs; }
 
 };
 

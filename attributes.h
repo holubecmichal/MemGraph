@@ -32,9 +32,13 @@ public:
 	unsigned long size();
 	attributes_it begin();
 	attributes_it end();
+
 	void clear();
 	void erase(const char *name);
+
+	void setAttr(Attribute *attr);
 	void setAttr(const char *name, Attribute *attr);
+	void setAttrs(Attributes *attrs);
 	template <typename T>
 	Attribute *setAttr(const char *name, T value) {
 		Attribute *attr = getAttr(name);
@@ -47,6 +51,7 @@ public:
 
 		return attr;
 	}
+
 
 	template <typename T>
 	Attribute *setHtmlAttr(const char *name, T value) {

@@ -34,8 +34,8 @@ public:
 	void setTo(Node *node);
 	Node *getFrom();
 	Node *getTo();
-	void setAttrs(Attributes *attrs);
 	Attribute *getAttr(const char *name);
+	void setAttrs(Attributes *attrs);
 	template <typename T>
 	Edge *setAttr(const char *name, T value) {
 		attrs.setAttr(name, value);
