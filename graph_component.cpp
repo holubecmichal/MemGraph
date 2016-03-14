@@ -12,7 +12,7 @@ Node *GraphComponent::addNode(const char *name) {
 
 	if(node == NULL) {
 		node = new Node(name);
-		setDefaultNodeAttrs(node);
+//		setNodeAttrs(node);
 		nodes.insert(nodes_pair (name, node));
 		return node;
 	} else {
@@ -22,7 +22,7 @@ Node *GraphComponent::addNode(const char *name) {
 
 int GraphComponent::addNode(Node *node) {
 	if(getNode(node->getName()) == NULL) {
-		setDefaultNodeAttrs(node);
+//		setNodeAttrs(node);
 		nodes.insert(nodes_pair (node->getName(), node));
 		return 0;
 	} else {
@@ -116,7 +116,7 @@ int GraphComponent::addEdge(Edge *edge) {
 		throw "What does it means?";
 	}
 
-	setDefaultEdgeAttrs(edge);
+//	setEdgeAttrs(edge);
 	insertEdge(edge);
 	return 0;
 }
@@ -146,7 +146,7 @@ Edge *GraphComponent::addEdge(const char *from, const char *to) {
 	}
 
 	Edge *edge = new Edge();
-	setDefaultEdgeAttrs(edge);
+//	setEdgeAttrs(edge);
 	insertEdge(edge);
 
 	edge->setFrom(From);
@@ -180,7 +180,7 @@ Edge *GraphComponent::addEdge(Node *from, Node *to) {
 	}
 
 	Edge *edge = new Edge();
-	setDefaultEdgeAttrs(edge);
+//	setEdgeAttrs(edge);
 	insertEdge(edge);
 
 	edge->setFrom(From);
@@ -310,22 +310,22 @@ int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
 	return result;
 }
 
-void GraphComponent::setGraphAttrs(Attributes *attrs) {
+void GraphComponent::setAttrs(Attributes *attrs) {
 	this->attrs.setAttrs(attrs);
 }
 
-void GraphComponent::setDefaultNodeAttr(Attribute *attr) {
+void GraphComponent::setNodeAttr(Attribute *attr) {
 	node_attrs.setAttr(attr);
 }
 
-void GraphComponent::setDefaultNodeAttrs(Attributes *attrs) {
+void GraphComponent::setNodeAttrs(Attributes *attrs) {
 	node_attrs.setAttrs(attrs);
 }
 
-void GraphComponent::setDefaultEdgeAttr(Attribute *attr) {
+void GraphComponent::setEdgeAttr(Attribute *attr) {
 	edge_attrs.setAttr(attr);
 }
 
-void GraphComponent::setDefaultEdgeAttrs(Attributes *attrs) {
+void GraphComponent::setEdgeAttrs(Attributes *attrs) {
 	edge_attrs.setAttrs(attrs);
 }

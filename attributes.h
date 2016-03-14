@@ -36,8 +36,8 @@ public:
 	void clear();
 	void erase(const char *name);
 
-	void setAttr(Attribute *attr);
-	void setAttr(const char *name, Attribute *attr);
+	Attribute *setAttr(Attribute *attr);
+	Attribute *setAttr(const char *name, Attribute *attr);
 	void setAttrs(Attributes *attrs);
 	template <typename T>
 	Attribute *setAttr(const char *name, T value) {

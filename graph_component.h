@@ -27,9 +27,7 @@ private:
 	Attributes edge_attrs;
 
 	void insertEdge(Edge *edge);
-	//todo predelat pro vlozeni vlastni instance atributu
 	void setDefaultNodeAttrs(Node *node);
-	//todo predelat pro vlozeni vlastni instance atributu
 	void setDefaultEdgeAttrs(Edge *edge);
 
 protected:
@@ -45,7 +43,7 @@ public:
 	virtual ~GraphComponent() { }
 
 	// ===== GRAPH_COMPONENT METHODS =====
-	void setGraphAttrs(Attributes *attrs);
+	void setAttrs(Attributes *attrs);
 
 	// ===== SUBGRAPHS METHODS ======
 	Subgraph *addSubgraph(const char * name);
@@ -77,49 +75,27 @@ public:
 	// ===== NODE ATTRIBUTES METHODS =====
 
 	template <typename T>
-	void setDefaultNodeAttr(const char *name, T value) {
+	void setNodeAttr(const char *name, T value) {
 		node_attrs.setAttr(name, value);
 	}
-	void setDefaultNodeAttr(Attribute *attr);
-	void setDefaultNodeAttrs(Attributes *attrs);
-
-	template <typename T, typename U>
-	int setNodeAttr(U *arg_node, const char *attr_name, T value) {
-		Node *node = getNode(arg_node);
-
-		if(node == NULL) {
-			return -1;
-		}
-
-		node->setAttr(attr_name, value);
-		return 0;
-	}
+	void setNodeAttr(Attribute *attr);
+	void setNodeAttrs(Attributes *attrs);
 
 	// ===== EDGE ATTRIBUTES METHODS =====
 
 	template <typename T>
-	void setDeufalttEdgeAttr(const char *name, T value) {
+	void setEdgeAttr(const char *name, T value) {
 		edge_attrs.setAttr(name, value);
 	}
-	void setDefaultEdgeAttr(Attribute *attr);
-	void setDefaultEdgeAttrs(Attributes *attrs);
-
-	template <typename T, typename U>
-	int setEdgeAttr(U *from_node, U *to_node, const char* attr_name, T value) {
-		Edge *edge = getEdge(from_node, to_node);
-
-		if(edge == NULL) {
-			return -1;
-		}
-
-		edge->setAttr(attr_name, value);
-		return 0;
-	}
+	void setEdgeAttr(Attribute *attr);
+	void setEdgeAttrs(Attributes *attrs);
 
 	// ===== OTHERS =====
 	nodes_map     *getNodes()     { return &nodes; }
 	edges_vect    *getEdges()     { return &edges; }
 	subgraphs_map *getSubgraphs() { return &subgraphs; }
+	Attributes    *getNodeAttrs() { return &node_attrs; }
+	Attributes    *getEdgeAttrs() { return &edge_attrs; }
 
 	void clearDefaultNodeAttrs();
 	void clearDefaultEdgeAttrs();

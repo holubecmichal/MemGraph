@@ -21,8 +21,9 @@ public:
 	Plotter() { graph = new Graph; ident_step = 0; }
 
 	virtual std::string getDot() = 0;
-	virtual void plot(const char *name) = 0;
-	virtual void setOutputFormat() = 0;
+	virtual void plot() = 0;
+	virtual void setOutputPath(const char *path) = 0;
+	virtual void setOutputName(const char *name) = 0;
 
 };
 

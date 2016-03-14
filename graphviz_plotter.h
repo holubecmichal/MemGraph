@@ -9,7 +9,21 @@
 #include "plotter.h"
 
 class GraphvizPlotter : public Plotter {
+public:
+	enum output {
+		PDF,
+		PLAIN,
+		PNG,
+		PS,
+		PS2,
+		SVG
+	};
+
 private:
+	GraphvizPlotter::output output_format;
+	std::string path;
+	std::string name;
+
 	const char *print(std::string *content);
 	std::string getIdent();
 	std::string dotGraphHeader();
@@ -20,34 +34,19 @@ private:
 	std::string dotSubgraph(Subgraph *subgraph);
 	std::string dotEdgeType();
 	std::string dotGraphAttrs(Attributes *attrs);
-	template <typename T>
-	const char *dotAttributes(T *element) {
-		if(element->attrs.size() == 0) {
-			return "";
-		}
+	std::string dotGraphNodeAttrs(Attributes *attrs);
+	std::string dotGraphEdgeAttrs(Attributes *attrs);
+	std::string dotAttributes(Attributes *attrs);
 
-		attributes_it it = element->attrs.begin();
-
-		std::string attributes = "[";
-		while ( true ) {
-			attributes += dotAttribute(it->first, it->second);
-
-			if(++it == element->attrs.end()) {
-				break;
-			}
-
-			attributes += ",";
-		}
-		attributes += "]";
-
-		return attributes.c_str();
-	}
+	std::string getStringOutputFormat();
 
 public:
 
 	std::string getDot();
-	void plot(const char *file_name);
-	void setOutputFormat();
+	void plot();
+	void setOutputFormat(GraphvizPlotter::output format);
+	void setOutputPath(const char *path);
+	void setOutputName(const char *name);
 };
 
 

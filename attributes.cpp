@@ -16,27 +16,23 @@ Attribute *Attributes::insert(const char *name, Attribute *attr) {
 	return attr;
 }
 
-void Attributes::setAttr(const char *name, Attribute *attribute) {
+Attribute *Attributes::setAttr(const char *name, Attribute *attribute) {
 	switch(attribute->getType()) {
 		case Attribute::type_int:
-			setAttr(name, attribute->getIValue());
-			break;
+			return setAttr(name, attribute->getIValue());
 		case Attribute::type_double:
-			setAttr(name, attribute->getDValue());
-			break;
+			return setAttr(name, attribute->getDValue());
 		case Attribute::type_bool:
-			setAttr(name, attribute->getBValue());
-			break;
+			return setAttr(name, attribute->getBValue());
 		case Attribute::type_string:
-			setAttr(name, attribute->getSValue());
-			break;
+			return setAttr(name, attribute->getSValue());
 		default:
 			throw "Unknown or uninitialized attribute";
 	}
 }
 
-void Attributes::setAttr(Attribute *attr) {
-	setAttr(attr->getName(), attr);
+Attribute *Attributes::setAttr(Attribute *attr) {
+	return setAttr(attr->getName(), attr);
 }
 
 Attribute *Attributes::getAttr(const char *name) {
