@@ -10,7 +10,6 @@
 using namespace std;
 
 	// todo implementace graphvizu
-	// todo propisuji se v dotu defaultne nastavene atributy do subgraphs?
 	// todo attrs prepsat na asociativni pole?
 
 int main() {
@@ -21,7 +20,9 @@ int main() {
 	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
 	plotter->setOutputName("out");
 
-	Examples::predator_1(graph);
+	Examples::forester_1(graph);
+	//Examples::predator_1(graph);
+
 	cout << plotter->getDot() << endl;
 	plotter->plot();
 

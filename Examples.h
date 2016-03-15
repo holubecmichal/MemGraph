@@ -267,6 +267,500 @@ public:
 				->setAttr("fontcolor","black")
 				->setAttr("label","[+0]");
 	}
+
+	static void forester_1(Graph *graph) {
+// 		digraph "observer-0001-0000" {
+//			label=<<FONT POINT-SIZE="18">observer-0001-0000</FONT>>;
+//			clusterrank=local;
+//			labelloc=t;
+		graph->setHtmlAttr("label","<FONT POINT-SIZE=\"18\">observer-0001-0000</FONT>");
+		graph->setAttr("clusterrank","local");
+		graph->setAttr("labelloc","t");
+
+		Attributes subgraphs_attrs;
+		subgraphs_attrs.setAttr("rank","same");
+		subgraphs_attrs.setAttr("color","black");
+		subgraphs_attrs.setAttr("fontcolor","black");
+		subgraphs_attrs.setAttr("style","dashed");
+		subgraphs_attrs.setAttr("penwidth","1.0");
+
+//			subgraph "cluster_treeaut0" {
+//				rank=same;
+//				label="TA 0";
+//				labeljust=right;
+//				color=black;
+//				fontcolor=black;
+//				bgcolor=green;
+//				style=dashed;
+//				penwidth=1.0;
+
+		Subgraph *subgraph = graph->addSubgraph("cluster_treeaut0");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("bgcolor","green")
+				->setAttr("label","TA 0")
+				->setAttr("labeljust","right");
+
+//				subgraph "cluster_treeaut0_q1_0" {
+//					rank=same;
+//					label=q1;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+
+		subgraph = subgraph->addSubgraph("cluster_treeaut0_q1_0");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("bgcolor","orange")
+				->setAttr("label","q1")
+				->setAttr("labeljust","left");
+
+//
+//					"39517688" [shape=ellipse, style=filled, fillcolor=lightblue, label="__global_vars_block"];
+//					"39517688.0" [shape=box, style=filled, fillcolor=pink, label="__fake_global__"];
+//					"39517688" -> "39517688.0"[label="[0:1:+0]"];
+//				}
+
+		subgraph->addNode("39517688")
+				->setAttr("shape","ellipse")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","lightblue")
+				->setAttr("label","__global_vars_block");
+
+		subgraph->addNode("39517688.0")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label","__fake_global__");
+
+		subgraph->addEdge("39517688","39517688.0")
+				->setAttr("label", "[0:1:+0]");
+//
+//				subgraph "cluster_treeaut0_r0_1" {
+//					rank=same;
+//					label=r0;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+//
+//					"18446744073276704883" [shape=box, style=filled, fillcolor=red, label="(undef)"];
+//				}
+//
+//			}
+
+		subgraph = graph->getSubgraph("cluster_treeaut0")->addSubgraph("cluster_treeaut0_r0_1");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","r0")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+		subgraph->addNode("18446744073276704883")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","red")
+				->setAttr("label","(undef)");
+
+//			subgraph "cluster_treeaut1" {
+//				rank=same;
+//				label="TA 1";
+//				labeljust=right;
+//				color=black;
+//				fontcolor=black;
+//				bgcolor=green;
+//				style=dashed;
+//				penwidth=1.0;
+//
+
+		subgraph = graph->addSubgraph("cluster_treeaut1");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","TA 1")
+				->setAttr("labeljust","right")
+				->setAttr("bgcolor","green");
+
+//				subgraph "cluster_treeaut1_q24_2" {
+//					rank=same;
+//					label=q24;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+
+		subgraph = subgraph->addSubgraph("cluster_treeaut1_q24_2");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","q24")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+//
+//					"39770200" [shape=ellipse, style=filled, fillcolor=lightblue, label="main:1976"];
+//					"39770200.0" [shape=box, style=filled, fillcolor=pink, label="_pABP"];
+//					"39770200" -> "39770200.0"[label="[0:4:+0]"];
+//					"39770200.4" [shape=box, style=filled, fillcolor=pink, label="_retaddr"];
+//					"39770200" -> "39770200.4"[label="[4:8:+0]"];
+
+		subgraph->addNode("39770200")
+				->setAttr("shape","ellipse")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","lightblue")
+				->setAttr("label","main:1976");
+
+		subgraph->addNode("39770200.0")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label","_pABP");
+
+		subgraph->addEdge("39770200","39770200.0")
+				->setAttr("label","[0:4:+0]");
+
+		subgraph->addNode("39770200.4")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label","_retaddr");
+
+		subgraph->addEdge("39770200","39770200.4")
+				->setAttr("label","[4:8:+0]");
+
+//					"39770200.12" [shape=box, style=filled, fillcolor=pink, label="x"];
+//					"39770200" -> "39770200.12"[label="[12:4:+0]"];
+//					"39770200.16" [shape=box, style=filled, fillcolor=pink, label="y"];
+//					"39770200" -> "39770200.16"[label="[16:4:+0]"];
+//					"39770200.20" [shape=box, style=filled, fillcolor=pink, label="found"];
+//					"39770200" -> "39770200.20"[label="[20:1:+0]"];
+//				}
+//
+
+		subgraph->addNode("39770200.12")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label","x");
+
+		subgraph->addEdge("39770200","39770200.12")
+				->setAttr("label","[12:4:+0]");
+
+		subgraph->addNode("39770200.16")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label","y");
+
+		subgraph->addEdge("39770200","39770200.16")
+				->setAttr("label","[16:4:+0]");
+
+		subgraph->addNode("39770200.20")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label","found");
+
+		subgraph->addEdge("39770200","39770200.20")
+				->setAttr("label","[20:1:+0]");
+
+
+//				subgraph "cluster_treeaut1_r0_3" {
+//					rank=same;
+//					label=r0;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+//
+//					"18446744073519815761" [shape=box, style=filled, fillcolor=red, label="(undef)"];
+//				}
+
+		subgraph = graph->getSubgraph("cluster_treeaut1")->addSubgraph("cluster_treeaut1_r0_3");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","r0")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+		subgraph->addNode("18446744073519815761")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","red")
+				->setAttr("label","(undef)");
+
+//
+//				subgraph "cluster_treeaut1_r1_4" {
+//					rank=same;
+//					label=r1;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+//
+//					"18446744071986306303" [shape=box, style=filled, fillcolor=red, label="(int)0"];
+//				}
+
+		subgraph = graph->getSubgraph("cluster_treeaut1")->addSubgraph("cluster_treeaut1_r1_4");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","r1")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+		subgraph->addNode("18446744071986306303")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","red")
+				->setAttr("label","(int)0");
+
+
+//
+//				subgraph "cluster_treeaut1_r2_5" {
+//					rank=same;
+//					label=r2;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+//
+//					"18446744072281953354" [shape=box, style=filled, fillcolor=red, label="(native_ptr)0x25f6370"];
+//				}
+
+		subgraph = graph->getSubgraph("cluster_treeaut1")->addSubgraph("cluster_treeaut1_r2_5");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","r2")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+		subgraph->addNode("18446744072281953354")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","red")
+				->setAttr("label","(native_ptr)0x25f6370");
+
+//
+//				subgraph "cluster_treeaut1_r3_6" {
+//					rank=same;
+//					label=r3;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+//
+//				}
+
+		subgraph = graph->getSubgraph("cluster_treeaut1")->addSubgraph("cluster_treeaut1_r3_6");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","r3")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+//
+//			}
+
+//		    subgraph "cluster_treeaut2" {
+//				rank=same;
+//				label="TA 2";
+//				labeljust=right;
+//				color=black;
+//				fontcolor=black;
+//				bgcolor=green;
+//				style=dashed;
+//				penwidth=1.0;
+
+		subgraph = graph->addSubgraph("cluster_treeaut2");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","TA 2")
+				->setAttr("labeljust","right")
+				->setAttr("bgcolor","green");
+
+//
+//				subgraph "cluster_treeaut2_q25_7" {
+//					rank=same;
+//					label=q25;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+
+		subgraph = subgraph->addSubgraph("cluster_treeaut2_q25_7");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","q25")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+//
+//					"39502392" [shape=ellipse, style=filled, fillcolor=lightblue, label="SLL"];
+//					"39502392.0" [shape=box, style=filled, fillcolor=pink, label=".next"];
+//					"39502392" -> "39502392"[label="[0:4:+0]"];
+//					"39502392.4" [shape=box, style=filled, fillcolor=pink, label=".data"];
+//					"39502392" -> "39502392.4"[label="[4:4:+0]"];
+
+		subgraph->addNode("39502392")
+				->setAttr("shape","ellipse")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","lightblue")
+				->setAttr("label","SLL");
+
+		subgraph->addNode("39502392.0")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label",".next");
+
+		subgraph->addNode("39502392.4")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label",".data");
+
+		subgraph->addEdge("39502392","39502392.0")
+				->setAttr("label","[0:4:+0]");
+
+		subgraph->addEdge("39502392","39502392.4")
+				->setAttr("label","[4:4:+0]");
+
+
+//				}
+//
+//				subgraph "cluster_treeaut2_q25_8" {
+//					rank=same;
+//					label=q25;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+
+		subgraph = graph->getSubgraph("cluster_treeaut2")->addSubgraph("cluster_treeaut2_q25_8");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","q25")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+//
+//					"39382008" [shape=ellipse, style=filled, fillcolor=lightblue, label="SLL"];
+//					"39382008.0" [shape=box, style=filled, fillcolor=pink, label=".next"];
+//					"39382008" -> "39382008.0"[label="[0:4:+0]"];
+//					"39382008.4" [shape=box, style=filled, fillcolor=pink, label=".data"];
+//					"39382008" -> "39382008.4"[label="[4:4:+0]"];
+
+		subgraph->addNode("39382008")
+				->setAttr("shape","ellipse")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","lightblue")
+				->setAttr("label","SLL");
+
+		subgraph->addNode("39382008.0")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label",".next");
+
+		subgraph->addNode("39382008.4")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","pink")
+				->setAttr("label",".data");
+
+		subgraph->addEdge("39382008","39382008.0")
+				->setAttr("label","[0:4:+0]");
+
+		subgraph->addEdge("39382008","39382008.4")
+				->setAttr("label","[4:4:+0]");
+
+//				}
+//
+//				subgraph "cluster_treeaut2_r1_9" {
+//					rank=same;
+//					label=r1;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+//
+//					"18446744072158584617" [shape=box, style=filled, fillcolor=red, label="(int)0"];
+//				}
+
+		subgraph = graph->getSubgraph("cluster_treeaut2")->addSubgraph("cluster_treeaut2_r1_9");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","r1")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+		subgraph->addNode("18446744072158584617")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","red")
+				->setAttr("label","(int)0");
+
+//
+//				subgraph "cluster_treeaut2_r4_10" {
+//					rank=same;
+//					label=r4;
+//					labeljust=left;
+//					color=black;
+//					fontcolor=black;
+//					bgcolor=orange;
+//					style=dashed;
+//					penwidth=1.0;
+//
+//					"18446744072751709389" [shape=box, style=filled, fillcolor=red, label="(int)1"];
+//				}
+//
+//			}
+
+		subgraph = graph->getSubgraph("cluster_treeaut2")->addSubgraph("cluster_treeaut2_r4_10");
+		subgraph->setAttrs(&subgraphs_attrs);
+		subgraph->setAttr("label","r4")
+				->setAttr("labeljust","left")
+				->setAttr("bgcolor","orange");
+
+		subgraph->addNode("18446744072751709389")
+				->setAttr("shape","box")
+				->setAttr("style","filled")
+				->setAttr("fillcolor","red")
+				->setAttr("label","(int)1");
+
+//			"39517688.0" -> "18446744073276704883";
+//			"39770200.0" -> "18446744071986306303";
+//			"39770200.4" -> "18446744072281953354";
+//			"39770200.12" -> "39502392";
+//			"39770200.12" -> "39382008";
+//			"39770200.16" -> "18446744073519815761";
+//			"39770200.20" -> "18446744073519815761";
+//			"39502392.0" -> "39502392";
+//			"39502392.0" -> "39382008";
+//			"39502392.4" -> "18446744072158584617";
+//			"39382008.0" -> "18446744072158584617";
+//			"39382008.4" -> "18446744072751709389";
+//		}
+
+		graph->addEdge("39517688.0","18446744073276704883");
+		graph->addEdge("39770200.0","18446744071986306303");
+		graph->addEdge("39770200.4","18446744072281953354");
+		graph->addEdge("39770200.12","39502392");
+		graph->addEdge("39770200.12","39382008");
+		graph->addEdge("39770200.16","18446744073519815761");
+		graph->addEdge("39770200.20","18446744073519815761");
+		graph->addEdge("39502392.0","39502392");
+		graph->addEdge("39502392.0","39382008");
+		graph->addEdge("39502392.4","18446744072158584617");
+		graph->addEdge("39382008.0","18446744072158584617");
+		graph->addEdge("39382008.4","18446744072751709389");
+
+	}
 };
 
 
