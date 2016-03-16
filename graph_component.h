@@ -16,8 +16,6 @@ typedef std::map< const char *, Subgraph* > subgraphs_map;
 typedef subgraphs_map::iterator subgraphs_it;
 typedef std::pair< const char *, Subgraph* > subgraphs_pair;
 
-// todo osetrit metody pro moznosti prijmuti null jako parametru
-
 class GraphComponent {
 private:
 	nodes_map nodes;
@@ -27,8 +25,12 @@ private:
 	Attributes edge_attrs;
 
 	void insertEdge(Edge *edge);
-	void setDefaultNodeAttrs(Node *node);
-	void setDefaultEdgeAttrs(Edge *edge);
+	template <typename T>
+	void checkNullObject(T *object) {
+		if(object == NULL) {
+			throw "Type of " + std::string(typeid(T).name()) + " - object is NULL";
+		}
+	}
 
 protected:
 	GraphComponent *parent;
@@ -96,11 +98,6 @@ public:
 	subgraphs_map *getSubgraphs() { return &subgraphs; }
 	Attributes    *getNodeAttrs() { return &node_attrs; }
 	Attributes    *getEdgeAttrs() { return &edge_attrs; }
-
-	void clearDefaultNodeAttrs();
-	void clearDefaultEdgeAttrs();
-	void eraseDeafultNodeAttr(const char *name);
-	void eraseDefaultEdgeAttr(const char *name);
 
 };
 

@@ -8,6 +8,7 @@
 // ===== GRAPH_COMPONENT CLASS =====
 
 Node *GraphComponent::addNode(const char *name) {
+	checkNullObject(name);
 	Node *node = getNode(name);
 
 	if(node == NULL) {
@@ -21,6 +22,8 @@ Node *GraphComponent::addNode(const char *name) {
 }
 
 int GraphComponent::addNode(Node *node) {
+	checkNullObject(node);
+
 	if(getNode(node->getName()) == NULL) {
 //		setNodeAttrs(node);
 		nodes.insert(nodes_pair (node->getName(), node));
@@ -112,19 +115,17 @@ Node *GraphComponent::getNodeInSubgraphs(const char *name) {
 }
 
 int GraphComponent::addEdge(Edge *edge) {
-	if(edge->getFrom() == NULL || edge->getTo() == NULL) {
-		throw "What does it means?";
-	}
+	checkNullObject(edge);
+	checkNullObject(edge->getFrom());
+	checkNullObject(edge->getTo());
 
-//	setEdgeAttrs(edge);
 	insertEdge(edge);
 	return 0;
 }
 
 Edge *GraphComponent::addEdge(const char *from, const char *to) {
-	if(from == NULL || to == NULL) {
-		throw "What does it means?";
-	}
+	checkNullObject(from);
+	checkNullObject(to);
 
 	Node *From = NULL;
 	Node *To = NULL;
@@ -156,9 +157,8 @@ Edge *GraphComponent::addEdge(const char *from, const char *to) {
 }
 
 Edge *GraphComponent::addEdge(Node *from, Node *to) {
-	if(from == NULL || to == NULL) {
-		throw "What does it means?";
-	}
+	checkNullObject(from);
+	checkNullObject(to);
 
 	Node *From = NULL;
 	Node *To = NULL;
@@ -190,10 +190,15 @@ Edge *GraphComponent::addEdge(Node *from, Node *to) {
 }
 
 void GraphComponent::insertEdge(Edge *edge) {
+	checkNullObject(edge);
+
 	edges.insert(edges.end(), edge);
 }
 
 Edge *GraphComponent::getEdge(Node *from, Node *to) {
+	checkNullObject(from);
+	checkNullObject(to);
+
 	for(unsigned i = 0; i < edges.size(); i++) {
 		Edge *edge = edges.at(i);
 
@@ -236,34 +241,6 @@ Edge *GraphComponent::getEdge(const char *from, const char *to) {
 	return NULL;
 }
 
-void GraphComponent::setDefaultNodeAttrs(Node *node) {
-	for(attributes_it it = node_attrs.begin(); it != node_attrs.end(); ++it) {
-		node->setAttr(it->first, it->second);
-	}
-}
-
-void GraphComponent::setDefaultEdgeAttrs(Edge *edge) {
-	for(attributes_it it = edge_attrs.begin(); it != edge_attrs.end(); ++it) {
-		edge->setAttr(it->first, it->second);
-	}
-}
-
-void GraphComponent::clearDefaultNodeAttrs() {
-	node_attrs.clear();
-}
-
-void GraphComponent::clearDefaultEdgeAttrs() {
-	edge_attrs.clear();
-}
-
-void GraphComponent::eraseDeafultNodeAttr(const char *name) {
-	node_attrs.erase(name);
-}
-
-void GraphComponent::eraseDefaultEdgeAttr(const char *name) {
-	edge_attrs.erase(name);
-}
-
 Subgraph *GraphComponent::addSubgraph(const char *name) {
 	Subgraph *subgraph = getSubgraph(name);
 
@@ -276,6 +253,8 @@ Subgraph *GraphComponent::addSubgraph(const char *name) {
 }
 
 void GraphComponent::addSubgraph(Subgraph *graph) {
+	checkNullObject(graph);
+
 	Subgraph *subgraph = getSubgraph(graph->getName());
 
 	if(subgraph != NULL) {
@@ -304,6 +283,9 @@ void Subgraph::setName(const char *value) {
 }
 
 int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
+	checkNullObject(edge);
+	checkNullObject(attrs);
+
 	int result = addEdge(edge);
 	edge->setAttrs(attrs);
 
@@ -311,21 +293,26 @@ int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
 }
 
 void GraphComponent::setAttrs(Attributes *attrs) {
+	checkNullObject(attrs);
 	this->attrs.setAttrs(attrs);
 }
 
 void GraphComponent::setNodeAttr(Attribute *attr) {
+	checkNullObject(attr);
 	node_attrs.setAttr(attr);
 }
 
 void GraphComponent::setNodeAttrs(Attributes *attrs) {
+	checkNullObject(attrs);
 	node_attrs.setAttrs(attrs);
 }
 
 void GraphComponent::setEdgeAttr(Attribute *attr) {
+	checkNullObject(attr);
 	edge_attrs.setAttr(attr);
 }
 
 void GraphComponent::setEdgeAttrs(Attributes *attrs) {
+	checkNullObject(attrs);
 	edge_attrs.setAttrs(attrs);
 }

@@ -126,7 +126,7 @@ public:
 		graph->addEdge("BusinessManager", "ITManager");
 
 		// todo pridat zasobnik contextu (attr rank)
-		graph->setAttr("rank", "same;ITManager Teacher1 Teacher2");
+//		graph->setAttr("rank", "same;ITManager Teacher1 Teacher2");
 
 	}
 

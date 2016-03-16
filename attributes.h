@@ -18,7 +18,8 @@ class Attributes {
 private:
 	attributes_map attrs;
 
-	Attribute * insert(const char *name, Attribute *attr);
+	Attribute *insert(const char *name, Attribute *attr);
+	Attribute *setAttr(const char *name);
 
 public:
 	Attributes() { attrs.empty(); }
@@ -40,11 +41,15 @@ public:
 	Attribute *setAttr(const char *name, Attribute *attr);
 	void setAttrs(Attributes *attrs);
 	template <typename T>
-	Attribute *setAttr(const char *name, T value) {
+
+	// todo poresit jeste ten nepovinny parametr
+	Attribute *setAttr(const char *name, T value, bool null_attr = false) {
 		Attribute *attr = getAttr(name);
 
 		if(attr != NULL) {
 			attr->setValue(value);
+		} else if(null_attr) {
+			attr = insert(name, new Attribute(name));
 		} else {
 			attr = insert(name, new Attribute(name, value));
 		}
@@ -58,6 +63,17 @@ public:
 		Attribute *attr = setAttr(name, value);
 		attr->setHtml();
 		return attr;
+	}
+
+	Attribute &operator[] (const char *name)
+	{
+		Attribute *attr = getAttr(name);
+
+		if(attr == NULL) {
+			attr = setAttr(name);
+		}
+
+		return *attr;
 	}
 
 };

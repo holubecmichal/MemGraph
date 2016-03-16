@@ -27,8 +27,12 @@ Attribute *Attributes::setAttr(const char *name, Attribute *attribute) {
 		case Attribute::type_string:
 			return setAttr(name, attribute->getSValue());
 		default:
-			throw "Unknown or uninitialized attribute";
+			throw "Unknown Attribute type or uninitialize value";
 	}
+}
+
+Attribute *Attributes::setAttr(const char *name) {
+	return setAttr(name, false, true);
 }
 
 Attribute *Attributes::setAttr(Attribute *attr) {

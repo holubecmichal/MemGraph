@@ -62,6 +62,12 @@ public:
 	Attribute::attr_type getType();
 	void setName(const char *name);
 	const char *getName();
+
+	template <typename T>
+	void operator= (T value) {
+		setValue(value);
+	}
+
 	void setHtml() {
 		html_attr = true;
 	}

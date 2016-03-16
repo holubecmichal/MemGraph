@@ -20,8 +20,16 @@ int main() {
 	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
 	plotter->setOutputName("out");
 
-	Examples::forester_1(graph);
+	Examples::tonyballantyne_com_51(graph);
 	//Examples::predator_1(graph);
+
+	Attributes attrs;
+	attrs["asd"] = "aasdasd";
+	attrs["int"] = 10;
+	attrs["bool"] = true;
+
+	attrs["int"] = 50;
+	attrs["int"] = "asdadsasdadasdasda";
 
 	cout << plotter->getDot() << endl;
 	plotter->plot();
