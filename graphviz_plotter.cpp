@@ -288,3 +288,7 @@ void GraphvizPlotter::setOutputPath(const char *path) {
 void GraphvizPlotter::setOutputName(const char *name) {
 	this->name = name;
 }
+
+void GraphvizPlotter::setAvailableAttrs() {
+
+}

@@ -7,6 +7,7 @@
 
 
 #include "graph.h"
+#include "available_attrs.h"
 
 const std::string new_line = "\n";
 const std::string tab = "\t";

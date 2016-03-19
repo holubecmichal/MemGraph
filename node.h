@@ -6,11 +6,17 @@
 #define BACHELOR_NODE_H
 
 #include <string>
+#include <vector>
 #include "attributes.h"
+#include "available_attrs.h"
+#include "graphviz_attrs.h"
 
 class Node {
 private:
 	const char* name;
+	static string_vector available_attrs;
+
+	bool isAvailableAttrs(const char *name);
 
 public:
 	Attributes attrs;
@@ -29,13 +35,27 @@ public:
 	void setAttrs(Attributes *attrs);
 	template <typename T>
 	Node *setAttr(const char *name, T value) {
+		if(!isAvailableAttrs(name)) {
+			std::cerr << "Node: Unknown atribute " << name << std::endl;
+		}
+
 		attrs.setAttr(name, value);
 		return this;
 	}
 	template <typename T>
 	Node *setHtmlAttr(const char *name, T value) {
+		if(!isAvailableAttrs(name)) {
+			std::cerr << "Node: Unknown atribute " << name << std::endl;
+		}
+
 		attrs.setHtmlAttr(name,value);
 		return this;
+	}
+
+	static void setAvailableAttrs(string_vector attrs) {
+		for(auto i : attrs) {
+			available_attrs.push_back(i);
+		}
 	}
 
 };

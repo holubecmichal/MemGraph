@@ -8,11 +8,15 @@
 
 #include <map>
 #include <string>
+#include <vector>
 #include "attribute.h"
 
 typedef std::map< const char *, Attribute* > attributes_map;
 typedef attributes_map::iterator attributes_it;
 typedef std::pair< const char *, Attribute* > attributes_pair;
+
+typedef std::vector< std::string > string_vector;
+typedef string_vector::iterator string_vector_it;
 
 class Attributes {
 private:

@@ -7,6 +7,7 @@
 
 
 #include "plotter.h"
+#include "graphviz_attrs.h"
 
 class GraphvizPlotter : public Plotter {
 public:
@@ -21,6 +22,7 @@ public:
 
 private:
 	GraphvizPlotter::output output_format;
+	AvailableAttrs available_attrs;
 	std::string path;
 	std::string name;
 
@@ -41,12 +43,16 @@ private:
 	std::string getStringOutputFormat();
 
 public:
+	GraphvizPlotter() : Plotter() {
+		Node::setAvailableAttrs(GraphvizAttrs::node_attrs);
+	}
 
 	std::string getDot();
 	void plot();
 	void setOutputFormat(GraphvizPlotter::output format);
 	void setOutputPath(const char *path);
 	void setOutputName(const char *name);
+	void setAvailableAttrs();
 };
 
 

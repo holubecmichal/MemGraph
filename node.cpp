@@ -4,6 +4,8 @@
 
 #include "node.h"
 
+string_vector Node::available_attrs;
+
 void Node::setName(const char* value) {
 	name = value;
 }
@@ -18,4 +20,14 @@ Attribute *Node::getAttr(const char *name) {
 
 void Node::setAttrs(Attributes *attrs) {
 	attrs->setAttrs(attrs);
+}
+
+bool Node::isAvailableAttrs(const char *name) {
+	for(auto i : available_attrs) {
+		if(i == name) {
+			return true;
+		}
+	}
+
+	return false;
 }
