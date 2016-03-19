@@ -16,7 +16,8 @@ private:
 	const char* name;
 	static string_vector available_attrs;
 
-	bool isAvailableAttrs(const char *name);
+	static void printWarning(const char *name);
+	static bool isAvailableAttr(const char *name);
 
 public:
 	Attributes attrs;
@@ -35,27 +36,20 @@ public:
 	void setAttrs(Attributes *attrs);
 	template <typename T>
 	Node *setAttr(const char *name, T value) {
-		if(!isAvailableAttrs(name)) {
-			std::cerr << "Node: Unknown atribute " << name << std::endl;
-		}
-
+		checkAttr(name);
 		attrs.setAttr(name, value);
 		return this;
 	}
 	template <typename T>
 	Node *setHtmlAttr(const char *name, T value) {
-		if(!isAvailableAttrs(name)) {
-			std::cerr << "Node: Unknown atribute " << name << std::endl;
-		}
-
+		checkAttr(name);
 		attrs.setHtmlAttr(name,value);
 		return this;
 	}
 
+	static void checkAttr(const char *name);
 	static void setAvailableAttrs(string_vector attrs) {
-		for(auto i : attrs) {
-			available_attrs.push_back(i);
-		}
+		available_attrs = attrs;
 	}
 
 };

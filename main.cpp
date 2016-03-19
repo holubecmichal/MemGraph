@@ -16,6 +16,7 @@ using namespace std;
 int main() {
 	GraphvizPlotter *plotter = new GraphvizPlotter();
 	Graph *graph = plotter->graph;
+	graph->setAttr(GraphvizAttrs::GRAPH_ATTR_BGCOLOR, "green");
 
 	plotter->setOutputFormat(GraphvizPlotter::PNG);
 	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
@@ -35,7 +36,6 @@ int main() {
 //	cout << plotter->getDot() << endl;
 	plotter->plot();
 
-	// todo kontrolovat spravnost atributu
 	// todo moznost vypnout warnig graphvizu
 	// todo vizualni styly
 	// todo da se graphvi nastavit, aby mu sel nastavit minimalni uhel hran prekreslenych pres sebe ?
@@ -43,7 +43,6 @@ int main() {
 	// todo mrknout na ddd - debuger, ktery dokaze znazornit zmeny -> pro isomorfismus
 	// todo pormyslet pouziti pro vykresleni adt v normalnich programech
 	// todo verifit - smg 3
-	// todo
 
 	return 0;
 }

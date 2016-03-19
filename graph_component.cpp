@@ -5,6 +5,9 @@
 #include <sstream>
 #include "graph_component.h"
 
+string_vector GraphComponent::available_attrs;
+bool GraphComponent::enable_warnings(true);
+
 // ===== GRAPH_COMPONENT CLASS =====
 
 Node *GraphComponent::addNode(const char *name) {
@@ -294,25 +297,56 @@ int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
 
 void GraphComponent::setAttrs(Attributes *attrs) {
 	checkNullObject(attrs);
+	for( auto i : *attrs) {
+		checkAttr(i.first);
+	}
 	this->attrs.setAttrs(attrs);
 }
 
 void GraphComponent::setNodeAttr(Attribute *attr) {
+	Node::checkAttr(attr->getName());
 	checkNullObject(attr);
 	node_attrs.setAttr(attr);
 }
 
 void GraphComponent::setNodeAttrs(Attributes *attrs) {
+	for( auto i : *attrs) {
+		Node::checkAttr(i.first);
+	}
 	checkNullObject(attrs);
 	node_attrs.setAttrs(attrs);
 }
 
 void GraphComponent::setEdgeAttr(Attribute *attr) {
+	Edge::checkAttr(attr->getName());
 	checkNullObject(attr);
 	edge_attrs.setAttr(attr);
 }
 
 void GraphComponent::setEdgeAttrs(Attributes *attrs) {
+	for( auto i : *attrs) {
+		Edge::checkAttr(i.first);
+	}
 	checkNullObject(attrs);
 	edge_attrs.setAttrs(attrs);
+}
+
+bool GraphComponent::isAvailableAttr(const char *name) {
+	for(auto i : available_attrs) {
+		if(i == name) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void GraphComponent::checkAttr(const char *name) {
+	if(!isAvailableAttr(name) && GraphComponent::enable_warnings) {
+		printWarning(name);
+	}
+}
+
+void GraphComponent::printWarning(const char *name) {
+	std::cerr << "Graph: Unknown atribute " << name << std::endl;
 }

@@ -39,12 +39,22 @@ private:
 	std::string dotGraphNodeAttrs(Attributes *attrs);
 	std::string dotGraphEdgeAttrs(Attributes *attrs);
 	std::string dotAttributes(Attributes *attrs);
-
 	std::string getStringOutputFormat();
+
+	void setAvailableAttrs() {
+		Node::setAvailableAttrs(GraphvizAttrs::node_attrs);
+		Edge::setAvailableAttrs(GraphvizAttrs::edge_attrs);
+		GraphComponent::setAvailableAttrs(GraphvizAttrs::graph_attrs);
+	}
 
 public:
 	GraphvizPlotter() : Plotter() {
-		Node::setAvailableAttrs(GraphvizAttrs::node_attrs);
+		setAvailableAttrs();
+	}
+
+
+	GraphvizPlotter(Graph *graph) : Plotter(graph) {
+		setAvailableAttrs();
 	}
 
 	std::string getDot();
@@ -52,7 +62,6 @@ public:
 	void setOutputFormat(GraphvizPlotter::output format);
 	void setOutputPath(const char *path);
 	void setOutputName(const char *name);
-	void setAvailableAttrs();
 };
 
 

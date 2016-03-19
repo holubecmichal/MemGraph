@@ -39,13 +39,35 @@ protected:
 	Node *getLocalNode(const char *name);
 	GraphComponent *getMainParent();
 
+	static string_vector available_attrs;
+	static void printWarning(const char *name);
+	static bool isAvailableAttr(const char *name);
+
 public:
 	Attributes attrs;
+	static bool enable_warnings;
 
 	virtual ~GraphComponent() { }
 
 	// ===== GRAPH_COMPONENT METHODS =====
 	void setAttrs(Attributes *attrs);
+	GraphComponent *setAttr(const char *name, Attribute *attr) {
+		checkAttr(name);
+		attrs.setAttr(name, attr);
+		return this;
+	}
+	template <typename T>
+	GraphComponent *setAttr(const char *name, T value) {
+		checkAttr(name);
+		attrs.setAttr(name, value);
+		return this;
+	}
+	template <typename T>
+	GraphComponent *setHtmlAttr(const char *name, T value) {
+		checkAttr(name);
+		attrs.setHtmlAttr(name,value);
+		return this;
+	}
 
 	// ===== SUBGRAPHS METHODS ======
 	Subgraph *addSubgraph(const char * name);
@@ -78,6 +100,7 @@ public:
 
 	template <typename T>
 	void setNodeAttr(const char *name, T value) {
+		Node::checkAttr(name);
 		node_attrs.setAttr(name, value);
 	}
 	void setNodeAttr(Attribute *attr);
@@ -87,6 +110,7 @@ public:
 
 	template <typename T>
 	void setEdgeAttr(const char *name, T value) {
+		Edge::checkAttr(name);
 		edge_attrs.setAttr(name, value);
 	}
 	void setEdgeAttr(Attribute *attr);
@@ -98,6 +122,11 @@ public:
 	subgraphs_map *getSubgraphs() { return &subgraphs; }
 	Attributes    *getNodeAttrs() { return &node_attrs; }
 	Attributes    *getEdgeAttrs() { return &edge_attrs; }
+
+	static void checkAttr(const char *name);
+	static void setAvailableAttrs(string_vector attrs) {
+		available_attrs = attrs;
+	}
 
 };
 
@@ -111,21 +140,6 @@ public:
 
 	const char *getName();
 	void setName(const char *value);
-
-	Subgraph *setAttr(const char *name, Attribute *attr) {
-		attrs.setAttr(name, attr);
-		return this;
-	}
-	template <typename T>
-	Subgraph *setAttr(const char *name, T value) {
-		attrs.setAttr(name, value);
-		return this;
-	}
-	template <typename T>
-	Subgraph *setHtmlAttr(const char *name, T value) {
-		attrs.setHtmlAttr(name,value);
-		return this;
-	}
 };
 
 

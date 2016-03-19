@@ -3,6 +3,7 @@
 //
 
 #include "node.h"
+#include "graph_component.h"
 
 string_vector Node::available_attrs;
 
@@ -19,10 +20,13 @@ Attribute *Node::getAttr(const char *name) {
 }
 
 void Node::setAttrs(Attributes *attrs) {
+	for( auto i : *attrs) {
+		checkAttr(i.first);
+	}
 	attrs->setAttrs(attrs);
 }
 
-bool Node::isAvailableAttrs(const char *name) {
+bool Node::isAvailableAttr(const char *name) {
 	for(auto i : available_attrs) {
 		if(i == name) {
 			return true;
@@ -30,4 +34,14 @@ bool Node::isAvailableAttrs(const char *name) {
 	}
 
 	return false;
+}
+
+void Node::checkAttr(const char *name) {
+	if(!isAvailableAttr(name) && GraphComponent::enable_warnings) {
+		printWarning(name);
+	}
+}
+
+void Node::printWarning(const char *name) {
+	std::cerr << "Node: Unknown atribute " << name << std::endl;
 }

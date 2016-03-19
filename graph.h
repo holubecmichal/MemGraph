@@ -21,21 +21,6 @@ public:
 	Graph() { type = digraph; parent = NULL; }
 	Graph(graph_type value) { type = value; parent = NULL; };
 
-	Graph *setAttr(const char *name, Attribute *attr) {
-		attrs.setAttr(name, attr);
-		return this;
-	}
-	template <typename T>
-	Graph *setAttr(const char *name, T value) {
-		attrs.setAttr(name, value);
-		return this;
-	}
-	template <typename T>
-	Graph *setHtmlAttr(const char *name, T value) {
-		attrs.setHtmlAttr(name, value);
-		return this;
-	}
-
 	void setType(graph_type value);
 	graph_type getType();
 };
