@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include "attributes.h"
-#include "available_attrs.h"
 #include "graphviz_attrs.h"
 
 class Node {

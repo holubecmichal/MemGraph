@@ -6,7 +6,6 @@
 #define BACHELOR_GRAPHVIZ_ATTRS_H
 
 #include <string>
-#include "available_attrs.h"
 #include "node.h"
 
 class GraphvizAttrs {

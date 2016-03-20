@@ -16,14 +16,13 @@ using namespace std;
 int main() {
 	GraphvizPlotter *plotter = new GraphvizPlotter();
 	Graph *graph = plotter->graph;
-	graph->setAttr(GraphvizAttrs::GRAPH_ATTR_BGCOLOR, "green");
 
 	plotter->setOutputFormat(GraphvizPlotter::PNG);
 	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
 	plotter->setOutputName("out");
 
-//	Examples::tonyballantyne_com_51(graph);
-	Examples::predator_1(graph);
+	Examples::tonyballantyne_com_51(graph);
+//	Examples::predator_1(graph);
 
 	Attributes attrs;
 	attrs["asd"] = "aasdasd";
@@ -33,7 +32,7 @@ int main() {
 	attrs["int"] = 50;
 	attrs["int"] = "asdadsasdadasdasda";
 
-//	cout << plotter->getDot() << endl;
+	cout << plotter->getDot() << endl;
 	plotter->plot();
 
 	// todo moznost vypnout warnig graphvizu

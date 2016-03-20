@@ -22,7 +22,6 @@ public:
 
 private:
 	GraphvizPlotter::output output_format;
-	AvailableAttrs available_attrs;
 	std::string path;
 	std::string name;
 
