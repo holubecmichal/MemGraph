@@ -288,3 +288,99 @@ void GraphvizPlotter::setOutputPath(const char *path) {
 void GraphvizPlotter::setOutputName(const char *name) {
 	this->name = name;
 }
+
+Graph *GraphvizPlotter::parseDot(const char *content) {
+	g_graph = agmemread(content);
+	parse();
+
+	return graph;
+}
+
+void GraphvizPlotter::parse() {
+	//todo graph nodes
+	//todo graph edges
+	//todo graph attrs
+	//todo graph node attrs
+	//todo graph edge attrs
+	parseSubgraphs();
+}
+
+void GraphvizPlotter::parseSubgraphs() {
+	for(Agraph_t *subg = agfstsubg(g_graph); subg; subg = agnxtsubg(subg)) {
+		// todo subgraph attrs
+
+		// postup vytazeni atributu a hodnoty
+//		Agsym_t *sym = agnxtattr(g,AGNODE,0);
+//		while (sym != NULL) {
+//			printf("%s = %s\n",sym->name,sym->defval);
+//			sym = agnxtattr(g,AGNODE,sym);
+//		}
+
+		Subgraph *subgraph = graph->addSubgraph(agnameof(subg));
+		std::cout << agnameof(subg) << std::endl;
+		parseGraphAttrs(subg, subgraph);
+		parseNodes(subg, subgraph);
+		parseEdges(subg, subgraph);
+	}
+}
+
+void GraphvizPlotter::parseGraphAttrs(Agraph_t *g, GraphComponent *g_component) {
+	// todo
+}
+
+void GraphvizPlotter::parseNodes(Agraph_t *g, GraphComponent *g_component) {
+	Agnode_t *n = agfstnode(g);
+	while (n != NULL) {
+		Node *node = g_component->addNode(agnameof(n));
+		std::cout << agnameof(n) << std::endl;
+
+		parseNodeAttrs(n, node);
+		n = agnxtnode(g, n);
+	}
+}
+
+void GraphvizPlotter::parseNodeAttrs(Agnode_t *n, Node *node) {
+	for( auto i : GraphvizAttrs::node_attrs) {
+		// todo is value double or bool?
+		char *value = agget(n,(char*)i.c_str());
+
+		if(value != NULL && strlen(value) > 0) {
+			std::string str_value = value;
+
+			if(str_value.compare("\\N") != 0) {
+				std::cout << i << " " << value << std::endl;
+				node->setAttr(i.c_str(), value);
+			}
+		}
+	}
+}
+
+void GraphvizPlotter::parseEdges(Agraph_t *g, GraphComponent *g_component) {
+	Agnode_t *from_node = agfstnode(g);
+	while (from_node != NULL) {
+
+		Agedge_t *e = agfstout(g, from_node);
+		while(e != NULL) {
+			Agnode_t *to_node = e->node;
+
+			Edge *edge = g_component->addEdge(agnameof(from_node), agnameof(to_node));
+			std::cout << agnameof(from_node) << " -> " << agnameof(to_node) << std::endl;
+			parseEdgeAttrs(e, edge);
+			e = agnxtout(g, e);
+		}
+
+		from_node = agnxtnode(g, from_node);
+	}
+}
+
+void GraphvizPlotter::parseEdgeAttrs(Agedge_t *e, Edge *edge) {
+	for( auto i : GraphvizAttrs::edge_attrs) {
+		// todo is value double or bool?
+		char *value = agget(e,(char*)i.c_str());
+
+		if(value != NULL && strlen(value) > 0) {
+			std::cout << i << " " << value << std::endl;
+			edge->setAttr(i.c_str(), value);
+		}
+	}
+}

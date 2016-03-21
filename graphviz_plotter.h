@@ -6,6 +6,7 @@
 #define BACHELOR_GRAPHVIZPLOTTER_H
 
 
+#include <graphviz/cgraph.h>
 #include "plotter.h"
 #include "graphviz_attrs.h"
 
@@ -46,11 +47,21 @@ private:
 		GraphComponent::setAvailableAttrs(GraphvizAttrs::graph_attrs);
 	}
 
+	// ===== PARSE DOT METHODS ======
+	Agraph_t *g_graph;
+
+	void parse();
+	void parseSubgraphs();
+	void parseNodes(Agraph_t *g, GraphComponent *g_component);
+	void parseNodeAttrs(Agnode_t *n, Node *node);
+	void parseEdges(Agraph_t *g, GraphComponent *g_component);
+	void parseEdgeAttrs(Agedge_t *e, Edge *edge);
+	void parseGraphAttrs(Agraph_t *g, GraphComponent *g_component);
+
 public:
 	GraphvizPlotter() : Plotter() {
 		setAvailableAttrs();
 	}
-
 
 	GraphvizPlotter(Graph *graph) : Plotter(graph) {
 		setAvailableAttrs();
@@ -61,6 +72,8 @@ public:
 	void setOutputFormat(GraphvizPlotter::output format);
 	void setOutputPath(const char *path);
 	void setOutputName(const char *name);
+	Graph *parseDot(const char *content);
+
 };
 
 
