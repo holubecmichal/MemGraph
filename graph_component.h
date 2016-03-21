@@ -12,9 +12,9 @@
 
 class Subgraph;
 
-typedef std::map< const char *, Subgraph* > subgraphs_map;
+typedef std::map< std::string, Subgraph* > subgraphs_map;
 typedef subgraphs_map::iterator subgraphs_it;
-typedef std::pair< const char *, Subgraph* > subgraphs_pair;
+typedef std::pair< std::string, Subgraph* > subgraphs_pair;
 
 class GraphComponent {
 private:
@@ -40,8 +40,8 @@ protected:
 	GraphComponent *getMainParent();
 
 	static string_vector available_attrs;
-	static void printWarning(const char *name);
-	static bool isAvailableAttr(const char *name);
+	static void printWarning(std::string name);
+	static bool isAvailableAttr(std::string name);
 
 public:
 	Attributes attrs;
@@ -123,7 +123,7 @@ public:
 	Attributes    *getNodeAttrs() { return &node_attrs; }
 	Attributes    *getEdgeAttrs() { return &edge_attrs; }
 
-	static void checkAttr(const char *name);
+	static void checkAttr(std::string name);
 	static void setAvailableAttrs(string_vector attrs) {
 		available_attrs = attrs;
 	}

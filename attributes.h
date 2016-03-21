@@ -11,9 +11,9 @@
 #include <vector>
 #include "attribute.h"
 
-typedef std::map< const char *, Attribute* > attributes_map;
+typedef std::map< std::string, Attribute* > attributes_map;
 typedef attributes_map::iterator attributes_it;
-typedef std::pair< const char *, Attribute* > attributes_pair;
+typedef std::pair< std::string, Attribute* > attributes_pair;
 
 typedef std::vector< std::string > string_vector;
 typedef string_vector::iterator string_vector_it;
@@ -28,9 +28,9 @@ private:
 public:
 	Attributes() { attrs.empty(); }
 	virtual ~Attributes() {
-		for(attributes_it it = attrs.begin(); it != attrs.end(); ++it) {
-			delete it->second;
-		}
+//		for(attributes_it it = attrs.begin(); it != attrs.end(); ++it) {
+//			delete it->second;
+//		}
 	}
 
 	Attribute *getAttr(const char *name);

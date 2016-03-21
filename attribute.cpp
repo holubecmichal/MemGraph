@@ -68,6 +68,6 @@ bool Attribute::useHtmlMark() {
 	return isHtml();
 }
 
-const char *Attribute::getName() {
+std::string Attribute::getName() {
 	return name;
 }

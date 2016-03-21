@@ -102,7 +102,7 @@ public:
 				"\t}\n"
 				"\n"
 				"\tsubgraph cluster1 {\n"
-				"\t\te [color=yellow];\n"
+				"\t\te [color=yellow, penwidth=1.0];\n"
 				"\t\te -> g;\n"
 				"\t\te -> f [color=red];\n"
 				"\t}\n"

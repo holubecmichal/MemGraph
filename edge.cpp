@@ -34,7 +34,7 @@ void Edge::setAttrs(Attributes *attrs) {
 	attrs->setAttrs(attrs);
 }
 
-bool Edge::isAvailableAttr(const char *name) {
+bool Edge::isAvailableAttr(std::string name) {
 	for(auto i : available_attrs) {
 		if(i == name) {
 			return true;
@@ -44,12 +44,12 @@ bool Edge::isAvailableAttr(const char *name) {
 	return false;
 }
 
-void Edge::checkAttr(const char *name) {
+void Edge::checkAttr(std::string name) {
 	if(!isAvailableAttr(name) && GraphComponent::enable_warnings) {
 		printWarning(name);
 	}
 }
 
-void Edge::printWarning(const char *name) {
+void Edge::printWarning(std::string name) {
 	std::cerr << "Edge: Unknown atribute " << name << std::endl;
 }

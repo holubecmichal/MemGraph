@@ -206,7 +206,7 @@ std::string GraphvizPlotter::dotAttributes(Attributes *attrs) {
 	return attributes.c_str();
 }
 
-std::string GraphvizPlotter::dotAttribute(const char *name, Attribute *attr) {
+std::string GraphvizPlotter::dotAttribute(std::string name, Attribute *attr) {
 	std::string attribute = "";
 	std::string str_name = name;
 	std::string value = attr->getValue();

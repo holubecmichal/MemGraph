@@ -28,7 +28,7 @@ private:
 	const char *print(std::string *content);
 	std::string getIdent();
 	std::string dotGraphHeader();
-	std::string dotAttribute(const char *name, Attribute *attr);
+	std::string dotAttribute(std::string name, Attribute *attr);
 	std::string dotNodes(nodes_map *nodes);
 	std::string dotEdges(edges_vect *edges);
 	std::string dotSubgraphs(subgraphs_map *subgraphs);

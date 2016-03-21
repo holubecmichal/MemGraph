@@ -15,8 +15,8 @@ private:
 	const char* name;
 	static string_vector available_attrs;
 
-	static void printWarning(const char *name);
-	static bool isAvailableAttr(const char *name);
+	static void printWarning(std::string name);
+	static bool isAvailableAttr(std::string name);
 
 public:
 	Attributes attrs;
@@ -46,16 +46,16 @@ public:
 		return this;
 	}
 
-	static void checkAttr(const char *name);
+	static void checkAttr(std::string name);
 	static void setAvailableAttrs(string_vector attrs) {
 		available_attrs = attrs;
 	}
 
 };
 
-typedef std::map< const char *, Node* > nodes_map;
+typedef std::map< std::string, Node* > nodes_map;
 typedef nodes_map::iterator nodes_it;
-typedef std::pair< const char *, Node* > nodes_pair;
+typedef std::pair< std::string, Node* > nodes_pair;
 
 
 #endif //BACHELOR_NODE_H

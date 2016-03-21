@@ -26,7 +26,7 @@ void Node::setAttrs(Attributes *attrs) {
 	attrs->setAttrs(attrs);
 }
 
-bool Node::isAvailableAttr(const char *name) {
+bool Node::isAvailableAttr(std::string name) {
 	for(auto i : available_attrs) {
 		if(i == name) {
 			return true;
@@ -36,12 +36,12 @@ bool Node::isAvailableAttr(const char *name) {
 	return false;
 }
 
-void Node::checkAttr(const char *name) {
+void Node::checkAttr(std::string name) {
 	if(!isAvailableAttr(name) && GraphComponent::enable_warnings) {
 		printWarning(name);
 	}
 }
 
-void Node::printWarning(const char *name) {
+void Node::printWarning(std::string name) {
 	std::cerr << "Node: Unknown atribute " << name << std::endl;
 }

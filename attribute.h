@@ -27,12 +27,12 @@ private:
 	union {
 		int i_value;
 		double d_value;
-		const char *s_value;
+		std::string s_value;
 		bool b_value;
 	};
 
 	attr_type type;
-	const char *name;
+	std::string name;
 	bool html_attr;
 
 	void setType(int value)          { type = type_int; }
@@ -50,18 +50,18 @@ public:
 
 	void setValue(int value)          { i_value = value; setType(value); }
 	void setValue(double value)       { d_value = value; setType(value); }
-	void setValue(const char * value) { s_value = value; setType(value); }
+	void setValue(const char * value) { std::string val(value); s_value = val; setType(value); }
 	void setValue(bool value)         { b_value = value; setType(value); }
 
 	int         getIValue() { return i_value; }
 	double      getDValue() { return d_value; }
-	const char *getSValue() { return s_value; };
+	const char *getSValue() { return s_value.c_str(); };
 	bool        getBValue() { return b_value; };
 
 	std::string getValue();
 	Attribute::attr_type getType();
 	void setName(const char *name);
-	const char *getName();
+	std::string getName();
 
 	template <typename T>
 	void operator= (T value) {

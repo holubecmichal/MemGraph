@@ -331,7 +331,7 @@ void GraphComponent::setEdgeAttrs(Attributes *attrs) {
 	edge_attrs.setAttrs(attrs);
 }
 
-bool GraphComponent::isAvailableAttr(const char *name) {
+bool GraphComponent::isAvailableAttr(std::string name) {
 	for(auto i : available_attrs) {
 		if(i == name) {
 			return true;
@@ -341,12 +341,12 @@ bool GraphComponent::isAvailableAttr(const char *name) {
 	return false;
 }
 
-void GraphComponent::checkAttr(const char *name) {
+void GraphComponent::checkAttr(std::string name) {
 	if(!isAvailableAttr(name) && GraphComponent::enable_warnings) {
 		printWarning(name);
 	}
 }
 
-void GraphComponent::printWarning(const char *name) {
+void GraphComponent::printWarning(std::string name) {
 	std::cerr << "Graph: Unknown atribute " << name << std::endl;
 }

@@ -16,8 +16,8 @@ private:
 	Node *to;
 	static string_vector available_attrs;
 
-	static void printWarning(const char *name);
-	static bool isAvailableAttr(const char *name);
+	static void printWarning(std::string name);
+	static bool isAvailableAttr(std::string name);
 
 public:
 	Attributes attrs;
@@ -53,7 +53,7 @@ public:
 		return this;
 	}
 
-	static void checkAttr(const char *name);
+	static void checkAttr(std::string name);
 	static void setAvailableAttrs(string_vector attrs) {
 		available_attrs = attrs;
 	}

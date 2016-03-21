@@ -12,9 +12,7 @@
 
 using namespace std;
 
-	// todo implementace graphvizu
 	// todo attrs prepsat na asociativni pole?
-	// todo vsechna const char * predelat na string
 
 typedef struct mynode_s {
 	Agrec_t     h;
@@ -78,6 +76,7 @@ int main() {
 			for( auto i : GraphvizAttrs::node_attrs) {
 				char *value = agget(from_node,(char*)i.c_str());
 
+				// todo is value double or bool
 				if(value != NULL && strlen(value) > 0) {
 					std::string str_value = value;
 
