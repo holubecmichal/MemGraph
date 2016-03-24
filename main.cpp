@@ -110,8 +110,13 @@ int main() {
 //		}
 //	}
 
+	plotter->setOutputFormat(GraphvizPlotter::PNG);
+	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
+	plotter->setOutputName("out");
+
 	Graph *graph = plotter->parseDot(Examples::dotman_27_dot());
 	cout << plotter->getDot() << endl;
+	plotter->plot();
 
 	// todo moznost vypnout warnig graphvizu
 	// todo vizualni styly

@@ -10,6 +10,8 @@
 #include "plotter.h"
 #include "graphviz_attrs.h"
 
+typedef std::map<std::string,std::string> string_map;
+
 class GraphvizPlotter : public Plotter {
 public:
 	enum output {
@@ -49,14 +51,30 @@ private:
 
 	// ===== PARSE DOT METHODS ======
 	Agraph_t *g_graph;
+	std::vector<Agedge_t *> walked_edges;
+	std::vector<Agnode_t *> walked_nodes;
+	string_map walked_graph_attrs;
+	string_map walked_node_attrs;
+	string_map walked_edge_attrs;
 
 	void parse();
-	void parseSubgraphs();
+	void parseSubgraphs(Agraph_t *g);
 	void parseNodes(Agraph_t *g, GraphComponent *g_component);
 	void parseNodeAttrs(Agnode_t *n, Node *node);
 	void parseEdges(Agraph_t *g, GraphComponent *g_component);
 	void parseEdgeAttrs(Agedge_t *e, Edge *edge);
 	void parseGraphAttrs(Agraph_t *g, GraphComponent *g_component);
+	bool isWalkedEdge(Agedge_t *e);
+	bool isWalkedNode(Agnode_t *n);
+	bool isWalkedGraphAttr(std::string name, std::string value);
+	bool isWalkedNodeAttr(std::string name, std::string value);
+	bool isWalkedEdgeAttr(std::string name, std::string value);
+	void backupWalkedNodeAttrs(string_map *storage);
+	void backupWalkedEdgeAttrs(string_map *storage);
+	void backupWalkedGraphAttrs(string_map *storage);
+	void loadWalkedNodeAttrs(string_map *storage);
+	void loadWalkedEdgeAttrs(string_map *storage);
+	void loadWalkedGraphAttrs(string_map *storage);
 
 public:
 	GraphvizPlotter() : Plotter() {
@@ -75,6 +93,5 @@ public:
 	Graph *parseDot(const char *content);
 
 };
-
 
 #endif //BACHELOR_GRAPHVIZPLOTTER_H

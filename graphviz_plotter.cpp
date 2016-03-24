@@ -297,44 +297,86 @@ Graph *GraphvizPlotter::parseDot(const char *content) {
 }
 
 void GraphvizPlotter::parse() {
-	//todo graph nodes
-	//todo graph edges
-	//todo graph attrs
-	//todo graph node attrs
-	//todo graph edge attrs
-	parseSubgraphs();
+	parseGraphAttrs(g_graph, graph);
+	parseSubgraphs(g_graph);
+	parseNodes(g_graph, graph);
+	parseEdges(g_graph, graph);
 }
 
-void GraphvizPlotter::parseSubgraphs() {
+void GraphvizPlotter::parseSubgraphs(Agraph_t *g) {
+	string_map node_attrs_bak;
+	string_map edge_attrs_bak;
+	string_map graph_attrs_bak;
+
+	backupWalkedNodeAttrs(&node_attrs_bak);
+	backupWalkedEdgeAttrs(&edge_attrs_bak);
+	backupWalkedGraphAttrs(&graph_attrs_bak);
+
 	for(Agraph_t *subg = agfstsubg(g_graph); subg; subg = agnxtsubg(subg)) {
-		// todo subgraph attrs
-
-		// postup vytazeni atributu a hodnoty
-//		Agsym_t *sym = agnxtattr(g,AGNODE,0);
-//		while (sym != NULL) {
-//			printf("%s = %s\n",sym->name,sym->defval);
-//			sym = agnxtattr(g,AGNODE,sym);
-//		}
-
 		Subgraph *subgraph = graph->addSubgraph(agnameof(subg));
-		std::cout << agnameof(subg) << std::endl;
 		parseGraphAttrs(subg, subgraph);
+		// todo nested subgraphs
+//		parseSubgraphs(subg);
 		parseNodes(subg, subgraph);
 		parseEdges(subg, subgraph);
+
+		walked_graph_attrs.clear();
+		walked_node_attrs.clear();
+		walked_edge_attrs.clear();
+		loadWalkedGraphAttrs(&graph_attrs_bak);
+		loadWalkedNodeAttrs(&node_attrs_bak);
+		loadWalkedEdgeAttrs(&edge_attrs_bak);
 	}
 }
 
 void GraphvizPlotter::parseGraphAttrs(Agraph_t *g, GraphComponent *g_component) {
-	// todo
+	for (auto i : GraphvizAttrs::graph_attrs) {
+		Agsym_t *attr = agattr(g, AGRAPH, (char*)i.c_str(), 0);
+
+		if(attr && strlen(attr->defval) && !isWalkedGraphAttr(i.c_str(), attr->defval)) {
+			g_component->setAttr(i.c_str(), attr->defval);
+			walked_graph_attrs.insert(std::pair<std::string,std::string>(i, attr->defval));
+		}
+
+//		Agsym_t *attr = agattrsym(g, (char*)i.c_str());
+//
+//		if(attr && strlen(attr->defval) && !isWalkedGraphAttr(attr)) {
+//			g_component->setAttr(i.c_str(), attr->defval);
+//			walked_graph_attrs.push_back(attr);
+//			std::cout << i << " = " << attr->defval << std::endl;
+//		}
+	}
+
+	for (auto i : GraphvizAttrs::node_attrs) {
+		Agsym_t *attr = agattr(g, AGNODE, (char*)i.c_str(), 0);
+
+		if(attr && strlen(attr->defval) && !isWalkedNodeAttr(i.c_str(), attr->defval)) {
+			g_component->setNodeAttr(i.c_str(), attr->defval);
+			walked_node_attrs.insert(std::pair<std::string,std::string>(i, attr->defval));
+		}
+	}
+
+	for (auto i : GraphvizAttrs::edge_attrs) {
+		Agsym_t *attr = agattr(g, AGEDGE, (char*)i.c_str(), 0);
+
+		if(attr && strlen(attr->defval) && !isWalkedEdgeAttr(i.c_str(), attr->defval)) {
+			g_component->setEdgeAttr(i.c_str(), attr->defval);
+			walked_edge_attrs.insert(std::pair<std::string,std::string>(i, attr->defval));
+		}
+	}
 }
 
 void GraphvizPlotter::parseNodes(Agraph_t *g, GraphComponent *g_component) {
 	Agnode_t *n = agfstnode(g);
-	while (n != NULL) {
-		Node *node = g_component->addNode(agnameof(n));
-		std::cout << agnameof(n) << std::endl;
+	while (n) {
+		if(isWalkedNode(n)) {
+			n = agnxtnode(g, n);
+			continue;
+		}
 
+		Node *node = g_component->addNode(agnameof(n));
 		parseNodeAttrs(n, node);
+		walked_nodes.push_back(n);
 		n = agnxtnode(g, n);
 	}
 }
@@ -342,30 +384,41 @@ void GraphvizPlotter::parseNodes(Agraph_t *g, GraphComponent *g_component) {
 void GraphvizPlotter::parseNodeAttrs(Agnode_t *n, Node *node) {
 	for( auto i : GraphvizAttrs::node_attrs) {
 		// todo is value double or bool?
+//		char *value = agget(n,(char*)i.c_str());
+//
+//		if(value && strlen(value) > 0) {
+//			std::string str_value = value;
+//
+//			if(str_value.compare("\\N") != 0) {
+//				std::cout << i << " " << value << std::endl;
+//				node->setAttr(i.c_str(), value);
+//			}
+//		}
+
 		char *value = agget(n,(char*)i.c_str());
 
-		if(value != NULL && strlen(value) > 0) {
-			std::string str_value = value;
-
-			if(str_value.compare("\\N") != 0) {
-				std::cout << i << " " << value << std::endl;
-				node->setAttr(i.c_str(), value);
-			}
+		if(value && strlen(value) > 0 && !isWalkedNodeAttr(i, value)) {
+			node->setAttr(i.c_str(), value);
 		}
 	}
 }
 
 void GraphvizPlotter::parseEdges(Agraph_t *g, GraphComponent *g_component) {
 	Agnode_t *from_node = agfstnode(g);
-	while (from_node != NULL) {
+	while (from_node) {
 
 		Agedge_t *e = agfstout(g, from_node);
 		while(e != NULL) {
+			if(isWalkedEdge(e)) {
+				e = agnxtout(g, e);
+				continue;
+			}
 			Agnode_t *to_node = e->node;
 
 			Edge *edge = g_component->addEdge(agnameof(from_node), agnameof(to_node));
-			std::cout << agnameof(from_node) << " -> " << agnameof(to_node) << std::endl;
 			parseEdgeAttrs(e, edge);
+
+			walked_edges.push_back(e);
 			e = agnxtout(g, e);
 		}
 
@@ -378,9 +431,94 @@ void GraphvizPlotter::parseEdgeAttrs(Agedge_t *e, Edge *edge) {
 		// todo is value double or bool?
 		char *value = agget(e,(char*)i.c_str());
 
-		if(value != NULL && strlen(value) > 0) {
-			std::cout << i << " " << value << std::endl;
+		if(value && strlen(value) > 0 && !isWalkedEdgeAttr(i, value)) {
 			edge->setAttr(i.c_str(), value);
 		}
+	}
+}
+
+bool GraphvizPlotter::isWalkedEdge(Agedge_t *e) {
+	for(auto i : walked_edges) {
+		if(i == e) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool GraphvizPlotter::isWalkedNode(Agnode_t *n) {
+	for(auto i : walked_nodes) {
+		if(i == n) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool GraphvizPlotter::isWalkedNodeAttr(std::string name, std::string value) {
+	for(auto i : walked_node_attrs) {
+		if(i.first == name && i.second == value) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool GraphvizPlotter::isWalkedEdgeAttr(std::string name, std::string value) {
+	for(auto i : walked_edge_attrs) {
+		if(i.first == name && i.second == value) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool GraphvizPlotter::isWalkedGraphAttr(std::string name, std::string value) {
+	for(auto i : walked_graph_attrs) {
+		if(i.first == name && i.second == value) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void GraphvizPlotter::backupWalkedNodeAttrs(string_map *storage) {
+	for(auto i : walked_node_attrs) {
+		storage->insert(std::pair<std::string,std::string>(i.first,i.second));
+	}
+}
+
+void GraphvizPlotter::backupWalkedEdgeAttrs(string_map *storage) {
+	for(auto i : walked_edge_attrs) {
+		storage->insert(std::pair<std::string,std::string>(i.first,i.second));
+	}
+}
+
+void GraphvizPlotter::backupWalkedGraphAttrs(string_map *storage) {
+	for(auto i : walked_graph_attrs) {
+		storage->insert(std::pair<std::string,std::string>(i.first,i.second));
+	}
+}
+
+void GraphvizPlotter::loadWalkedNodeAttrs(string_map *storage) {
+	for( auto i : *storage) {
+		walked_node_attrs.insert(std::pair<std::string,std::string>(i.first,i.second));
+	}
+}
+
+void GraphvizPlotter::loadWalkedEdgeAttrs(string_map *storage) {
+	for( auto i : *storage) {
+		walked_edge_attrs.insert(std::pair<std::string,std::string>(i.first,i.second));
+	}
+}
+
+void GraphvizPlotter::loadWalkedGraphAttrs(string_map *storage) {
+	for( auto i : *storage) {
+		walked_graph_attrs.insert(std::pair<std::string,std::string>(i.first,i.second));
 	}
 }
