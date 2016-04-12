@@ -15,6 +15,7 @@ class Subgraph;
 typedef std::map< std::string, Subgraph* > subgraphs_map;
 typedef subgraphs_map::iterator subgraphs_it;
 typedef std::pair< std::string, Subgraph* > subgraphs_pair;
+typedef std::vector< Subgraph* > subgraphs_vect;
 
 class GraphComponent {
 private:
@@ -122,6 +123,9 @@ public:
 	subgraphs_map *getSubgraphs() { return &subgraphs; }
 	Attributes    *getNodeAttrs() { return &node_attrs; }
 	Attributes    *getEdgeAttrs() { return &edge_attrs; }
+	Attributes    *getAttributes(){ return &attrs; }
+
+	Attribute *getAttr(const char *name) { return attrs.getAttr(name); }
 
 	static void checkAttr(std::string name);
 	static void setAvailableAttrs(string_vector attrs) {

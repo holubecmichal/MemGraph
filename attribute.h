@@ -43,10 +43,10 @@ private:
 public:
 	Attribute() : type(type_null), name("") { };
 	template <typename T>
-	Attribute(const char *name, T value) : type(type_null), name(name) {
+	Attribute(const char *name, T value) : type(type_null), name(name), html_attr(false) {
 		setValue(value);
 	}
-	Attribute(const char *name)	: type(type_null), name(name) { }
+	Attribute(const char *name)	: type(type_null), name(name), html_attr(false) { }
 
 	void setValue(int value)          { i_value = value; setType(value); }
 	void setValue(double value)       { d_value = value; setType(value); }

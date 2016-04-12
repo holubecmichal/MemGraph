@@ -52,7 +52,12 @@ bool Attribute::useQuotationMark() {
 
 	if(getType() == type_string) {
 		std::string value(s_value);
+		// decimal value
 		if(value.find(".") != std::string::npos) {
+			return true;
+		}
+
+		if(s_value.length() == 0) {
 			return true;
 		}
 	}

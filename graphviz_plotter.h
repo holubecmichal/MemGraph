@@ -58,31 +58,45 @@ private:
 	string_map walked_edge_attrs;
 
 	void parse();
-	void parseSubgraphs(Agraph_t *g);
+	void parseSubgraphs(Agraph_t *g, GraphComponent *g_component);
 	void parseNodes(Agraph_t *g, GraphComponent *g_component);
 	void parseNodeAttrs(Agnode_t *n, Node *node);
 	void parseEdges(Agraph_t *g, GraphComponent *g_component);
 	void parseEdgeAttrs(Agedge_t *e, Edge *edge);
 	void parseGraphAttrs(Agraph_t *g, GraphComponent *g_component);
-	bool isWalkedEdge(Agedge_t *e);
-	bool isWalkedNode(Agnode_t *n);
-	bool isWalkedGraphAttr(std::string name, std::string value);
-	bool isWalkedNodeAttr(std::string name, std::string value);
-	bool isWalkedEdgeAttr(std::string name, std::string value);
-	void backupWalkedNodeAttrs(string_map *storage);
-	void backupWalkedEdgeAttrs(string_map *storage);
-	void backupWalkedGraphAttrs(string_map *storage);
-	void loadWalkedNodeAttrs(string_map *storage);
-	void loadWalkedEdgeAttrs(string_map *storage);
-	void loadWalkedGraphAttrs(string_map *storage);
+
+	template <typename T, typename U>
+	bool isWalkedObject(T *object, U *map) {
+		for(auto i : *map) {
+			if(i == object) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool isWalkedObjectAttr(string_map *attrs, std::string name, std::string value);
+
+	void backup(string_map *storage, string_map *walked_attrs);
+	void restore(string_map *storage, string_map *walked_attrs);
+
+	bool isHtmlAttr(std::string value);
 
 public:
-	GraphvizPlotter() : Plotter() {
+	GraphvizPlotter() : Plotter(), g_graph(NULL) {
 		setAvailableAttrs();
 	}
 
-	GraphvizPlotter(Graph *graph) : Plotter(graph) {
+	GraphvizPlotter(Graph *graph) : Plotter(graph), g_graph(NULL) {
 		setAvailableAttrs();
+	}
+
+
+	virtual ~GraphvizPlotter() {
+		if(g_graph != NULL) {
+			agclose(g_graph);
+		}
 	}
 
 	std::string getDot();

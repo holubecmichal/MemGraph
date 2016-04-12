@@ -9,6 +9,7 @@
 #include "graphviz_plotter.h"
 #include "examples.h"
 #include "graphviz_attrs.h"
+#include "predator.h"
 
 using namespace std;
 
@@ -114,17 +115,18 @@ int main() {
 	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
 	plotter->setOutputName("out");
 
-	Graph *graph = plotter->parseDot(Examples::dotman_27_dot());
+	plotter->parseDot(Examples::predator_sls_dls());
 	cout << plotter->getDot() << endl;
-	plotter->plot();
+//	plotter->plot();
+
+	Predator *predator = new Predator(plotter);
+	predator->pointsToOffset(Predator::OFF);
+	predator->plotter->plot();
+	predator->getAllSLS();
 
 	// todo moznost vypnout warnig graphvizu
 	// todo vizualni styly
-	// todo da se graphvi nastavit, aby mu sel nastavit minimalni uhel hran prekreslenych pres sebe ?
-	// todo mrknout na predator adt - nastrankach pana Peringera
 	// todo mrknout na ddd - debuger, ktery dokaze znazornit zmeny -> pro isomorfismus
-	// todo pormyslet pouziti pro vykresleni adt v normalnich programech
-	// todo verifit - smg 3
 
 	return 0;
 }
