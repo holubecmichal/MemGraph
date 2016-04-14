@@ -34,6 +34,7 @@ private:
 	attr_type type;
 	std::string name;
 	bool html_attr;
+	bool removed = false;
 
 	void setType(int value)          { type = type_int; }
 	void setType(double value)       { type = type_double; }
@@ -48,10 +49,10 @@ public:
 	}
 	Attribute(const char *name)	: type(type_null), name(name), html_attr(false) { }
 
-	void setValue(int value)          { i_value = value; setType(value); }
-	void setValue(double value)       { d_value = value; setType(value); }
-	void setValue(const char * value) { std::string val(value); s_value = val; setType(value); }
-	void setValue(bool value)         { b_value = value; setType(value); }
+	void setValue(int value)          { i_value = value; setType(value); removed = false; }
+	void setValue(double value)       { d_value = value; setType(value); removed = false; }
+	void setValue(const char * value) { std::string val(value); s_value = val; setType(value); removed = false; }
+	void setValue(bool value)         { b_value = value; setType(value); removed = false; }
 
 	int         getIValue() { return i_value; }
 	double      getDValue() { return d_value; }
@@ -73,6 +74,12 @@ public:
 	}
 	bool isHtml() {
 		return html_attr;
+	}
+	void remove() {
+		removed = true;
+	}
+	bool isRemoved() {
+		return removed;
 	}
 
 	bool useQuotationMark();

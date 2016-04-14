@@ -15,6 +15,7 @@ private:
 	Node *from;
 	Node *to;
 	static string_vector available_attrs;
+	bool removed = false;
 
 	static void printWarning(std::string name);
 	static bool isAvailableAttr(std::string name);
@@ -56,6 +57,18 @@ public:
 	static void checkAttr(std::string name);
 	static void setAvailableAttrs(string_vector attrs) {
 		available_attrs = attrs;
+	}
+
+	attributes_map *getAttrs() {
+		return this->attrs.getAttrs();
+	}
+
+	void remove() {
+		removed = true;
+	}
+
+	bool isRemoved() {
+		return removed;
 	}
 
 };

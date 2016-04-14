@@ -123,7 +123,7 @@ public:
 	subgraphs_map *getSubgraphs() { return &subgraphs; }
 	Attributes    *getNodeAttrs() { return &node_attrs; }
 	Attributes    *getEdgeAttrs() { return &edge_attrs; }
-	Attributes    *getAttributes(){ return &attrs; }
+	Attributes    *getAttrs(){ return &attrs; }
 
 	Attribute *getAttr(const char *name) { return attrs.getAttr(name); }
 

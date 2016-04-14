@@ -14,6 +14,7 @@ class Node {
 private:
 	const char* name;
 	static string_vector available_attrs;
+	bool removed = false;
 
 	static void printWarning(std::string name);
 	static bool isAvailableAttr(std::string name);
@@ -51,11 +52,19 @@ public:
 		available_attrs = attrs;
 	}
 
+	void remove() {
+		removed = true;
+	}
+	bool isRemoved() {
+		return removed;
+	}
+
 };
 
 typedef std::map< std::string, Node* > nodes_map;
 typedef nodes_map::iterator nodes_it;
 typedef std::pair< std::string, Node* > nodes_pair;
+typedef std::vector< Node* > nodes_vect;
 
 
 #endif //BACHELOR_NODE_H

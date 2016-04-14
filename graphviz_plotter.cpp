@@ -50,7 +50,9 @@ std::string GraphvizPlotter::dotGraphAttrs(Attributes *attrs) {
 		attributes_it it = attrs->begin();
 
 		while( true ) {
-			text += getIdent() + dotAttribute(it->first, it->second) + ";" + new_line;
+			if(!it->second->isRemoved()) {
+				text += getIdent() + dotAttribute(it->first, it->second) + ";" + new_line;
+			}
 
 			if(++it == attrs->end()) {
 				break;
@@ -91,6 +93,8 @@ std::string GraphvizPlotter::dotNodes(nodes_map *nodes) {
 	std::string node = "";
 
 	for(nodes_it it = nodes->begin(); it != nodes->end(); ++it) {
+		if(it->second->isRemoved()) continue;
+
 		if(it->second->attrs.size() > 0) {
 			node = getIdent() + std::string(it->second->getName());
 			node += " ";
@@ -112,6 +116,16 @@ std::string GraphvizPlotter::dotEdges(edges_vect *edges) {
 
 	for(edges_it it = edges->begin(); it != edges->end(); ++it) {
 		Edge *e = (*it);
+
+		if(e->isRemoved()) continue;
+
+		if(e->getFrom()->isRemoved()) {
+			throw "Can't plot edge - from node was removed";
+		}
+		if(e->getTo()->isRemoved()) {
+			throw "Can't plot edge - to node was removed";
+		}
+
 		edge = getIdent() + std::string(e->getFrom()->getName()) + dotEdgeType() + std::string(e->getTo()->getName());
 
 		if(e->attrs.size() > 0) {
@@ -194,13 +208,17 @@ std::string GraphvizPlotter::dotAttributes(Attributes *attrs) {
 
 	std::string attributes = "[";
 	while ( true ) {
-		attributes += dotAttribute(it->first, it->second);
+		if(!it->second->isRemoved()) {
+			attributes += dotAttribute(it->first, it->second);
+		}
 
 		if(++it == attrs->end()) {
 			break;
 		}
 
-		attributes += ",";
+		if(!it->second->isRemoved()) {
+			attributes += ",";
+		}
 	}
 	attributes += "]";
 
@@ -242,7 +260,6 @@ void GraphvizPlotter::plot() {
 
 	g = agmemread(getDot().c_str());
 
-	// todo implementovat i jiny layout, nez dot? (neato, xdot, ...)
 	gvLayout(gvc, g, "dot");
 	gvRenderFilename (gvc, g, format.c_str(), filename.c_str());
 	gvFreeLayout(gvc, g);

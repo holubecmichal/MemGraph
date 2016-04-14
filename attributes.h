@@ -80,6 +80,10 @@ public:
 		return *attr;
 	}
 
+	attributes_map *getAttrs() {
+		return &attrs;
+	}
+
 };
 
 
