@@ -40,11 +40,16 @@ public:
 	Node *getFrom();
 	Node *getTo();
 	Attribute *getAttr(const char *name);
-	void setAttrs(Attributes *attrs);
+	void setAttrs(Attributes *new_attrs);
 	template <typename T>
 	Edge *setAttr(const char *name, T value) {
 		checkAttr(name);
 		attrs.setAttr(name, value);
+		return this;
+	}
+	Edge *setAttr(Attribute *attr) {
+		checkAttr(attr->getName());
+		attrs.setAttr(attr);
 		return this;
 	}
 	template <typename T>

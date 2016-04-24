@@ -66,7 +66,6 @@ public:
 
 	static void dotman_27(Graph *graph) {
 		Subgraph *subgraph;
-		Edge *edge;
 
 		graph->setAttr("compound", true);
 		subgraph = graph->addSubgraph("cluster0");

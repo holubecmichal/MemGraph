@@ -81,14 +81,12 @@ private:
 	void backup(string_map *storage, string_map *walked_attrs);
 	void restore(string_map *storage, string_map *walked_attrs);
 
-	bool isHtmlAttr(std::string value);
-
 public:
-	GraphvizPlotter() : Plotter(), g_graph(NULL) {
+	GraphvizPlotter() : Plotter(), g_graph(NULL), path("./"), name("graph"), output_format(PNG) {
 		setAvailableAttrs();
 	}
 
-	GraphvizPlotter(Graph *graph) : Plotter(graph), g_graph(NULL) {
+	GraphvizPlotter(Graph *graph) : Plotter(graph), g_graph(NULL), path("./"), name("graph"), output_format(PNG) {
 		setAvailableAttrs();
 	}
 

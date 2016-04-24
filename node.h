@@ -12,7 +12,7 @@
 
 class Node {
 private:
-	const char* name;
+	std::string name;
 	static string_vector available_attrs;
 	bool removed = false;
 
@@ -28,16 +28,24 @@ public:
 	Node(const char *value) {
 		name = value;
 	}
+	Node(std::string name) {
+		this->name = name;
+	}
 	virtual ~Node() { }
 
 	Attribute *getAttr(const char *name);
 	const char* getName();
 	void setName(const char *value);
-	void setAttrs(Attributes *attrs);
+	Node *setAttrs(Attributes *new_attrs);
 	template <typename T>
 	Node *setAttr(const char *name, T value) {
 		checkAttr(name);
 		attrs.setAttr(name, value);
+		return this;
+	}
+	Node *setAttr(Attribute *attr) {
+		checkAttr(attr->getName());
+		attrs.setAttr(attr);
 		return this;
 	}
 	template <typename T>

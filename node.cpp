@@ -12,18 +12,20 @@ void Node::setName(const char* value) {
 }
 
 const char*Node::getName() {
-	return name;
+	return name.c_str();
 }
 
 Attribute *Node::getAttr(const char *name) {
 	return attrs.getAttr(name);
 }
 
-void Node::setAttrs(Attributes *attrs) {
-	for( auto i : *attrs) {
+Node *Node::setAttrs(Attributes *new_attrs) {
+	for( auto i : *new_attrs) {
 		checkAttr(i.first);
 	}
-	attrs->setAttrs(attrs);
+	attrs.setAttrs(new_attrs);
+
+	return this;
 }
 
 bool Node::isAvailableAttr(std::string name) {

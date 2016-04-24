@@ -278,7 +278,7 @@ Subgraph *GraphComponent::getSubgraph(const char *name) {
 
 // ===== SUBGRAPH CLASS =====
 const char *Subgraph::getName() {
-	return name;
+	return name.c_str();
 }
 
 void Subgraph::setName(const char *value) {
@@ -295,12 +295,13 @@ int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
 	return result;
 }
 
-void GraphComponent::setAttrs(Attributes *attrs) {
-	checkNullObject(attrs);
-	for( auto i : *attrs) {
+void GraphComponent::setAttrs(Attributes *new_attrs) {
+	checkNullObject(new_attrs);
+	for( auto i : *new_attrs) {
 		checkAttr(i.first);
 	}
-	this->attrs.setAttrs(attrs);
+
+	attrs.setAttrs(new_attrs);
 }
 
 void GraphComponent::setNodeAttr(Attribute *attr) {

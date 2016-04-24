@@ -3,7 +3,7 @@
 //
 
 #include <regex>
-#include "Predator.h"
+#include "predator.h"
 
 void Predator::plotOffset(bool status) {
 	if(status == OFF) {
@@ -273,6 +273,21 @@ void Predator::abstractSLS(int lvl) {
 			}
 		}
 
+		// check if abstract is possible
+		for( auto root_edge : root_edges ) {
+			for( auto node_edge : nodes_edges ) {
+				if(root_edge->getTo() == node_edge->getFrom()) {
+					Node *node_to_remove = node_edge->getFrom();
+					Edge *root_edge_to_remove = root_edge;
+
+					for( auto edge : getAllEdges() ) {
+						// abstract is impossible
+						if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) return;
+					}
+				}
+			}
+		}
+
 		if(lvl == LVL_1 || lvl == LVL_2) {
 			for( auto root_edge : root_edges ) {
 				for( auto node_edge : nodes_edges ) {
@@ -280,6 +295,13 @@ void Predator::abstractSLS(int lvl) {
 						Node *node_to_remove = node_edge->getFrom();
 						Edge *edge_to_remove = node_edge;
 						Edge *root_edge_to_remove = root_edge;
+						bool do_continue = false;
+
+						for( auto edge : getAllEdges() ) {
+							if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) do_continue = true;
+						}
+
+						if(do_continue) continue;
 
 						Edge *new_edge = plotter->graph->addEdge(root_edge->getFrom(), node_edge->getTo());
 
@@ -341,6 +363,21 @@ void Predator::abstractDLS(int lvl) {
 			}
 		}
 
+		// check if abstract is possible
+		for( auto root_edge : root_edges ) {
+			for( auto node_edge : nodes_edges ) {
+				if(root_edge->getTo() == node_edge->getFrom()) {
+					Node *node_to_remove = node_edge->getFrom();
+					Edge *root_edge_to_remove = root_edge;
+
+					for( auto edge : getAllEdges() ) {
+						// abstract is impossible
+						if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) return;
+					}
+				}
+			}
+		}
+
 		if(lvl == LVL_1 || lvl == LVL_2) {
 			for( auto root_edge : root_edges ) {
 				for( auto node_edge : nodes_edges ) {
@@ -348,6 +385,13 @@ void Predator::abstractDLS(int lvl) {
 						Node *node_to_remove = node_edge->getFrom();
 						Edge *edge_to_remove = node_edge;
 						Edge *root_edge_to_remove = root_edge;
+						bool do_continue = false;
+
+						for( auto edge : getAllEdges() ) {
+							if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) do_continue = true;
+						}
+
+						if(do_continue) continue;
 
 						Edge *new_edge = plotter->graph->addEdge(root_edge->getFrom(), node_edge->getTo());
 

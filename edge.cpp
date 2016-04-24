@@ -27,11 +27,11 @@ Attribute *Edge::getAttr(const char *name) {
 	return attrs.getAttr(name);
 }
 
-void Edge::setAttrs(Attributes *attrs) {
-	for( auto i : *attrs) {
+void Edge::setAttrs(Attributes *new_attrs) {
+	for( auto i : *new_attrs) {
 		checkAttr(i.first);
 	}
-	attrs->setAttrs(attrs);
+	attrs.setAttrs(new_attrs);
 }
 
 bool Edge::isAvailableAttr(std::string name) {

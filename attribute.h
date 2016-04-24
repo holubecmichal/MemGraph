@@ -27,9 +27,9 @@ private:
 	union {
 		int i_value;
 		double d_value;
-		std::string s_value;
 		bool b_value;
 	};
+	std::string s_value;
 
 	attr_type type;
 	std::string name;
@@ -39,6 +39,7 @@ private:
 	void setType(int value)          { type = type_int; }
 	void setType(double value)       { type = type_double; }
 	void setType(const char * value) { type = type_string; }
+	void setType(std::string value)  { type = type_string; }
 	void setType(bool value)         { type = type_bool; }
 
 public:
@@ -53,6 +54,7 @@ public:
 	void setValue(double value)       { d_value = value; setType(value); removed = false; }
 	void setValue(const char * value) { std::string val(value); s_value = val; setType(value); removed = false; }
 	void setValue(bool value)         { b_value = value; setType(value); removed = false; }
+	void setValue(std::string value)  { s_value = value; setType(value); removed = false; }
 
 	int         getIValue() { return i_value; }
 	double      getDValue() { return d_value; }

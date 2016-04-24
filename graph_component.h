@@ -8,7 +8,8 @@
 
 #include <vector>
 #include "node.h"
-#include "Edge.h"
+#include "edge.h"
+#include <typeinfo>
 
 class Subgraph;
 
@@ -51,10 +52,15 @@ public:
 	virtual ~GraphComponent() { }
 
 	// ===== GRAPH_COMPONENT METHODS =====
-	void setAttrs(Attributes *attrs);
+	void setAttrs(Attributes *new_attrs);
 	GraphComponent *setAttr(const char *name, Attribute *attr) {
 		checkAttr(name);
 		attrs.setAttr(name, attr);
+		return this;
+	}
+	GraphComponent *setAttr(Attribute *attr) {
+		checkAttr(attr->getName());
+		attrs.setAttr(attr);
 		return this;
 	}
 	template <typename T>
@@ -93,7 +99,7 @@ public:
 		edge->setAttrs(attrs);
 
 		return edge;
-	};
+	}
 	Edge *getEdge(Node *from, Node *to);
 	Edge *getEdge(const char *from, const char *to);
 
@@ -136,11 +142,11 @@ public:
 
 class Subgraph : public GraphComponent {
 private:
-	const char *name;
+	std::string name;
 
 public:
 	Subgraph(GraphComponent *parent) { this->parent = parent; };
-	Subgraph(GraphComponent *parent, const char *name) { this->parent = parent; this->name = name; }
+	Subgraph(GraphComponent *parent, std::string name) { this->parent = parent; this->name = name; }
 
 	const char *getName();
 	void setName(const char *value);
