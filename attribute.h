@@ -33,14 +33,8 @@ private:
 
 	attr_type type;
 	std::string name;
-	bool html_attr;
+	bool html_attr = false;
 	bool removed = false;
-
-	void setType(int value)          { type = type_int; }
-	void setType(double value)       { type = type_double; }
-	void setType(const char * value) { type = type_string; }
-	void setType(std::string value)  { type = type_string; }
-	void setType(bool value)         { type = type_bool; }
 
 public:
 	Attribute() : type(type_null), name("") { };
@@ -50,11 +44,11 @@ public:
 	}
 	Attribute(const char *name)	: type(type_null), name(name), html_attr(false) { }
 
-	void setValue(int value)          { i_value = value; setType(value); removed = false; }
-	void setValue(double value)       { d_value = value; setType(value); removed = false; }
-	void setValue(const char * value) { std::string val(value); s_value = val; setType(value); removed = false; }
-	void setValue(bool value)         { b_value = value; setType(value); removed = false; }
-	void setValue(std::string value)  { s_value = value; setType(value); removed = false; }
+	void setValue(int value)          { i_value = value; type = type_int; removed = false; }
+	void setValue(double value)       { d_value = value; type = type_double; removed = false; }
+	void setValue(const char * value) { std::string val(value); s_value = val; type = type_string; removed = false; }
+	void setValue(bool value)         { b_value = value; type = type_bool; removed = false; }
+	void setValue(std::string value)  { s_value = value; type = type_string; removed = false; }
 
 	int         getIValue() { return i_value; }
 	double      getDValue() { return d_value; }

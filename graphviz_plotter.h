@@ -24,9 +24,9 @@ public:
 	};
 
 private:
-	GraphvizPlotter::output output_format;
-	std::string path;
-	std::string name;
+	GraphvizPlotter::output output_format = PNG;
+	std::string path = "./";
+	std::string name = "graph";
 
 	std::string getStringOutputFormat();
 
@@ -37,7 +37,7 @@ private:
 	}
 
 	// ===== PARSE DOT METHODS ======
-	Agraph_t *g_graph;
+	Agraph_t *g_graph = NULL;
 	std::vector<Agedge_t *> walked_edges;
 	std::vector<Agnode_t *> walked_nodes;
 	string_map walked_graph_attrs;
@@ -69,11 +69,11 @@ private:
 	void restore(string_map *storage, string_map *walked_attrs);
 
 public:
-	GraphvizPlotter() : Plotter(), g_graph(NULL), path("./"), name("graph"), output_format(PNG) {
+	GraphvizPlotter() {
 		setAvailableAttrs();
 	}
 
-	GraphvizPlotter(Graph *graph) : Plotter(graph), g_graph(NULL), path("./"), name("graph"), output_format(PNG) {
+	GraphvizPlotter(Graph *graph) : Plotter(graph) {
 		setAvailableAttrs();
 	}
 
