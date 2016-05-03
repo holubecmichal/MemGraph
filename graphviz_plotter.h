@@ -28,19 +28,6 @@ private:
 	std::string path;
 	std::string name;
 
-	const char *print(std::string *content);
-	std::string getIdent();
-	std::string dotGraphHeader();
-	std::string dotAttribute(std::string name, Attribute *attr);
-	std::string dotNodes(nodes_map *nodes);
-	std::string dotEdges(edges_vect *edges);
-	std::string dotSubgraphs(subgraphs_map *subgraphs);
-	std::string dotSubgraph(Subgraph *subgraph);
-	std::string dotEdgeType();
-	std::string dotGraphAttrs(Attributes *attrs);
-	std::string dotGraphNodeAttrs(Attributes *attrs);
-	std::string dotGraphEdgeAttrs(Attributes *attrs);
-	std::string dotAttributes(Attributes *attrs);
 	std::string getStringOutputFormat();
 
 	void setAvailableAttrs() {
@@ -97,7 +84,6 @@ public:
 		}
 	}
 
-	std::string getDot();
 	void plot();
 	void setOutputFormat(GraphvizPlotter::output format);
 	void setOutputPath(const char *path);

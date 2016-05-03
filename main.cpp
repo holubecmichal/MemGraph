@@ -71,17 +71,9 @@ int main() {
 	std::string content( (std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()) );
 
 	plotter->parseDot(content.c_str());
-//	std::cout << plotter->getDot() << std::endl;
-//	plotter->plot();
-
-	Predator *predator = new Predator(plotter);
-	predator->plotOffset(Predator::OFF);
-	predator->abstractValues(Predator::LVL_1);
-	predator->abstractSLS(Predator::LVL_1);
-	predator->abstractDLS(Predator::LVL_1);
 
 	cout << plotter->getDot() << endl;
-	predator->plotter->plot();
+	plotter->plot();
 
 	// todo mrknout na ddd - debuger, ktery dokaze znazornit zmeny -> pro isomorfismus
 
