@@ -20,7 +20,7 @@ Attribute *Node::getAttr(const char *name) {
 }
 
 Node *Node::setAttrs(Attributes *new_attrs) {
-	for( auto i : *new_attrs) {
+	for(auto i : *new_attrs) {
 		checkAttr(i.first);
 	}
 	attrs.setAttrs(new_attrs);
@@ -29,6 +29,10 @@ Node *Node::setAttrs(Attributes *new_attrs) {
 }
 
 bool Node::isAvailableAttr(std::string name) {
+	if(available_attrs.size() == 0) {
+		return true;
+	}
+
 	for(auto i : available_attrs) {
 		if(i == name) {
 			return true;

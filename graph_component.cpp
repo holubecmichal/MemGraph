@@ -16,36 +16,21 @@ Node *GraphComponent::addNode(const char *name) {
 
 	if(node == NULL) {
 		node = new Node(name);
-//		setNodeAttrs(node);
 		nodes.insert(nodes_pair (name, node));
-		return node;
-	} else {
-		return node;
 	}
+
+	return node;
 }
 
-int GraphComponent::addNode(Node *node) {
+Node *GraphComponent::addNode(Node *node) {
 	checkNullObject(node);
 
 	if(getNode(node->getName()) == NULL) {
-//		setNodeAttrs(node);
 		nodes.insert(nodes_pair (node->getName(), node));
-		return 0;
-	} else {
-		return 1;
 	}
-}
 
-//Node *GraphComponent::getNode(const char *name) {
-//	nodes_it it;
-//
-//	it = nodes.find(name);
-//	if(it != nodes.end()) {
-//		return nodes[name];
-//	} else {
-//		return NULL;
-//	}
-//}
+	return node;
+}
 
 Node *GraphComponent::getNode(Node *node) {
 	return node;
@@ -95,8 +80,8 @@ Node *GraphComponent::getNodeInSubgraphs(const char *name) {
 	}
 
 	// prohledavani prostoru
-	for(subgraphs_it it = subgraphs.begin(); it != subgraphs.end(); ++it) {
-		Subgraph *subgraph = it->second;
+	for(auto i : subgraphs) {
+		Subgraph *subgraph = i.second;
 		Node *node = subgraph->getLocalNode(name);
 
 		if(node != NULL) {
@@ -104,9 +89,9 @@ Node *GraphComponent::getNodeInSubgraphs(const char *name) {
 		}
 	}
 
-	// rekurze o jeden krok dolu;
-	for(subgraphs_it it = subgraphs.begin(); it != subgraphs.end(); ++it) {
-		Subgraph *subgraph = it->second;
+	// rekurze - zanoreni o jeden krok;
+	for(auto i : subgraphs) {
+		Subgraph *subgraph = i.second;
 		Node *node = subgraph->getNodeInSubgraphs(name);
 
 		if(node != NULL) {
@@ -117,7 +102,7 @@ Node *GraphComponent::getNodeInSubgraphs(const char *name) {
 	return NULL;
 }
 
-int GraphComponent::addEdge(Edge *edge) {
+Edge *GraphComponent::addEdge(Edge *edge) {
 	checkNullObject(edge);
 	checkNullObject(edge->getFrom());
 	checkNullObject(edge->getTo());
@@ -150,7 +135,6 @@ Edge *GraphComponent::addEdge(const char *from, const char *to) {
 	}
 
 	Edge *edge = new Edge();
-//	setEdgeAttrs(edge);
 	insertEdge(edge);
 
 	edge->setFrom(From);
@@ -183,7 +167,6 @@ Edge *GraphComponent::addEdge(Node *from, Node *to) {
 	}
 
 	Edge *edge = new Edge();
-//	setEdgeAttrs(edge);
 	insertEdge(edge);
 
 	edge->setFrom(From);
@@ -202,9 +185,7 @@ Edge *GraphComponent::getEdge(Node *from, Node *to) {
 	checkNullObject(from);
 	checkNullObject(to);
 
-	for(unsigned i = 0; i < edges.size(); i++) {
-		Edge *edge = edges.at(i);
-
+	for(auto edge : edges) {
 		Node *From = edge->getFrom();
 		Node *To = edge->getTo();
 
@@ -223,17 +204,15 @@ Edge *GraphComponent::getEdge(Node *from, Node *to) {
 }
 
 Edge *GraphComponent::getEdge(const char *from, const char *to) {
-	for(unsigned i = 0; i < edges.size(); i++) {
-		Edge *edge = edges.at(i);
-
+	for(auto edge : edges) {
 		Node *From = edge->getFrom();
 		Node *To = edge->getTo();
 
 		if(
-			( From == NULL && from == NULL && To == NULL && to == NULL )            ||
-			( From != NULL && From->getName() == from && To == NULL && to == NULL ) ||
-			( From == NULL && from == NULL && To != NULL && To->getName() == to )   ||
-			( From != NULL && From->getName() == from && To != NULL && To->getName() == to ))
+				( From == NULL && from == NULL && To == NULL && to == NULL )            ||
+				( From != NULL && From->getName() == from && To == NULL && to == NULL ) ||
+				( From == NULL && from == NULL && To != NULL && To->getName() == to )   ||
+				( From != NULL && From->getName() == from && To != NULL && To->getName() == to ))
 		{
 
 			return edge;
@@ -259,7 +238,6 @@ void GraphComponent::addSubgraph(Subgraph *graph) {
 	checkNullObject(graph);
 
 	Subgraph *subgraph = getSubgraph(graph->getName());
-
 	if(subgraph != NULL) {
 		subgraphs.insert(subgraphs_pair (graph->getName(), subgraph));
 	}
@@ -285,19 +263,17 @@ void Subgraph::setName(const char *value) {
 	name = value;
 }
 
-int GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
+Edge *GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
 	checkNullObject(edge);
 	checkNullObject(attrs);
 
-	int result = addEdge(edge);
 	edge->setAttrs(attrs);
-
-	return result;
+	return addEdge(edge);;
 }
 
 void GraphComponent::setAttrs(Attributes *new_attrs) {
 	checkNullObject(new_attrs);
-	for( auto i : *new_attrs) {
+	for(auto i : *new_attrs) {
 		checkAttr(i.first);
 	}
 
@@ -311,7 +287,7 @@ void GraphComponent::setNodeAttr(Attribute *attr) {
 }
 
 void GraphComponent::setNodeAttrs(Attributes *attrs) {
-	for( auto i : *attrs) {
+	for(auto i : *attrs) {
 		Node::checkAttr(i.first);
 	}
 	checkNullObject(attrs);
@@ -325,7 +301,7 @@ void GraphComponent::setEdgeAttr(Attribute *attr) {
 }
 
 void GraphComponent::setEdgeAttrs(Attributes *attrs) {
-	for( auto i : *attrs) {
+	for(auto i : *attrs) {
 		Edge::checkAttr(i.first);
 	}
 	checkNullObject(attrs);
@@ -333,6 +309,10 @@ void GraphComponent::setEdgeAttrs(Attributes *attrs) {
 }
 
 bool GraphComponent::isAvailableAttr(std::string name) {
+	if(available_attrs.size() == 0) {
+		return true;
+	}
+
 	for(auto i : available_attrs) {
 		if(i == name) {
 			return true;
@@ -350,4 +330,11 @@ void GraphComponent::checkAttr(std::string name) {
 
 void GraphComponent::printWarning(std::string name) {
 	std::cerr << "Graph: Unknown atribute " << name << std::endl;
+}
+
+void GraphComponent::destructSubgraphs(subgraphs_map *subgraphs) {
+	for(auto i : *subgraphs) {
+		Subgraph *subgraph = i.second;
+		delete subgraph;
+	}
 }

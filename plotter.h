@@ -10,7 +10,6 @@
 
 const std::string new_line = "\n";
 const std::string tab = "\t";
-const std::string q_mark = "\"";
 
 class Plotter {
 private:
@@ -28,11 +27,18 @@ private:
 	std::string dotAttributes(Attributes *attrs);
 
 public:
-	Graph *graph;
-	int ident_step;
+	Graph *graph = NULL;
+	int ident_step = 0;
 
-	Plotter(Graph *graph) : graph(graph) { ident_step = 0; }
-	Plotter() { graph = new Graph; ident_step = 0; }
+	Plotter(Graph *graph) : graph(graph) { }
+	Plotter() { graph = new Graph; }
+
+
+	virtual ~Plotter() {
+		if(graph != NULL) {
+			delete graph;
+		}
+	}
 
 	std::string getDot();
 	virtual void plot() = 0;

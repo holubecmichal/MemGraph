@@ -33,9 +33,10 @@ private:
 			throw "Type of " + std::string(typeid(T).name()) + " - object is NULL";
 		}
 	}
+	static void destructSubgraphs(subgraphs_map *subgraphs);
 
 protected:
-	GraphComponent *parent;
+	GraphComponent *parent = NULL;
 
 	Node *getNodeInSubgraphs(const char *name);
 	Node *getLocalNode(const char *name);
@@ -49,7 +50,18 @@ public:
 	Attributes attrs;
 	static bool enable_warnings;
 
-	virtual ~GraphComponent() { }
+	~GraphComponent() {
+		destructSubgraphs(&subgraphs);
+
+		for(auto i : nodes) {
+			Node *node = i.second;
+			delete node;
+		}
+
+		for(auto edge : edges) {
+			delete edge;
+		}
+	}
 
 	// ===== GRAPH_COMPONENT METHODS =====
 	void setAttrs(Attributes *new_attrs);
@@ -83,14 +95,14 @@ public:
 
 	// ===== NODES METHODS =====
 	Node *addNode(const char *name);
-	int addNode(Node *node);
+	Node *addNode(Node *node);
 	Node *getNode(const char *name);
 	// metoda zatim urcena pouze pro prekladac
 	Node *getNode(Node *node);
 
 	// ===== EDGES METHODS =====
-	int addEdge(Edge *edge);
-	int addEdge(Edge *edge, Attributes *attrs);
+	Edge *addEdge(Edge *edge);
+	Edge *addEdge(Edge *edge, Attributes *attrs);
 	Edge *addEdge(const char *from, const char *to);
 	Edge *addEdge(Node *from, Node * to);
 	template <typename T>

@@ -11,6 +11,13 @@
 #include "graphviz_attrs.h"
 
 typedef std::map<std::string,std::string> string_map;
+typedef struct {
+	string_map graph_attrs;
+	string_map node_attrs;
+	string_map edge_attrs;
+	std::vector<Agedge_t *> edges;
+	std::vector<Agnode_t *> nodes;
+} processedProperties;
 
 class GraphvizPlotter : public Plotter {
 public:
@@ -36,21 +43,16 @@ private:
 		GraphComponent::setAvailableAttrs(GraphvizAttrs::graph_attrs);
 	}
 
-	// ===== PARSE DOT METHODS ======
 	Agraph_t *g_graph = NULL;
-	std::vector<Agedge_t *> walked_edges;
-	std::vector<Agnode_t *> walked_nodes;
-	string_map walked_graph_attrs;
-	string_map walked_node_attrs;
-	string_map walked_edge_attrs;
 
+	// ===== PARSE DOT METHODS ======
 	void parse();
-	void parseSubgraphs(Agraph_t *g, GraphComponent *g_component);
-	void parseNodes(Agraph_t *g, GraphComponent *g_component);
-	void parseNodeAttrs(Agnode_t *n, Node *node);
-	void parseEdges(Agraph_t *g, GraphComponent *g_component);
-	void parseEdgeAttrs(Agedge_t *e, Edge *edge);
-	void parseGraphAttrs(Agraph_t *g, GraphComponent *g_component);
+	void parseSubgraphs(Agraph_t *g, GraphComponent *g_component, processedProperties *props);
+	void parseNodes(Agraph_t *g, GraphComponent *g_component, processedProperties *props);
+	void parseNodeAttrs(Agnode_t *n, Node *node, processedProperties *props);
+	void parseEdges(Agraph_t *g, GraphComponent *g_component, processedProperties *props);
+	void parseEdgeAttrs(Agedge_t *e, Edge *edge, processedProperties *props);
+	void parseGraphAttrs(Agraph_t *g, GraphComponent *g_component, processedProperties *props);
 
 	template <typename T, typename U>
 	bool isWalkedObject(T *object, U *map) {
@@ -65,9 +67,6 @@ private:
 
 	bool isWalkedObjectAttr(string_map *attrs, std::string name, std::string value);
 
-	void backup(string_map *storage, string_map *walked_attrs);
-	void restore(string_map *storage, string_map *walked_attrs);
-
 public:
 	GraphvizPlotter() {
 		setAvailableAttrs();
@@ -78,7 +77,7 @@ public:
 	}
 
 
-	virtual ~GraphvizPlotter() {
+	~GraphvizPlotter() {
 		if(g_graph != NULL) {
 			agclose(g_graph);
 		}

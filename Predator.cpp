@@ -7,7 +7,7 @@
 
 void Predator::plotOffset(bool status) {
 	if(status == OFF) {
-		for( auto i : getAllEdges() ) {
+		for(auto i : getAllEdges()) {
 			i->setAttr("label", "");
 		}
 	}
@@ -22,11 +22,11 @@ edges_vect Predator::getAllEdges() {
 }
 
 void Predator::walkEdgesRecursively(GraphComponent *graph, edges_vect *edges) {
-	for( auto edge : *graph->getEdges()) {
+	for(auto edge : *graph->getEdges()) {
 		edges->push_back(edge);
 	}
 
-	for( auto i : *graph->getSubgraphs() ) {
+	for(auto i : *graph->getSubgraphs()) {
 		Subgraph *subgraph = i.second;
 
 		walkEdgesRecursively(subgraph, edges);
@@ -65,8 +65,8 @@ bool Predator::isDLS(Subgraph *dls) {
 	std::regex re(".*DLS \\d+\\+,.+");
 
 	if(attr_label && attr_color && attr_style && attr_fontcolor) {
-		if( attr_color->getValue() == "orange"     &&
-		    attr_style->getValue() == "dashed"  &&
+		if( attr_color->getValue()     == "orange" &&
+		    attr_style->getValue()     == "dashed" &&
 		    attr_fontcolor->getValue() == "orange" &&
 		    std::regex_match(attr_label->getValue(), re))
 		{
@@ -88,7 +88,7 @@ subgraphs_vect Predator::getAllSubgraphs() {
 }
 
 void Predator::walkSubgraphsRecursively(GraphComponent *graph, subgraphs_vect *subgraphs) {
-	for( auto i : *graph->getSubgraphs() ) {
+	for(auto i : *graph->getSubgraphs()) {
 		Subgraph *subgraph = i.second;
 
 		subgraphs->push_back(subgraph);
@@ -100,13 +100,13 @@ void Predator::walkSubgraphsRecursively(GraphComponent *graph, subgraphs_vect *s
 }
 
 void Predator::walkNodesRecursively(GraphComponent *graph, nodes_vect *nodes) {
-	for( auto i : *graph->getNodes() ) {
+	for(auto i : *graph->getNodes()) {
 		Node *node = i.second;
 
 		nodes->push_back(node);
 	}
 
-	for( auto j : *graph->getSubgraphs() ) {
+	for(auto j : *graph->getSubgraphs()) {
 		Subgraph *subgraph = j.second;
 
 		walkNodesRecursively(subgraph, nodes);
@@ -124,7 +124,7 @@ nodes_vect Predator::getAllNodes() {
 edges_vect Predator::getHasValuesEdges() {
 	edges_vect edges;
 
-	for( auto edge : getAllEdges() ) {
+	for(auto edge : getAllEdges()) {
 		if(isHasValueEdge(edge)) {
 			edges.push_back(edge);
 		}
@@ -167,7 +167,7 @@ bool Predator::isPointsToEdge(Edge *edge) {
 edges_vect Predator::getPointsToEdges() {
 	edges_vect edges;
 
-	for( auto edge : getAllEdges() ) {
+	for(auto edge : getAllEdges()) {
 		if(isPointsToEdge(edge)) {
 			edges.push_back(edge);
 		}
@@ -191,7 +191,7 @@ bool Predator::isValuesNode(Node *node) {
 nodes_vect Predator::getValuesNodes() {
 	nodes_vect nodes;
 
-	for( auto node : getAllNodes()) {
+	for(auto node : getAllNodes()) {
 		if(isValuesNode(node)) {
 			nodes.push_back(node);
 		}
@@ -203,7 +203,7 @@ nodes_vect Predator::getValuesNodes() {
 subgraphs_vect Predator::getSLSSubgraphs() {
 	subgraphs_vect subgraphs;
 
-	for( auto i : getAllSubgraphs()) {
+	for(auto i : getAllSubgraphs()) {
 		if(isSLS(i)) {
 			subgraphs.push_back(i);
 		}
@@ -215,7 +215,7 @@ subgraphs_vect Predator::getSLSSubgraphs() {
 subgraphs_vect Predator::getDLSSubgraphs() {
 	subgraphs_vect subgraphs;
 
-	for( auto i : getAllSubgraphs()) {
+	for(auto i : getAllSubgraphs()) {
 		if(isDLS(i)) {
 			subgraphs.push_back(i);
 		}
@@ -225,7 +225,7 @@ subgraphs_vect Predator::getDLSSubgraphs() {
 }
 
 void Predator::abstractValues(int lvl) {
-	for( auto node : getValuesNodes() ) {
+	for(auto node : getValuesNodes()) {
 		if(lvl == LVL_1) {
 			Attribute *attr_label = node->getAttr(GraphvizAttrs::NODE_ATTR_LABEL);
 
@@ -247,13 +247,13 @@ void Predator::abstractValues(int lvl) {
 }
 
 void Predator::abstractSLS(int lvl) {
-	for( auto subgraph : getSLSSubgraphs() ) {
+	for(auto subgraph : getSLSSubgraphs()) {
 		Node *root_node = NULL;
 		nodes_vect others_nodes;
 		edges_vect root_edges;
 		edges_vect nodes_edges;
 
-		for( auto edge : *subgraph->getEdges() ) {
+		for(auto edge : *subgraph->getEdges()) {
 			if(root_node == NULL) {
 				root_node = edge->getFrom();
 			}
@@ -261,12 +261,12 @@ void Predator::abstractSLS(int lvl) {
 			others_nodes.push_back(edge->getTo());
 		}
 
-		for( auto edge : getAllEdges() ) {
+		for(auto edge : getAllEdges()) {
 			if(edge->getFrom() == root_node) {
 				root_edges.push_back(edge);
 			}
 
-			for( auto node : others_nodes ) {
+			for(auto node : others_nodes) {
 				if(edge->getFrom() == node) {
 					nodes_edges.push_back(edge);
 				}
@@ -274,13 +274,13 @@ void Predator::abstractSLS(int lvl) {
 		}
 
 		// check if abstract is possible
-		for( auto root_edge : root_edges ) {
-			for( auto node_edge : nodes_edges ) {
+		for(auto root_edge : root_edges) {
+			for(auto node_edge : nodes_edges) {
 				if(root_edge->getTo() == node_edge->getFrom()) {
 					Node *node_to_remove = node_edge->getFrom();
 					Edge *root_edge_to_remove = root_edge;
 
-					for( auto edge : getAllEdges() ) {
+					for(auto edge : getAllEdges()) {
 						// abstract is impossible
 						if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) return;
 					}
@@ -289,15 +289,15 @@ void Predator::abstractSLS(int lvl) {
 		}
 
 		if(lvl == LVL_1 || lvl == LVL_2) {
-			for( auto root_edge : root_edges ) {
-				for( auto node_edge : nodes_edges ) {
+			for(auto root_edge : root_edges) {
+				for(auto node_edge : nodes_edges) {
 					if(root_edge->getTo() == node_edge->getFrom()) {
 						Node *node_to_remove = node_edge->getFrom();
 						Edge *edge_to_remove = node_edge;
 						Edge *root_edge_to_remove = root_edge;
 						bool do_continue = false;
 
-						for( auto edge : getAllEdges() ) {
+						for(auto edge : getAllEdges()) {
 							if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) do_continue = true;
 						}
 
@@ -305,7 +305,7 @@ void Predator::abstractSLS(int lvl) {
 
 						Edge *new_edge = plotter->graph->addEdge(root_edge->getFrom(), node_edge->getTo());
 
-						for( auto attr : *node_edge->getAttrs() ) {
+						for(auto attr : *node_edge->getAttrs()) {
 							new_edge->setAttr(attr.first.c_str(), attr.second);
 						}
 
@@ -320,7 +320,7 @@ void Predator::abstractSLS(int lvl) {
 			}
 
 			if (lvl == LVL_2) {
-				for( auto attr : *subgraph->getAttrs() ) {
+				for(auto attr : *subgraph->getAttrs()) {
 					attr.second->remove();
 				}
 
@@ -336,14 +336,16 @@ void Predator::abstractSLS(int lvl) {
 	}
 }
 
+// level of detail
+
 void Predator::abstractDLS(int lvl) {
-	for( auto subgraph : getDLSSubgraphs() ) {
+	for(auto subgraph : getDLSSubgraphs()) {
 		Node *root_node = NULL;
 		nodes_vect others_nodes;
 		edges_vect root_edges;
 		edges_vect nodes_edges;
 
-		for( auto edge : *subgraph->getEdges() ) {
+		for(auto edge : *subgraph->getEdges()) {
 			if(root_node == NULL) {
 				root_node = edge->getFrom();
 			}
@@ -351,12 +353,12 @@ void Predator::abstractDLS(int lvl) {
 			others_nodes.push_back(edge->getTo());
 		}
 
-		for( auto edge : getAllEdges() ) {
+		for(auto edge : getAllEdges()) {
 			if(edge->getFrom() == root_node) {
 				root_edges.push_back(edge);
 			}
 
-			for( auto node : others_nodes ) {
+			for(auto node : others_nodes) {
 				if(edge->getFrom() == node) {
 					nodes_edges.push_back(edge);
 				}
@@ -364,13 +366,13 @@ void Predator::abstractDLS(int lvl) {
 		}
 
 		// check if abstract is possible
-		for( auto root_edge : root_edges ) {
-			for( auto node_edge : nodes_edges ) {
+		for(auto root_edge : root_edges) {
+			for(auto node_edge : nodes_edges) {
 				if(root_edge->getTo() == node_edge->getFrom()) {
 					Node *node_to_remove = node_edge->getFrom();
 					Edge *root_edge_to_remove = root_edge;
 
-					for( auto edge : getAllEdges() ) {
+					for(auto edge : getAllEdges()) {
 						// abstract is impossible
 						if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) return;
 					}
@@ -379,15 +381,15 @@ void Predator::abstractDLS(int lvl) {
 		}
 
 		if(lvl == LVL_1 || lvl == LVL_2) {
-			for( auto root_edge : root_edges ) {
-				for( auto node_edge : nodes_edges ) {
+			for(auto root_edge : root_edges) {
+				for(auto node_edge : nodes_edges) {
 					if(root_edge->getTo() == node_edge->getFrom()) {
 						Node *node_to_remove = node_edge->getFrom();
 						Edge *edge_to_remove = node_edge;
 						Edge *root_edge_to_remove = root_edge;
 						bool do_continue = false;
 
-						for( auto edge : getAllEdges() ) {
+						for(auto edge : getAllEdges()) {
 							if(edge != root_edge_to_remove && edge->getTo() == node_to_remove) do_continue = true;
 						}
 
@@ -395,7 +397,7 @@ void Predator::abstractDLS(int lvl) {
 
 						Edge *new_edge = plotter->graph->addEdge(root_edge->getFrom(), node_edge->getTo());
 
-						for( auto attr : *node_edge->getAttrs() ) {
+						for(auto attr : *node_edge->getAttrs()) {
 							new_edge->setAttr(attr.first.c_str(), attr.second);
 						}
 
@@ -410,7 +412,7 @@ void Predator::abstractDLS(int lvl) {
 			}
 
 			if (lvl == LVL_2) {
-				for( auto attr : *subgraph->getAttrs() ) {
+				for(auto attr : *subgraph->getAttrs()) {
 					attr.second->remove();
 				}
 

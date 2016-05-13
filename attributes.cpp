@@ -9,7 +9,6 @@ Attribute *Attributes::insert(const char *name, Attribute *attr) {
 
 	if(attribute != NULL) {
 		attrs.erase(name);
-//		delete attribute;
 	}
 
 	attrs.insert( attributes_pair(name, attr) );
@@ -63,9 +62,10 @@ attributes_it Attributes::end() {
 }
 
 void Attributes::clear() {
-//	for(attributes_it it = attrs.begin(); it != attrs.end(); ++it) {
-//		delete(it->second);
-//	}
+	for(auto i : attrs) {
+		Attribute *attr = i.second;
+		delete attr;
+	}
 
 	attrs.clear();
 }
@@ -74,13 +74,13 @@ void Attributes::erase(const char *name) {
 	Attribute *attr = getAttr(name);
 
 	if(attr != NULL) {
-//		delete(attr);
+		delete attr;
 		attrs.erase(name);
 	}
 }
 
 void Attributes::setAttrs(Attributes *attrs) {
-	for(attributes_it it = attrs->begin(); it != attrs->end(); ++it) {
-		setAttr(it->first.c_str(), it->second);
+	for(auto i : *attrs) {
+		setAttr(i.first.c_str(), i.second);
 	}
 }

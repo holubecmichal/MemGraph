@@ -7,10 +7,10 @@
 using namespace std;
 
 int main() {
-	GraphvizPlotter *plotter = new GraphvizPlotter();
+//	GraphvizPlotter *plotter = new GraphvizPlotter();
 
 //	plotter->setOutputFormat(GraphvizPlotter::PNG);
-	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
+//	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
 //	plotter->setOutputName("out");
 
 //	Examples::forester_1(plotter->graph);
@@ -66,16 +66,36 @@ int main() {
 
 //	std::cout << "asd" << endl;
 
-	std::string file_name("/Users/Michal/FIT/Bachelor/00-0000_bcPlot.dot");
-	std::ifstream ifs(file_name);
-	std::string content( (std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()) );
+	GraphvizPlotter *plotter = new GraphvizPlotter();
+	plotter->setOutputPath("/Users/Michal/FIT/Bachelor/");
+//
+////	std::string file_name("/Users/Michal/FIT/Bachelor/00-0000_bcPlot.dot");
+////	std::ifstream ifs(file_name);
+////	std::string content( (std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()) );
+//
+//	plotter->parseDot(content.c_str());
+//
+	plotter->setOutputFormat(GraphvizPlotter::PDF);
+	plotter->setOutputName("dot_example");
+	Examples::predator_1(plotter->graph);
+//	Examples::predator_2(plotter->graph);
 
-	plotter->parseDot(content.c_str());
+
+//	Predator *predator = new Predator(plotter);
+//	predator->plotOffset(Predator::OFF);
+//
+//	predator->abstractValues(Predator::LVL_1);
+//	predator->abstractSLS(Predator::LVL_1);
+//	predator->abstractDLS(Predator::LVL_1);
 
 	cout << plotter->getDot() << endl;
 	plotter->plot();
 
-	// todo mrknout na ddd - debuger, ktery dokaze znazornit zmeny -> pro isomorfismus
+	// todo pokusit se prepsat vsechna const char * na std::string
+	// todo okomentovat
+
+	delete plotter;
+
 
 	return 0;
 }

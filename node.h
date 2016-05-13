@@ -12,7 +12,7 @@
 
 class Node {
 private:
-	std::string name;
+	std::string name = "";
 	static string_vector available_attrs;
 	bool removed = false;
 
@@ -22,9 +22,7 @@ private:
 public:
 	Attributes attrs;
 
-	Node() {
-		name = "";
-	}
+	Node() { }
 	Node(const char *value) {
 		name = value;
 	}

@@ -45,17 +45,10 @@ std::string Plotter::dotGraphAttrs(Attributes *attrs) {
 	std::string text = "";
 
 	if(attrs->size() > 0) {
-		attributes_it it = attrs->begin();
-
-		while( true ) {
-			if(!it->second->isRemoved()) {
-				text += getIdent() + dotAttribute(it->first, it->second) + ";" + new_line;
+		for(auto i : *attrs) {
+			if(!i.second->isRemoved()) {
+				text += getIdent() + dotAttribute(i.first, i.second) + ";" + new_line;
 			}
-
-			if(++it == attrs->end()) {
-				break;
-			}
-
 		}
 		text += new_line;
 	}
@@ -90,13 +83,13 @@ std::string Plotter::dotNodes(nodes_map *nodes) {
 	std::string text = "";
 	std::string node = "";
 
-	for(nodes_it it = nodes->begin(); it != nodes->end(); ++it) {
-		if(it->second->isRemoved()) continue;
+	for(auto i : *nodes) {
+		if(i.second->isRemoved()) continue;
 
-		if(it->second->attrs.size() > 0) {
-			node = getIdent() + std::string(it->second->getName());
+		if(i.second->attrs.size() > 0) {
+			node = getIdent() + std::string(i.second->getName());
 			node += " ";
-			node += std::string(dotAttributes(&it->second->attrs));
+			node += std::string(dotAttributes(&i.second->attrs));
 			node += ";" + new_line;
 			text += node;
 		}
@@ -105,6 +98,7 @@ std::string Plotter::dotNodes(nodes_map *nodes) {
 	if(text.length() > 0) {
 		text += new_line;
 	}
+
 	return text;
 }
 
@@ -112,9 +106,7 @@ std::string Plotter::dotEdges(edges_vect *edges) {
 	std::string text = "";
 	std::string edge = "";
 
-	for(edges_it it = edges->begin(); it != edges->end(); ++it) {
-		Edge *e = (*it);
-
+	for(auto e : *edges) {
 		if(e->isRemoved()) continue;
 
 		if(e->getFrom()->isRemoved()) {

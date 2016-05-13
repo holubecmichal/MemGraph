@@ -26,11 +26,12 @@ private:
 	Attribute *setAttr(const char *name);
 
 public:
-	Attributes() { attrs.empty(); }
+	Attributes() {  }
 	virtual ~Attributes() {
-//		for(attributes_it it = attrs.begin(); it != attrs.end(); ++it) {
-//			delete it->second;
-//		}
+		for(auto i : attrs) {
+			Attribute *attr = i.second;
+			delete attr;
+		}
 	}
 
 	Attribute *getAttr(const char *name);
@@ -46,7 +47,6 @@ public:
 	void setAttrs(Attributes *attrs);
 	template <typename T>
 
-	// todo poresit jeste ten nepovinny parametr
 	Attribute *setAttr(const char *name, T value, bool null_attr = false) {
 		Attribute *attr = getAttr(name);
 

@@ -153,66 +153,15 @@ public:
 		graph->setNodeAttrs(&node_attrs);
 		graph->setEdgeAttrs(&edge_attrs);
 
-		graph->addEdge("Headteacher", "Deputy1");
-		graph->addEdge("Headteacher", "Deputy2");
-		graph->addEdge("Headteacher", "BusinessManager");
-		graph->addEdge("Deputy1", "Teacher1");
-		graph->addEdge("Deputy1", "Teacher2");
-		graph->addEdge("BusinessManager", "ITManager");
-
-		// todo pridat zasobnik contextu (attr rank)
-//		graph->setAttr("rank", "same;ITManager Teacher1 Teacher2");
-
+		graph->addEdge("vutbr", "fit");
+		graph->addEdge("vutbr", "fce");
+		graph->addEdge("vutbr", "feec");
+		graph->addEdge("fit", "merlin");
+		graph->addEdge("fit", "kazi");
+		graph->addEdge("feec", "kos");
 	}
 
 	static void predator_1(Graph *graph) {
-//		digraph G {
-//				label=<<FONT POINT-SIZE="18">test-0001-snapshot-0001</FONT>>;
-//				clusterrank=local;
-//				labelloc=t;
-//
-//				20 [label="CL#2335:ptr [obj = #20] field#22",color=blue,shape=box,fontcolor=blue];
-//				15 [label="#15 [off = 0, obj = #14]",fontcolot=black,penwidth=2,shape=ellipse];
-//				24 [label="#24 [off = 0, obj = #23]",fontcolot=black,penwidth=2,shape=ellipse];
-//				lonely3 [label="NULL",shape=plaintext,fontcolor=blue];
-//
-//				subgraph cluster1 {
-//					label="";
-//					rank=same;
-//					color=black;
-//					fontcolot=black;
-//					bgcolor=white;
-//					penwidth=1;
-//					style=dashed;
-//
-//					14 [label="#14 [SC_ON_HEAP, size = 8 B]",color=black,shape=box,fontcolor=black];
-//					16 [label=".next #16",color=black,shape=box,fontcolor=black];
-//
-//					14 -> 16 [label="[+0]",color=black,fontcolor=black];
-//				}
-//
-//				subgraph cluster2 {
-//					label="";
-//					rank=same;
-//					color=black;
-//					fontcolot=black;
-//					bgcolor=white;
-//					penwidth=1;
-//					style=dashed;
-//
-//					23 [label="#23 [SC_ON_HEAP, size = 8 B]",color=black,shape=box,fontcolor=black];
-//					25 [label=".next #25",color=black,shape=box,fontcolor=black];
-//
-//					23 -> 25 [label="[+0]",color=black,fontcolor=black];
-//				}
-//
-//				16 -> lonely3 [color=blue,fontcolor=black];
-//				20 -> 24 [color=blue,fontcolor=black];
-//				25 -> 15 [color=blue,fontcolor=black];
-//				24 -> 23 [label="[+0]",color=blue,fontcolor=black];
-//				15 -> 14 [label="[+0]",color=blue,fontcolor=black];
-//		}
-
 		Subgraph *subgraph;
 		Attributes subgraph_attrs;
 
@@ -301,6 +250,54 @@ public:
 				->setAttr("color","black")
 				->setAttr("fontcolor","black")
 				->setAttr("label","[+0]");
+	}
+
+	static void predator_2(Graph *graph) {
+		/*
+		 *
+digraph G {
+	clusterrank=local;
+	label=<<FONT POINT-SIZE="18">01-PL_ArenaAllocate-0001</FONT>>;
+	labelloc=t;
+
+	242 [color=blue,fontcolor=blue,label="CL#3121:ptr [obj = #242] field#244",shape=box];
+	243 [fontcolor=blue,label="#243 VT_OBJECT [off = 0, obj = #242]",penwidth=1,shape=ellipse];
+	lonely1 [fontcolor=blue,label="NULL",shape=plaintext];
+
+	243 -> 242 [color=black,fontcolor=black,label="[+0]"];
+	242 -> lonely1 [color=blue,fontcolor=blue];
+}
+		 */
+
+		graph->setAttr("clusterrank","local");
+		graph->setAttr("labelloc","t");
+		graph->setHtmlAttr("label","<FONT POINT-SIZE=\"18\">01-PL_ArenaAllocate-0001</FONT>");
+
+		graph->addNode("242")
+				->setAttr("color","blue")
+				->setAttr("fontcolor","blue")
+				->setAttr("label","CL#3121:ptr [obj = #242] field#244")
+				->setAttr("shape","box");
+
+		graph->addNode("243")
+				->setAttr("fontcolor","blue")
+				->setAttr("label","#243 VT_OBJECT [off = 0, obj = #242]")
+				->setAttr("shape","ellipse")
+				->setAttr("penwidth",1);
+
+		graph->addNode("lonely1")
+				->setAttr("fontcolor","blue")
+				->setAttr("label","NULL")
+				->setAttr("shape","plaintext");
+
+		graph->addEdge("243","242")
+				->setAttr("color","black")
+				->setAttr("fontcolor","black")
+				->setAttr("label","[+0]");
+
+		graph->addEdge("242","lonely1")
+				->setAttr("color","blue")
+				->setAttr("fontcolor","blue");
 	}
 
 	static void forester_1(Graph *graph) {
@@ -1111,6 +1108,428 @@ public:
 				"\t\"47\" -> \"43\" [color=blue, fontcolor=blue];\n"
 				"\t\"53\" -> \"48\" [color=blue, fontcolor=blue];\n"
 				"}";
+	}
+
+	static const char *predatorSMGs() {
+		return "digraph \"test-0108.c-122-0000\" {\n"
+				"\tlabel=<<FONT POINT-SIZE=\"18\">test-0108.c-122-0000</FONT>>;\n"
+				"\tclusterrank=local;\n"
+				"\tlabelloc=t;\n"
+				"subgraph \"cluster1\" {\n"
+				"\trank=same;\n"
+				"\tlabel=\"SLS 2+, head [+0], next [+0]\";\n"
+				"\tcolor=red;\n"
+				"\tfontcolor=red;\n"
+				"\tbgcolor=white;\n"
+				"\tpenwidth=3.0;\n"
+				"\tstyle=dashed;\n"
+				"\t\"9\" [shape=box, color=red, fontcolor=red, label=\"#9 [SC_ON_HEAP, size = 24 B]\"];\n"
+				"\t\"10\" [shape=box, color=red, fontcolor=red, penwidth=3.0, style=dashed, label=\".next #10\"];\n"
+				"\t\"9\" -> \"10\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+				"\t\"11\" [shape=box, color=black, fontcolor=black, label=\".dll.next #11\"];\n"
+				"\t\"9\" -> \"11\" [color=black, fontcolor=black, label=\"[+8]\"];\n"
+				"\t\"12\" [shape=box, color=black, fontcolor=black, label=\".dll.prev #12\"];\n"
+				"\t\"9\" -> \"12\" [color=black, fontcolor=black, label=\"[+16]\"];\n"
+				"}\n"
+				"subgraph \"cluster2\" {\n"
+				"\trank=same;\n"
+				"\tlabel=\"[L1 prototype] DLS 2+, head [+8], next [+8], prev [+16]\";\n"
+				"\tcolor=orange;\n"
+				"\tfontcolor=orange;\n"
+				"\tbgcolor=white;\n"
+				"\tpenwidth=3.0;\n"
+				"\tstyle=dashed;\n"
+				"\t\"14\" [shape=box, color=orange, fontcolor=orange, label=\"#14 [SC_ON_HEAP, size = 24 B]\"];\n"
+				"\t\"15\" [shape=box, color=black, fontcolor=black, label=\".data #15\"];\n"
+				"\t\"14\" -> \"15\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+				"\t\"16\" [shape=box, color=red, fontcolor=red, penwidth=3.0, style=dashed, label=\".link.next #16\"];\n"
+				"\t\"14\" -> \"16\" [color=black, fontcolor=black, label=\"[+8]\"];\n"
+				"\t\"17\" [shape=box, color=orange, fontcolor=orange, penwidth=3.0, style=dashed, label=\".link.prev #17\"];\n"
+				"\t\"14\" -> \"17\" [color=black, fontcolor=black, label=\"[+16]\"];\n"
+				"}\n"
+				"\t\"36\" [shape=box, color=blue, fontcolor=blue, label=\"CL#2382:sll [obj = #36] field#38\"];\n"
+				"\t\"13\" [shape=ellipse, penwidth=2, fontcolor=chartreuse2, label=\"#13 [off = 0, TS_FIRST, obj = #9]\"];\n"
+				"\t\"13\" -> \"9\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+				"\t\"19\" [shape=ellipse, penwidth=2, fontcolor=chartreuse2, label=\"#19 [off = 8, TS_LAST, obj = #14]\"];\n"
+				"\t\"19\" -> \"16\" [color=chartreuse2, fontcolor=chartreuse2];\n"
+				"\t\"21\" [shape=ellipse, penwidth=3, fontcolor=chartreuse2, label=\"#21 [off = 8, TS_ALL, obj = #9]\"];\n"
+				"\t\"21\" -> \"11\" [color=chartreuse2, fontcolor=chartreuse2];\n"
+				"\t\"23\" [shape=ellipse, penwidth=2, fontcolor=chartreuse2, label=\"#23 [off = 8, TS_FIRST, obj = #14]\"];\n"
+				"\t\"23\" -> \"16\" [color=chartreuse2, fontcolor=chartreuse2];\n"
+				"\t\"lonely3\" [shape=plaintext, fontcolor=blue, label=\"NULL\"];\n"
+				"\t\"10\" -> \"lonely3\" [color=blue, fontcolor=blue];\n"
+				"\t\"11\" -> \"23\" [color=blue, fontcolor=blue];\n"
+				"\t\"12\" -> \"19\" [color=blue, fontcolor=blue];\n"
+				"\t\"lonely4\" [shape=plaintext, fontcolor=blue, label=\"NULL\"];\n"
+				"\t\"15\" -> \"lonely4\" [color=blue, fontcolor=blue];\n"
+				"\t\"16\" -> \"21\" [color=blue, fontcolor=blue];\n"
+				"\t\"17\" -> \"21\" [color=blue, fontcolor=blue];\n"
+				"\t\"36\" -> \"13\" [color=blue, fontcolor=blue];\n"
+				"}";
+	}
+
+	static const char *predatorTransformExample() {
+		return "digraph \"test-0240.c-52-0000\" {\n"
+		"\tlabel=<<FONT POINT-SIZE=\"18\">test-0240.c-52-0000</FONT>>;\n"
+		"\tclusterrank=local;\n"
+		"\tlabelloc=t;\n"
+		"subgraph \"cluster1\" {\n"
+		"\trank=same;\n"
+		"\tlabel=\"SLS 2+, head [+0], next [+0]\";\n"
+		"\tcolor=red;\n"
+		"\tfontcolor=red;\n"
+		"\tbgcolor=white;\n"
+		"\tpenwidth=3.0;\n"
+		"\tstyle=dashed;\n"
+		"\t\"40\" [shape=box, color=red, fontcolor=red, label=\"#40 [SC_ON_HEAP, size = 8 B]\"];\n"
+		"\t\"41\" [shape=box, color=red, fontcolor=red, penwidth=3.0, style=dashed, label=\".next #41\"];\n"
+		"\t\"40\" -> \"41\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+		"\t\"42\" [shape=box, color=black, fontcolor=black, label=\".data #42\"];\n"
+		"\t\"40\" -> \"42\" [color=black, fontcolor=black, label=\"[+4]\"];\n"
+		"}\n"
+		"\t\"63\" [shape=box, color=blue, fontcolor=blue, label=\"CL#1984:x [obj = #63] field#71\"];\n"
+		"\t\"64\" [shape=box, color=blue, fontcolor=blue, label=\"CL#1985:y [obj = #64] field#77\"];\n"
+		"\t\"43\" [shape=ellipse, penwidth=2, fontcolor=chartreuse2, label=\"#43 [off = 0, TS_FIRST, obj = #40]\"];\n"
+		"\t\"43\" -> \"40\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+		"\t\"65\" [shape=ellipse, penwidth=1, fontcolor=blue, label=\"#65 VT_OBJECT [off = 0, obj = #64]\"];\n"
+		"\t\"65\" -> \"64\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+		"\t\"66\" [shape=ellipse, penwidth=1, fontcolor=blue, label=\"#66 VT_OBJECT [off = 0, obj = #63]\"];\n"
+		"\t\"66\" -> \"63\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+		"\t\"lonely2\" [shape=plaintext, fontcolor=blue, label=\"NULL\"];\n"
+		"\t\"41\" -> \"lonely2\" [color=blue, fontcolor=blue];\n"
+		"\t\"lonely3\" [shape=plaintext, fontcolor=blue, label=\"NULL\"];\n"
+		"\t\"42\" -> \"lonely3\" [color=blue, fontcolor=blue];\n"
+		"\t\"63\" -> \"43\" [color=blue, fontcolor=blue];\n"
+		"\t\"lonely4\" [shape=plaintext, fontcolor=blue, label=\"NULL\"];\n"
+		"\t\"64\" -> \"lonely4\" [color=blue, fontcolor=blue];\n"
+		"}";
+	};
+
+	static const char *forestAutomata() {
+		return "digraph \"test-f0028-fixpoint-0002\" {\n"
+				"  label=<<FONT POINT-SIZE=\"18\">test-f0028-fixpoint-0002</FONT>>;\n"
+				"  clusterrank=local;\n"
+				"  labelloc=t;\n"
+				"\n"
+				"  subgraph \"cluster_treeaut0\" {\n"
+				"    rank=same;\n"
+				"    label=\"TA 0\";\n"
+				"    labeljust=right;\n"
+				"    color=black;\n"
+				"    fontcolor=black;\n"
+				"    bgcolor=green;\n"
+				"    style=dashed;\n"
+				"    penwidth=1.0;\n"
+				"\n"
+				"    subgraph \"cluster_treeaut0_q1_20\" {\n"
+				"      rank=same;\n"
+				"      label=q1;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"34028696\" [shape=ellipse, style=filled, fillcolor=lightblue, label=\"__global_vars_block\"];\n"
+				"      \"34028696.0\" [shape=box, style=filled, fillcolor=pink, label=\"__fake_global__\"];\n"
+				"      \"34028696\" -> \"34028696.0\"[label=\"[0:1:+0]\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut0_r0_21\" {\n"
+				"      rank=same;\n"
+				"      label=r0;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"18446744071866157140\" [shape=box, style=filled, fillcolor=red, label=\"(undef)\"];\n"
+				"    }\n"
+				"\n"
+				"  }\n"
+				"\n"
+				"  subgraph \"cluster_treeaut1\" {\n"
+				"    rank=same;\n"
+				"    label=\"TA 1\";\n"
+				"    labeljust=right;\n"
+				"    color=black;\n"
+				"    fontcolor=black;\n"
+				"    bgcolor=green;\n"
+				"    style=dashed;\n"
+				"    penwidth=1.0;\n"
+				"\n"
+				"    subgraph \"cluster_treeaut1_q24_22\" {\n"
+				"      rank=same;\n"
+				"      label=q24;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"33979400\" [shape=ellipse, style=filled, fillcolor=lightblue, label=\"main:1971\"];\n"
+				"      \"33979400.0\" [shape=box, style=filled, fillcolor=pink, label=\"_pABP\"];\n"
+				"      \"33979400\" -> \"33979400.0\"[label=\"[0:4:+0]\"];\n"
+				"      \"33979400.4\" [shape=box, style=filled, fillcolor=pink, label=\"_retaddr\"];\n"
+				"      \"33979400\" -> \"33979400.4\"[label=\"[4:8:+0]\"];\n"
+				"      \"33979400.12\" [shape=box, style=filled, fillcolor=pink, label=\"x\"];\n"
+				"      \"33979400\" -> \"33979400.12\"[label=\"[12:4:+0]\"];\n"
+				"      \"33979400.16\" [shape=box, style=filled, fillcolor=pink, label=\"y\"];\n"
+				"      \"33979400\" -> \"33979400.16\"[label=\"[16:4:+0]\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut1_r0_23\" {\n"
+				"      rank=same;\n"
+				"      label=r0;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"18446744072865523704\" [shape=box, style=filled, fillcolor=red, label=\"(undef)\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut1_r1_24\" {\n"
+				"      rank=same;\n"
+				"      label=r1;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"18446744071597073179\" [shape=box, style=filled, fillcolor=red, label=\"(int)0\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut1_r2_25\" {\n"
+				"      rank=same;\n"
+				"      label=r2;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"18446744072083663336\" [shape=box, style=filled, fillcolor=red, label=\"(native_ptr)0x206ae80\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut1_r3_26\" {\n"
+				"      rank=same;\n"
+				"      label=r3;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"    }\n"
+				"\n"
+				"  }\n"
+				"\n"
+				"  subgraph \"cluster_treeaut2\" {\n"
+				"    rank=same;\n"
+				"    label=\"TA 2\";\n"
+				"    labeljust=right;\n"
+				"    color=black;\n"
+				"    fontcolor=black;\n"
+				"    bgcolor=green;\n"
+				"    style=dashed;\n"
+				"    penwidth=1.0;\n"
+				"\n"
+				"    subgraph \"cluster_treeaut2_q22_27\" {\n"
+				"      rank=same;\n"
+				"      label=q22;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"33775448\" [shape=ellipse, style=filled, fillcolor=lightblue, label=\"T\"];\n"
+				"      \"33775448.0\" [shape=box, style=filled, fillcolor=pink, label=\"box0(1)[in=0; out0=4]\"];\n"
+				"      \"33775448\" -> \"33775448.0\"[label=\"[0:0:+0]\"];\n"
+				"      \"33775448.4\" [shape=box, style=filled, fillcolor=pink, label=\".prev\"];\n"
+				"      \"33775448\" -> \"33775448.4\"[label=\"[4:4:+0]\"];\n"
+				"      \"33775448.8\" [shape=box, style=filled, fillcolor=pink, label=\".data\"];\n"
+				"      \"33775448\" -> \"33775448.8\"[label=\"[8:4:+0]\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut2_q22_28\" {\n"
+				"      rank=same;\n"
+				"      label=q22;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"33775528\" [shape=ellipse, style=filled, fillcolor=lightblue, label=\"T\"];\n"
+				"      \"33775528.0\" [shape=box, style=filled, fillcolor=pink, label=\".next\"];\n"
+				"      \"33775528\" -> \"33775528.0\"[label=\"[0:4:+0]\"];\n"
+				"      \"33775528.4\" [shape=box, style=filled, fillcolor=pink, label=\".prev\"];\n"
+				"      \"33775528\" -> \"33775528.4\"[label=\"[4:4:+0]\"];\n"
+				"      \"33775528.8\" [shape=box, style=filled, fillcolor=pink, label=\".data\"];\n"
+				"      \"33775528\" -> \"33775528.8\"[label=\"[8:4:+0]\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut2_q25_29\" {\n"
+				"      rank=same;\n"
+				"      label=q25;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"33685624\" [shape=ellipse, style=filled, fillcolor=lightblue, label=\"T\"];\n"
+				"      \"33685624.0\" [shape=box, style=filled, fillcolor=pink, label=\"_pABP\"];\n"
+				"      \"33685624\" -> \"33685624.0\"[label=\"[0:4:+0]\"];\n"
+				"      \"33685624.8\" [shape=box, style=filled, fillcolor=pink, label=\".data\"];\n"
+				"      \"33685624\" -> \"33685624.8\"[label=\"[8:4:+0]\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut2_r0_30\" {\n"
+				"      rank=same;\n"
+				"      label=r0;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"18446744073289024397\" [shape=box, style=filled, fillcolor=red, label=\"(undef)\"];\n"
+				"    }\n"
+				"\n"
+				"    subgraph \"cluster_treeaut2_r1_31\" {\n"
+				"      rank=same;\n"
+				"      label=r1;\n"
+				"      labeljust=left;\n"
+				"      color=black;\n"
+				"      fontcolor=black;\n"
+				"      bgcolor=orange;\n"
+				"      style=dashed;\n"
+				"      penwidth=1.0;\n"
+				"\n"
+				"      \"18446744071898533750\" [shape=box, style=filled, fillcolor=red, label=\"(int)0\"];\n"
+				"    }\n"
+				"\n"
+				"  }\n"
+				"\n"
+				"  \"34028696.0\" -> \"18446744071866157140\";\n"
+				"  \"33979400.0\" -> \"18446744071597073179\";\n"
+				"  \"33979400.4\" -> \"18446744072083663336\";\n"
+				"  \"33979400.12\" -> \"33775448\";\n"
+				"  \"33979400.12\" -> \"33775528\";\n"
+				"  \"33979400.16\" -> \"18446744072865523704\";\n"
+				"  \"33775448.0\" -> \"33685624\";\n"
+				"  \"33775448.4\" -> \"18446744071898533750\";\n"
+				"  \"33775448.8\" -> \"18446744073289024397\";\n"
+				"  \"33775528.0\" -> \"18446744071898533750\";\n"
+				"  \"33775528.4\" -> \"18446744071898533750\";\n"
+				"  \"33775528.8\" -> \"18446744073289024397\";\n"
+				"  \"33685624.0\" -> \"18446744071898533750\";\n"
+				"  \"33685624.8\" -> \"18446744073289024397\";\n"
+				"}";
+	}
+
+	static void CPACheckerExample(Graph *graph) {
+		graph->addNode("init")
+			->setHtmlAttr("label","1 Function startu dummy edge<BR />2 int value = 0;");
+		graph->addNode("N3")
+			->setAttr("shape","diamond")
+			->setHtmlAttr("label","N3<BR />6");
+
+		graph->addEdge("init","N3");
+
+		graph->addNode("N5")
+			->setHtmlAttr("label","N5<BR />2");
+		graph->addNode("N6")
+			->setHtmlAttr("label","N6<BR />5")
+			->setAttr("shape","diamond");
+
+		graph->addEdge("N3","N5")
+			->setAttr("label","[ x > y ]");
+		graph->addEdge("N3","N6")
+			->setAttr("label","[ !(x > y) ]");
+
+		graph->addNode("N9")
+			->setHtmlAttr("label","N9<BR />3");
+		graph->addNode("N10")
+				->setHtmlAttr("label","N10<BR />4");
+
+		graph->addEdge("N6","N9")
+				->setAttr("label","[ x < y ]");
+		graph->addEdge("N6","N10")
+				->setAttr("label","[ !(x < y) ]");
+
+		graph->addNode("N4")
+				->setHtmlAttr("label","N4<BR />1");
+		graph->addNode("N0")
+				->setHtmlAttr("label","N0<BR />0");
+
+		graph->addEdge("N9","N4")
+				->setAttr("label","value = 2;");
+		graph->addEdge("N10","N4")
+				->setAttr("label","value = 3;");
+		graph->addEdge("N4","N0")
+				->setAttr("label","return value;");
+		graph->addEdge("N5","N4")
+				->setAttr("label","value = 1;");
+
+	}
+
+	static void diGraph(Graph *graph) {
+		graph->addNode("A")->setAttr("label","a");
+		graph->addNode("B")->setAttr("label","b");
+		graph->addNode("C")->setAttr("label","c");
+		graph->addNode("D")->setAttr("label","d");
+		graph->addNode("X")->setAttr("label","x");
+
+		graph->addEdge("A","X");
+		graph->addEdge("A","B");
+		graph->addEdge("B","C");
+		graph->addEdge("B","D");
+	}
+
+	static void stdGraph(Graph *graph) {
+		graph->setType(std_graph);
+
+		graph->addNode("A")->setAttr("label","a");
+		graph->addNode("B")->setAttr("label","b");
+		graph->addNode("C")->setAttr("label","c");
+		graph->addNode("D")->setAttr("label","d");
+		graph->addNode("X")->setAttr("label","x");
+
+		graph->addEdge("A","X");
+		graph->addEdge("A","B");
+		graph->addEdge("B","C");
+		graph->addEdge("B","D");
+	}
+
+	static void stdSubGraph(Graph *graph) {
+		graph->setType(std_graph);
+
+		graph->addNode("A")->setAttr("label","a");
+		graph->addNode("B")->setAttr("label","b");
+		graph->addNode("C")->setAttr("label","c");
+		graph->addNode("D")->setAttr("label","d");
+
+		graph->addEdge("A","B");
+		graph->addEdge("B","C");
+		graph->addEdge("B","D");
 	}
 };
 

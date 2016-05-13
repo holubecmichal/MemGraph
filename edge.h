@@ -30,10 +30,7 @@ public:
 
 	Edge(Node *from, Node *to) : from(from), to(to) { }
 
-	~Edge() {
-		delete from;
-		delete to;
-	}
+	~Edge() { }
 
 	void setFrom(Node *node);
 	void setTo(Node *node);
