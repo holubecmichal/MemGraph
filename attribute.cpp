@@ -68,6 +68,10 @@ namespace memgraph {
 	}
 
 	void Attribute::setName(std::string name) {
+		if(name.length() == 0) {
+			throw "Attribute: identificator is empty";
+		}
+
 		this->name = name;
 	}
 

@@ -194,7 +194,9 @@ namespace memgraph {
 		Node *getNode(std::string name);
 
 		// metoda urcena pouze pro prekladac
-		Node *getNode(Node *node);
+		Node *getNode(Node *node) {
+			return node;
+		}
 
 		// ===== EDGES METHODS =====
 		/**

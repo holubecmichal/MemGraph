@@ -9,6 +9,10 @@ namespace memgraph {
 	string_vector Edge::available_attrs;
 
 	void Edge::setFrom(Node *node) {
+		if(node == NULL) {
+			throw "node is null";
+		}
+
 		from = node;
 	}
 
@@ -17,6 +21,10 @@ namespace memgraph {
 	}
 
 	void Edge::setTo(Node *node) {
+		if(node == NULL) {
+			throw "node is null";
+		}
+
 		to = node;
 	}
 
@@ -36,6 +44,10 @@ namespace memgraph {
 	}
 
 	bool Edge::isAvailableAttr(std::string name) {
+		if(name.length() == 0) {
+			throw "identificator is not set";
+		}
+
 		if (available_attrs.size() == 0) {
 			return true;
 		}

@@ -35,12 +35,11 @@ namespace memgraph {
 	public:
 		Attributes attrs;
 
-		Edge() {
-			from = NULL;
-			to = NULL;
+		Edge(Node *from, Node *to) : from(from), to(to) {
+			if(from == NULL || to == NULL) {
+				throw "Some node is NULL";
+			}
 		}
-
-		Edge(Node *from, Node *to) : from(from), to(to) { }
 
 		~Edge() { }
 
@@ -85,6 +84,10 @@ namespace memgraph {
 		 */
 		template<typename T>
 		Edge *setAttr(std::string name, T value) {
+			if(name.length() == 0) {
+				throw "identificator is empty";
+			}
+
 			checkAttr(name);
 			attrs.setAttr(name, value);
 			return this;
@@ -109,6 +112,10 @@ namespace memgraph {
 		 */
 		template<typename T>
 		Edge *setHtmlAttr(std::string name, T value) {
+			if(name.length() == 0) {
+				throw "identificator is empty";
+			}
+
 			checkAttr(name);
 			attrs.setHtmlAttr(name, value);
 			return this;

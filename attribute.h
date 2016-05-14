@@ -47,7 +47,6 @@ namespace memgraph {
 		bool removed = false;
 
 	public:
-		Attribute() : type(type_null), name("") { };
 		template <typename T>
 		Attribute(std::string name, T value) : type(type_null), name(name), html_attr(false) {
 			setValue(value);

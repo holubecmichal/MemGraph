@@ -107,6 +107,10 @@ namespace memgraph {
 		 */
 		template<typename T>
 		Attribute *setAttr(std::string name, T value, bool null_attr = false) {
+			if(name.length() == 0) {
+				throw "identificator is empty";
+			}
+
 			Attribute *attr = getAttr(name);
 
 			if (attr != NULL) {
@@ -128,12 +132,20 @@ namespace memgraph {
 		 */
 		template<typename T>
 		Attribute *setHtmlAttr(std::string name, T value) {
+			if(name.length() == 0) {
+				throw "identificator is empty";
+			}
+
 			Attribute *attr = setAttr(name, value);
 			attr->setHtml();
 			return attr;
 		}
 
 		Attribute &operator[](std::string name) {
+			if(name.length() == 0) {
+				throw "identificator is empty";
+			}
+
 			Attribute *attr = getAttr(name);
 
 			if (attr == NULL) {

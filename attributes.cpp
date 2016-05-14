@@ -6,6 +6,10 @@
 
 namespace memgraph {
 	Attribute *Attributes::insert(std::string name, Attribute *attr) {
+		if(name.length() == 0) {
+			throw "identificator is empty";
+		}
+
 		Attribute *attribute = getAttr(name);
 
 		if (attribute != NULL) {
@@ -17,6 +21,10 @@ namespace memgraph {
 	}
 
 	Attribute *Attributes::setAttr(std::string name) {
+		if(name.length() == 0) {
+			throw "identificator is empty";
+		}
+
 		return setAttr(name, false, true);
 	}
 

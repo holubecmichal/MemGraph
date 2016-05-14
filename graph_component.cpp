@@ -35,11 +35,12 @@ namespace memgraph {
 		return node;
 	}
 
-	Node *GraphComponent::getNode(Node *node) {
-		return node;
-	}
-
 	Node *GraphComponent::getNode(std::string name) {
+		if(name.length() == 0) {
+			throw "identificator is empty";
+			return NULL;
+		}
+
 		Node *node = getLocalNode(name);
 
 		if (node != NULL) {
@@ -57,6 +58,11 @@ namespace memgraph {
 	}
 
 	Node *GraphComponent::getLocalNode(std::string name) {
+		if(name.length() == 0) {
+			throw "identificator is empty";
+			return NULL;
+		}
+
 		nodes_it it;
 
 		it = nodes.find(name);
@@ -78,6 +84,11 @@ namespace memgraph {
 	}
 
 	Node *GraphComponent::getNodeInSubgraphs(std::string name) {
+		if(name.length() == 0) {
+			throw "identificator is empty";
+			return NULL;
+		}
+
 		if (subgraphs.empty()) {
 			return NULL;
 		}
@@ -118,7 +129,8 @@ namespace memgraph {
 
 	Edge *GraphComponent::addEdge(std::string from, std::string to) {
 		if(from.length() == 0 || to.length() == 0) {
-			throw "Edge: some of node is empty";
+			throw "Edge: some of identificator is empty";
+			return NULL;
 		}
 
 		Node *From = getNode(from);
@@ -132,11 +144,8 @@ namespace memgraph {
 		}
 
 
-		Edge *edge = new Edge();
+		Edge *edge = new Edge(From, To);
 		insertEdge(edge);
-
-		edge->setFrom(From);
-		edge->setTo(To);
 
 		return edge;
 	}
@@ -164,11 +173,8 @@ namespace memgraph {
 			}
 		}
 
-		Edge *edge = new Edge();
+		Edge *edge = new Edge(From, To);
 		insertEdge(edge);
-
-		edge->setFrom(From);
-		edge->setTo(To);
 
 		return edge;
 	}
@@ -198,6 +204,11 @@ namespace memgraph {
 	}
 
 	Edge *GraphComponent::getEdge(std::string from, std::string to) {
+		if(from.length() == 0 || to.length() == 0) {
+			throw "Edge: some of identificator is empty";
+			return NULL;
+		}
+
 		for (auto edge : edges) {
 			Node *From = edge->getFrom();
 			Node *To = edge->getTo();
@@ -213,6 +224,11 @@ namespace memgraph {
 	}
 
 	Subgraph *GraphComponent::addSubgraph(std::string name) {
+		if(name.length() == 0) {
+			throw "Subgraph: identificator is empty";
+			return NULL;
+		}
+
 		Subgraph *subgraph = getSubgraph(name);
 
 		if (subgraph == NULL) {
@@ -224,6 +240,11 @@ namespace memgraph {
 	}
 
 	Subgraph *GraphComponent::getSubgraph(std::string name) {
+		if(name.length() == 0) {
+			throw "Subgraph: identificator is empty";
+			return NULL;
+		}
+
 		subgraphs_it it;
 
 		it = subgraphs.find(name);
@@ -240,6 +261,11 @@ namespace memgraph {
 	}
 
 	void Subgraph::setName(std::string value) {
+		if(value.length() == 0) {
+			throw "Subgraph: value is empty";
+			return;
+		}
+
 		name = value;
 	}
 
@@ -281,6 +307,10 @@ namespace memgraph {
 	}
 
 	bool GraphComponent::isAvailableAttr(std::string name) {
+		if(name.length() == 0) {
+			throw "Attribute: identificator is empty";
+		}
+
 		if (available_attrs.size() == 0) {
 			return true;
 		}

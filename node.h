@@ -34,8 +34,6 @@ namespace memgraph {
 	public:
 		Attributes attrs;
 
-		Node() { }
-
 		Node(std::string name) {
 			this->name = name;
 		}

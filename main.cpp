@@ -13,11 +13,10 @@ int main() {
 	plotter->setOutputFormat(GraphvizPlotter::PDF);
 	plotter->setOutputName("dot_example");
 //	Examples::predator_2(plotter->graph);
+
 	plotter->parseDot(Examples::predatorTransformExample());
 	cout << plotter->getDot() << endl;
 	plotter->plot();
-
-	// todo okomentovat
 
 	delete plotter;
 
