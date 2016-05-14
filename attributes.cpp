@@ -28,6 +28,21 @@ namespace memgraph {
 		return setAttr(name, false, true);
 	}
 
+	Attribute *Attributes::setAttr(std::string name, Attribute *attribute) {
+		switch(attribute->getType()) {
+			case Attribute::type_int:
+				return setAttr(name, attribute->getIValue());
+			case Attribute::type_double:
+				return setAttr(name, attribute->getDValue());
+			case Attribute::type_bool:
+				return setAttr(name, attribute->getBValue());
+			case Attribute::type_string:
+				return setAttr(name, attribute->getSValue());
+			default:
+				throw "Unknown Attribute type or uninitialize value";
+		}
+	}
+
 	Attribute *Attributes::setAttr(Attribute *attr) {
 		return setAttr(attr->getName(), attr);
 	}

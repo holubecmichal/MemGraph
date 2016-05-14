@@ -93,6 +93,14 @@ namespace memgraph {
 		Attribute *setAttr(Attribute *attr);
 
 		/**
+		 * nastavi atribut
+		 * @param std::string name identifikator
+		 * @param Attribute*
+		 * @return Attribute*
+		 */
+		Attribute *setAttr(std::string name, Attribute *attribute);
+
+		/**
 		 * nastavi vice atributu
 		 * @param Attributes*
 		 */
