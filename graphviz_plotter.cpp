@@ -9,6 +9,14 @@
 
 namespace memgraph {
 	void GraphvizPlotter::plot() {
+		if(path.length() == 0) {
+			throw "Path is empty";
+		}
+
+		if(name.length() == 0) {
+			throw "Name is empty";
+		}
+
 		// nacte nastaveny format grafu
 		std::string format = getStringOutputFormat();
 		// vytvori konecne umisteni a nazev souboru
@@ -73,6 +81,10 @@ namespace memgraph {
 	}
 
 	Graph *GraphvizPlotter::parseDot(std::string content) {
+		if(content.length() == 0) {
+			throw "content is empty";
+		}
+
 		g_graph = agmemread(content.c_str());
 
 		if (g_graph) {
