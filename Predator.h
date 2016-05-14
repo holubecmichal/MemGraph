@@ -2,13 +2,14 @@
 // Created by Michael Holubec on 12.04.16.
 //
 
-#ifndef BACHELOR_PREDATOR_H
-#define BACHELOR_PREDATOR_H
+#ifndef MEMGRAPH_PREDATOR_H
+#define MEMGRAPH_PREDATOR_H
 
 
 #include "plotter.h"
 #include "graphviz_plotter.h"
 
+using namespace memgraph;
 class Predator {
 public:
 	enum {
@@ -54,4 +55,4 @@ public:
 };
 
 
-#endif //BACHELOR_PREDATOR_H
+#endif //MEMGRAPH_PREDATOR_H

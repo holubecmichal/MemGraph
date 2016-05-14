@@ -2,8 +2,8 @@
 // Created by Michael Holubec on 15.02.16.
 //
 
-#ifndef BACHELOR_ATTRIBUTES_H
-#define BACHELOR_ATTRIBUTES_H
+#ifndef MEMGRAPH_ATTRIBUTES_H
+#define MEMGRAPH_ATTRIBUTES_H
 
 
 #include <map>
@@ -11,80 +11,91 @@
 #include <vector>
 #include "attribute.h"
 
-typedef std::map< std::string, Attribute* > attributes_map;
-typedef attributes_map::iterator attributes_it;
-typedef std::pair< std::string, Attribute* > attributes_pair;
+namespace memgraph {
+	typedef std::map<std::string, Attribute *> attributes_map;
+	typedef attributes_map::iterator attributes_it;
+	typedef std::pair<std::string, Attribute *> attributes_pair;
 
-typedef std::vector< std::string > string_vector;
-typedef string_vector::iterator string_vector_it;
+	typedef std::vector<std::string> string_vector;
+	typedef string_vector::iterator string_vector_it;
 
-class Attributes {
-private:
-	attributes_map attrs;
+	class Attributes {
+	private:
+		attributes_map attrs;
 
-	Attribute *insert(const char *name, Attribute *attr);
-	Attribute *setAttr(const char *name);
+		Attribute *insert(const char *name, Attribute *attr);
 
-public:
-	Attributes() {  }
-	virtual ~Attributes() {
-		for(auto i : attrs) {
-			Attribute *attr = i.second;
-			delete attr;
-		}
-	}
+		Attribute *setAttr(const char *name);
 
-	Attribute *getAttr(const char *name);
-	unsigned long size();
-	attributes_it begin();
-	attributes_it end();
+	public:
+		Attributes() { }
 
-	void clear();
-	void erase(const char *name);
-
-	Attribute *setAttr(Attribute *attr);
-	Attribute *setAttr(const char *name, Attribute *attr);
-	void setAttrs(Attributes *attrs);
-	template <typename T>
-
-	Attribute *setAttr(const char *name, T value, bool null_attr = false) {
-		Attribute *attr = getAttr(name);
-
-		if(attr != NULL) {
-			attr->setValue(value);
-		} else if(null_attr) {
-			attr = insert(name, new Attribute(name));
-		} else {
-			attr = insert(name, new Attribute(name, value));
+		virtual ~Attributes() {
+			for (auto i : attrs) {
+				Attribute *attr = i.second;
+				delete attr;
+			}
 		}
 
-		return attr;
-	}
+		Attribute *getAttr(const char *name);
 
+		unsigned long size();
 
-	template <typename T>
-	Attribute *setHtmlAttr(const char *name, T value) {
-		Attribute *attr = setAttr(name, value);
-		attr->setHtml();
-		return attr;
-	}
+		attributes_it begin();
 
-	Attribute &operator[] (const char *name)
-	{
-		Attribute *attr = getAttr(name);
+		attributes_it end();
 
-		if(attr == NULL) {
-			attr = setAttr(name);
+		void clear();
+
+		void erase(const char *name);
+
+		Attribute *setAttr(Attribute *attr);
+
+		Attribute *setAttr(const char *name, Attribute *attr);
+
+		void setAttrs(Attributes *attrs);
+
+		template<typename T>
+
+		Attribute *setAttr(const char *name, T value, bool null_attr = false) {
+			Attribute *attr = getAttr(name);
+
+			if (attr != NULL) {
+				attr->setValue(value);
+			} else if (null_attr) {
+				attr = insert(name, new Attribute(name));
+			} else {
+				attr = insert(name, new Attribute(name, value));
+			}
+
+			return attr;
 		}
 
-		return *attr;
-	}
 
-	attributes_map *getAttrs() {
-		return &attrs;
-	}
+		template<typename T>
+		Attribute *setHtmlAttr(const char *name, T value) {
+			Attribute *attr = setAttr(name, value);
+			attr->setHtml();
+			return attr;
+		}
 
-};
+		Attribute &operator[](const char *name) {
+			Attribute *attr = getAttr(name);
+
+			if (attr == NULL) {
+				attr = setAttr(name);
+			}
+
+			return *attr;
+		}
+
+		attributes_map *getAttrs() {
+			return &attrs;
+		}
+
+	};
+
+}
 
 
-#endif //BACHELOR_ATTRIBUTES_H
+#endif //MEMGRAPH_ATTRIBUTES_H

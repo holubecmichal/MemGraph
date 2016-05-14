@@ -32,5 +32,7 @@
 00-0000_bcPlot.dot
 cloc_exclude
 graph.png
-projekt.pdf
 test-0014.c-298-0000.dot
+*.pdf
+*.svg
+built

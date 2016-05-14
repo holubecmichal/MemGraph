@@ -2,8 +2,8 @@
 // Created by Michael Holubec on 06.03.16.
 //
 
-#ifndef BACHELOR_UTILITY_H
-#define BACHELOR_UTILITY_H
+#ifndef MEMGRAPH_UTILITY_H
+#define MEMGRAPH_UTILITY_H
 
 
 #include <iosfwd>
@@ -58,4 +58,4 @@ public:
 };
 
 
-#endif //BACHELOR_UTILITY_H
+#endif //MEMGRAPH_UTILITY_H

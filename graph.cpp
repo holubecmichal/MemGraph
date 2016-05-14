@@ -4,10 +4,12 @@
 
 #include "graph.h"
 
-void Graph::setType(graph_type value) {
-	type = value;
-}
+namespace memgraph {
+	void Graph::setType(graph_type value) {
+		type = value;
+	}
 
-graph_type Graph::getType() {
-	return type;
+	graph_type Graph::getType() {
+		return type;
+	}
 }

@@ -2,11 +2,12 @@
 // Created by Michael Holubec on 10.03.16.
 //
 
-#ifndef BACHELOR_EXAMPLES_H
-#define BACHELOR_EXAMPLES_H
+#ifndef MEMGRAPH_EXAMPLES_H
+#define MEMGRAPH_EXAMPLES_H
 
 
 #include "graph.h"
+using namespace memgraph;
 
 class Examples {
 public:
@@ -1534,4 +1535,4 @@ digraph G {
 };
 
 
-#endif //BACHELOR_EXAMPLES_H
+#endif //MEMGRAPH_EXAMPLES_H

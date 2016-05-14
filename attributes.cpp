@@ -4,83 +4,85 @@
 
 #include "attributes.h"
 
-Attribute *Attributes::insert(const char *name, Attribute *attr) {
-	Attribute *attribute = getAttr(name);
+namespace memgraph {
+	Attribute *Attributes::insert(const char *name, Attribute *attr) {
+		Attribute *attribute = getAttr(name);
 
-	if(attribute != NULL) {
-		attrs.erase(name);
+		if (attribute != NULL) {
+			attrs.erase(name);
+		}
+
+		attrs.insert(attributes_pair(name, attr));
+		return attr;
 	}
 
-	attrs.insert( attributes_pair(name, attr) );
-	return attr;
-}
-
-Attribute *Attributes::setAttr(const char *name, Attribute *attribute) {
-	switch(attribute->getType()) {
-		case Attribute::type_int:
-			return setAttr(name, attribute->getIValue());
-		case Attribute::type_double:
-			return setAttr(name, attribute->getDValue());
-		case Attribute::type_bool:
-			return setAttr(name, attribute->getBValue());
-		case Attribute::type_string:
-			return setAttr(name, attribute->getSValue());
-		default:
-			throw "Unknown Attribute type or uninitialize value";
-	}
-}
-
-Attribute *Attributes::setAttr(const char *name) {
-	return setAttr(name, false, true);
-}
-
-Attribute *Attributes::setAttr(Attribute *attr) {
-	return setAttr(attr->getName().c_str(), attr);
-}
-
-Attribute *Attributes::getAttr(const char *name) {
-	attributes_it it;
-
-	it = attrs.find(name);
-	if(it != attrs.end()) {
-		return attrs[name];
-	} else {
-		return NULL;
-	}
-}
-
-unsigned long Attributes::size() {
-	return attrs.size();
-}
-
-attributes_it Attributes::begin() {
-	return attrs.begin();
-}
-
-attributes_it Attributes::end() {
-	return attrs.end();
-}
-
-void Attributes::clear() {
-	for(auto i : attrs) {
-		Attribute *attr = i.second;
-		delete attr;
+	Attribute *Attributes::setAttr(const char *name, Attribute *attribute) {
+		switch (attribute->getType()) {
+			case Attribute::type_int:
+				return setAttr(name, attribute->getIValue());
+			case Attribute::type_double:
+				return setAttr(name, attribute->getDValue());
+			case Attribute::type_bool:
+				return setAttr(name, attribute->getBValue());
+			case Attribute::type_string:
+				return setAttr(name, attribute->getSValue());
+			default:
+				throw "Unknown Attribute type or uninitialize value";
+		}
 	}
 
-	attrs.clear();
-}
-
-void Attributes::erase(const char *name) {
-	Attribute *attr = getAttr(name);
-
-	if(attr != NULL) {
-		delete attr;
-		attrs.erase(name);
+	Attribute *Attributes::setAttr(const char *name) {
+		return setAttr(name, false, true);
 	}
-}
 
-void Attributes::setAttrs(Attributes *attrs) {
-	for(auto i : *attrs) {
-		setAttr(i.first.c_str(), i.second);
+	Attribute *Attributes::setAttr(Attribute *attr) {
+		return setAttr(attr->getName().c_str(), attr);
+	}
+
+	Attribute *Attributes::getAttr(const char *name) {
+		attributes_it it;
+
+		it = attrs.find(name);
+		if (it != attrs.end()) {
+			return attrs[name];
+		} else {
+			return NULL;
+		}
+	}
+
+	unsigned long Attributes::size() {
+		return attrs.size();
+	}
+
+	attributes_it Attributes::begin() {
+		return attrs.begin();
+	}
+
+	attributes_it Attributes::end() {
+		return attrs.end();
+	}
+
+	void Attributes::clear() {
+		for (auto i : attrs) {
+			Attribute *attr = i.second;
+			delete attr;
+		}
+
+		attrs.clear();
+	}
+
+	void Attributes::erase(const char *name) {
+		Attribute *attr = getAttr(name);
+
+		if (attr != NULL) {
+			delete attr;
+			attrs.erase(name);
+		}
+	}
+
+	void Attributes::setAttrs(Attributes *attrs) {
+		for (auto i : *attrs) {
+			setAttr(i.first.c_str(), i.second);
+		}
 	}
 }
