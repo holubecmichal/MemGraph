@@ -10,7 +10,7 @@
 #include "graphviz_plotter.h"
 
 using namespace memgraph;
-class Predator {
+class PredatorWrapper {
 public:
 	enum {
 		OFF,
@@ -48,8 +48,8 @@ public:
 	void abstractSLS(int lvl);
 	void abstractDLS(int lvl);
 
-	Predator(Plotter *plotter) : plotter(plotter) { }
-	Predator() { plotter = new GraphvizPlotter(); }
+	PredatorWrapper(Plotter *plotter) : plotter(plotter) { }
+	PredatorWrapper() { plotter = new GraphvizPlotter(); }
 
 	void plotOffset(bool status = ON);
 };

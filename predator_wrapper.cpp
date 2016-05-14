@@ -3,9 +3,9 @@
 //
 
 #include <regex>
-#include "predator.h"
+#include "predator_wrapper.h"
 
-void Predator::plotOffset(bool status) {
+void PredatorWrapper::plotOffset(bool status) {
 	if(status == OFF) {
 		for(auto i : getAllEdges()) {
 			i->setAttr("label", "");
@@ -13,7 +13,7 @@ void Predator::plotOffset(bool status) {
 	}
 }
 
-edges_vect Predator::getAllEdges() {
+edges_vect PredatorWrapper::getAllEdges() {
 	edges_vect edges;
 
 	walkEdgesRecursively(plotter->graph, &edges);
@@ -21,7 +21,7 @@ edges_vect Predator::getAllEdges() {
 	return edges;
 }
 
-void Predator::walkEdgesRecursively(GraphComponent *graph, edges_vect *edges) {
+void PredatorWrapper::walkEdgesRecursively(GraphComponent *graph, edges_vect *edges) {
 	for(auto edge : *graph->getEdges()) {
 		edges->push_back(edge);
 	}
@@ -33,7 +33,7 @@ void Predator::walkEdgesRecursively(GraphComponent *graph, edges_vect *edges) {
 	}
 }
 
-bool Predator::isSLS(Subgraph *sls) {
+bool PredatorWrapper::isSLS(Subgraph *sls) {
 	Attribute *attr_label = sls->getAttr(GraphvizAttrs::GRAPH_ATTR_LABEL);
 	Attribute *attr_color = sls->getAttr(GraphvizAttrs::GRAPH_ATTR_COLOR);
 	Attribute *attr_style = sls->getAttr(GraphvizAttrs::GRAPH_ATTR_STYLE);
@@ -56,7 +56,7 @@ bool Predator::isSLS(Subgraph *sls) {
 	return false;
 }
 
-bool Predator::isDLS(Subgraph *dls) {
+bool PredatorWrapper::isDLS(Subgraph *dls) {
 	Attribute *attr_label = dls->getAttr(GraphvizAttrs::GRAPH_ATTR_LABEL);
 	Attribute *attr_color = dls->getAttr(GraphvizAttrs::GRAPH_ATTR_COLOR);
 	Attribute *attr_style = dls->getAttr(GraphvizAttrs::GRAPH_ATTR_STYLE);
@@ -79,7 +79,7 @@ bool Predator::isDLS(Subgraph *dls) {
 	return false;
 }
 
-subgraphs_vect Predator::getAllSubgraphs() {
+subgraphs_vect PredatorWrapper::getAllSubgraphs() {
 	subgraphs_vect subgraphs;
 
 	walkSubgraphsRecursively(plotter->graph, &subgraphs);
@@ -87,7 +87,7 @@ subgraphs_vect Predator::getAllSubgraphs() {
 	return subgraphs;
 }
 
-void Predator::walkSubgraphsRecursively(GraphComponent *graph, subgraphs_vect *subgraphs) {
+void PredatorWrapper::walkSubgraphsRecursively(GraphComponent *graph, subgraphs_vect *subgraphs) {
 	for(auto i : *graph->getSubgraphs()) {
 		Subgraph *subgraph = i.second;
 
@@ -99,7 +99,7 @@ void Predator::walkSubgraphsRecursively(GraphComponent *graph, subgraphs_vect *s
 	}
 }
 
-void Predator::walkNodesRecursively(GraphComponent *graph, nodes_vect *nodes) {
+void PredatorWrapper::walkNodesRecursively(GraphComponent *graph, nodes_vect *nodes) {
 	for(auto i : *graph->getNodes()) {
 		Node *node = i.second;
 
@@ -113,7 +113,7 @@ void Predator::walkNodesRecursively(GraphComponent *graph, nodes_vect *nodes) {
 	}
 }
 
-nodes_vect Predator::getAllNodes() {
+nodes_vect PredatorWrapper::getAllNodes() {
 	nodes_vect nodes;
 
 	walkNodesRecursively(plotter->graph, &nodes);
@@ -121,7 +121,7 @@ nodes_vect Predator::getAllNodes() {
 	return nodes;
 }
 
-edges_vect Predator::getHasValuesEdges() {
+edges_vect PredatorWrapper::getHasValuesEdges() {
 	edges_vect edges;
 
 	for(auto edge : getAllEdges()) {
@@ -133,7 +133,7 @@ edges_vect Predator::getHasValuesEdges() {
 	return edges;
 }
 
-bool Predator::isHasValueEdge(Edge *edge) {
+bool PredatorWrapper::isHasValueEdge(Edge *edge) {
 	Attribute *attr_color = edge->getAttr(GraphvizAttrs::EDGE_ATTR_COLOR);
 	Attribute *attr_fontcolor = edge->getAttr(GraphvizAttrs::EDGE_ATTR_FONTCOLOR);
 
@@ -148,7 +148,7 @@ bool Predator::isHasValueEdge(Edge *edge) {
 	return false;
 }
 
-bool Predator::isPointsToEdge(Edge *edge) {
+bool PredatorWrapper::isPointsToEdge(Edge *edge) {
 	Node *from = edge->getFrom();
 	Node *to = edge->getTo();
 
@@ -164,7 +164,7 @@ bool Predator::isPointsToEdge(Edge *edge) {
 	return false;
 }
 
-edges_vect Predator::getPointsToEdges() {
+edges_vect PredatorWrapper::getPointsToEdges() {
 	edges_vect edges;
 
 	for(auto edge : getAllEdges()) {
@@ -176,7 +176,7 @@ edges_vect Predator::getPointsToEdges() {
 	return edges;
 }
 
-bool Predator::isValuesNode(Node *node) {
+bool PredatorWrapper::isValuesNode(Node *node) {
 	Attribute *attr_shape = node->getAttr(GraphvizAttrs::NODE_ATTR_SHAPE);
 
 	if(attr_shape) {
@@ -188,7 +188,7 @@ bool Predator::isValuesNode(Node *node) {
 	return false;
 }
 
-nodes_vect Predator::getValuesNodes() {
+nodes_vect PredatorWrapper::getValuesNodes() {
 	nodes_vect nodes;
 
 	for(auto node : getAllNodes()) {
@@ -200,7 +200,7 @@ nodes_vect Predator::getValuesNodes() {
 	return nodes;
 }
 
-subgraphs_vect Predator::getSLSSubgraphs() {
+subgraphs_vect PredatorWrapper::getSLSSubgraphs() {
 	subgraphs_vect subgraphs;
 
 	for(auto i : getAllSubgraphs()) {
@@ -212,7 +212,7 @@ subgraphs_vect Predator::getSLSSubgraphs() {
 	return subgraphs;
 }
 
-subgraphs_vect Predator::getDLSSubgraphs() {
+subgraphs_vect PredatorWrapper::getDLSSubgraphs() {
 	subgraphs_vect subgraphs;
 
 	for(auto i : getAllSubgraphs()) {
@@ -224,7 +224,7 @@ subgraphs_vect Predator::getDLSSubgraphs() {
 	return subgraphs;
 }
 
-void Predator::abstractValues(int lvl) {
+void PredatorWrapper::abstractValues(int lvl) {
 	for(auto node : getValuesNodes()) {
 		if(lvl == LVL_1) {
 			Attribute *attr_label = node->getAttr(GraphvizAttrs::NODE_ATTR_LABEL);
@@ -246,7 +246,7 @@ void Predator::abstractValues(int lvl) {
 	}
 }
 
-void Predator::abstractSLS(int lvl) {
+void PredatorWrapper::abstractSLS(int lvl) {
 	for(auto subgraph : getSLSSubgraphs()) {
 		Node *root_node = NULL;
 		nodes_vect others_nodes;
@@ -338,7 +338,7 @@ void Predator::abstractSLS(int lvl) {
 
 // level of detail
 
-void Predator::abstractDLS(int lvl) {
+void PredatorWrapper::abstractDLS(int lvl) {
 	for(auto subgraph : getDLSSubgraphs()) {
 		Node *root_node = NULL;
 		nodes_vect others_nodes;

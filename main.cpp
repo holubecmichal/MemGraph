@@ -2,7 +2,7 @@
 #include <fstream>
 #include "graphviz_plotter.h"
 #include "examples.h"
-#include "predator.h"
+#include "predator_wrapper.h"
 
 using namespace std;
 using namespace memgraph;
@@ -12,12 +12,11 @@ int main() {
 	plotter->setOutputPath("/Users/Michal/FIT/MemGraph/");
 	plotter->setOutputFormat(GraphvizPlotter::PDF);
 	plotter->setOutputName("dot_example");
-//	Examples::forester_1(plotter->graph);
-	plotter->parseDot(Examples::predatorSMGs());
+//	Examples::predator_2(plotter->graph);
+	plotter->parseDot(Examples::predatorTransformExample());
 	cout << plotter->getDot() << endl;
 	plotter->plot();
 
-	// todo pokusit se prepsat vsechna const char * na std::string
 	// todo okomentovat
 
 	delete plotter;
