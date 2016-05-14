@@ -83,6 +83,7 @@ namespace memgraph {
 		}
 
 		// prohledavani prostoru
+		// nejdrvie prohledani vlastnich podgrafu
 		for (auto i : subgraphs) {
 			Subgraph *subgraph = i.second;
 			Node *node = subgraph->getLocalNode(name);
@@ -92,6 +93,7 @@ namespace memgraph {
 			}
 		}
 
+		// nasledne vnoreni do podgrafu a prohledavani v jeho prostoru
 		// rekurze - zanoreni o jeden krok;
 		for (auto i : subgraphs) {
 			Subgraph *subgraph = i.second;
@@ -221,15 +223,6 @@ namespace memgraph {
 		return subgraph;
 	}
 
-	void GraphComponent::addSubgraph(Subgraph *graph) {
-		checkNullObject(graph);
-
-		Subgraph *subgraph = getSubgraph(graph->getName());
-		if (subgraph != NULL) {
-			subgraphs.insert(subgraphs_pair(graph->getName(), subgraph));
-		}
-	}
-
 	Subgraph *GraphComponent::getSubgraph(std::string name) {
 		subgraphs_it it;
 
@@ -248,14 +241,6 @@ namespace memgraph {
 
 	void Subgraph::setName(std::string value) {
 		name = value;
-	}
-
-	Edge *GraphComponent::addEdge(Edge *edge, Attributes *attrs) {
-		checkNullObject(edge);
-		checkNullObject(attrs);
-
-		edge->setAttrs(attrs);
-		return addEdge(edge);;
 	}
 
 	void GraphComponent::setAttrs(Attributes *new_attrs) {

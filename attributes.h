@@ -21,10 +21,22 @@ namespace memgraph {
 
 	class Attributes {
 	private:
+		// mnozina atributu
 		attributes_map attrs;
 
+		/**
+		 * vlozi atribut do mnoziny
+		 * @param std::string name nazev atributu
+		 * @param Attribute* ukazatel na atribut
+		 * @return Attribtue* ukazatel na novy atribut
+		 */
 		Attribute *insert(std::string name, Attribute *attr);
 
+		/**
+		 * vytvori atribut a nepriradi mu zadnou hodnotu
+		 * @param std::string name nazev atributu
+		 * @return Attribute* ukazatel na atribut
+		 */
 		Attribute *setAttr(std::string name);
 
 	public:
@@ -37,26 +49,63 @@ namespace memgraph {
 			}
 		}
 
+		/**
+		 * podle parametru se pokusi najit atribut v mnozine a vrati ukazatel
+		 * @param std::string name nazev hledaneho atributu
+		 * @return Attribute*|NULL
+		 */
 		Attribute *getAttr(std::string name);
 
+		/**
+		 * pocet prvku v mnozine
+		 * @return unsigne long
+		 */
 		unsigned long size();
 
+		/**
+		 * vraci iterator na zacatek std::map
+		 * @return attributes_it
+		 */
 		attributes_it begin();
 
+		/**
+		 * vraci iterator na konec std::map
+		 * @return attributes_it
+		 */
 		attributes_it end();
 
+		/**
+		 * odstrani vsechny atributy
+		 */
 		void clear();
 
+		/**
+		 * pokusi se najit atribut a nasledne jej smazat
+		 * @param std::string name nazev atributu ke smazani
+		 */
 		void erase(std::string name);
 
+		/**
+		 * nastavi atribut
+		 * @param Attribute*
+		 * @return Attribute*
+		 */
 		Attribute *setAttr(Attribute *attr);
 
-		Attribute *setAttr(std::string name, Attribute *attr);
-
+		/**
+		 * nastavi vice atributu
+		 * @param Attributes*
+		 */
 		void setAttrs(Attributes *attrs);
 
+		/**
+		 * nastavi nebo vytvori hodnotu atributu
+		 * @param std::string name nazev atributu
+		 * @param typename T value hodnot
+		 * @param bool null_attr udava, jestli se ma vytvorit atribut bez hodnoty
+		 * @return Attribute* ukazatel na atribut
+		 */
 		template<typename T>
-
 		Attribute *setAttr(std::string name, T value, bool null_attr = false) {
 			Attribute *attr = getAttr(name);
 
@@ -71,7 +120,12 @@ namespace memgraph {
 			return attr;
 		}
 
-
+		/**
+		 * nastavi atribut a priradi mu priznak HTML
+		 * @param std::string name identifikator atributu, ktery chceme vytvorit
+		 * @param typename T value hodnota atributu
+		 * @return Attribute* ukazatel na atribut
+		 */
 		template<typename T>
 		Attribute *setHtmlAttr(std::string name, T value) {
 			Attribute *attr = setAttr(name, value);
@@ -89,6 +143,10 @@ namespace memgraph {
 			return *attr;
 		}
 
+		/**
+		 * vrati mnozinu atributu
+		 * @return attributes_map mnozina atributu
+		 */
 		attributes_map *getAttrs() {
 			return &attrs;
 		}

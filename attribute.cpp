@@ -37,6 +37,7 @@ namespace memgraph {
 				break;
 		}
 
+		// hodnota atributu muze byt obalena uvedenymi znaky
 		if (useHtmlMark()) {
 			value = "<" + value + ">";
 		} else if (useQuotationMark()) {

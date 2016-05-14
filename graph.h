@@ -9,13 +9,15 @@
 #include "graph_component.h"
 
 namespace memgraph {
+	// typ grafu
 	enum graph_type {
-		std_graph,
-		digraph
+		std_graph, // neorientovany
+		digraph    // orientovany
 	};
 
 	class Graph : public GraphComponent {
 	private:
+		// typ grafu
 		graph_type type;
 
 	public:
@@ -29,8 +31,16 @@ namespace memgraph {
 			parent = NULL;
 		};
 
+		/**
+		 * nastavi typ grafu
+		 * @param graph_type value typ grafu
+		 */
 		void setType(graph_type value);
 
+		/**
+		 * vraci typ gafu
+		 * @return graph_type value typ grafu
+		 */
 		graph_type getType();
 	};
 }

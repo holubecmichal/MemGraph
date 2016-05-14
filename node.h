@@ -13,12 +13,22 @@
 namespace memgraph {
 	class Node {
 	private:
+		// nazev vrcholu
 		std::string name = "";
+		// mnozina dostupnych atributu
 		static string_vector available_attrs;
 		bool removed = false;
 
+		/**
+		 * pomocna metoda pro vypis upozorneni neexistence atributu hrany ve staticke promenne available_attrs
+		 * @param std::string nazev vlozeneho atributu
+		 */
 		static void printWarning(std::string name);
 
+		/**
+		 * kontroluje existenci atributu ve staticke promenne available_attrs
+		 * @param std::string nazev vlozeneho atributu
+		 */
 		static bool isAvailableAttr(std::string name);
 
 	public:
@@ -32,14 +42,38 @@ namespace memgraph {
 
 		virtual ~Node() { }
 
+		/**
+		 * vraci atribut vrcholu
+		 * @param std::string name
+		 * @return Attribute*
+		 */
 		Attribute *getAttr(std::string name);
 
+		/**
+		 * vraci nazev vrcholu
+		 */
 		const char *getName();
 
+		/**
+		 * nastavuje nazev vrcholu
+		 * @param std::string value nazev
+		 */
 		void setName(std::string value);
 
+		/**
+		 * nastavi atributy vrcholu
+		 * @param Attributes *new_attrs mnozina atributy k nastaveni
+		 * @return Node*
+		 *
+		 */
 		Node *setAttrs(Attributes *new_attrs);
 
+		/**
+		 * nastavi atribut vrcholu
+		 * @param std::string name identifikator atributu
+		 * @param typename T hodnota
+		 * @return Node*
+		 */
 		template<typename T>
 		Node *setAttr(std::string name, T value) {
 			checkAttr(name);
@@ -47,12 +81,23 @@ namespace memgraph {
 			return this;
 		}
 
+		/**
+		 * nastavi atribut vrcholu
+		 * @param Attribute* atribut k prirazeni
+		 * @return Node*
+		 */
 		Node *setAttr(Attribute *attr) {
 			checkAttr(attr->getName());
 			attrs.setAttr(attr);
 			return this;
 		}
 
+		/**
+		 * nastavi html atribut
+		 * @param std::string name identifikator
+		 * @param typename T hodnota
+		 * @return Node*
+		 */
 		template<typename T>
 		Node *setHtmlAttr(std::string name, T value) {
 			checkAttr(name);
@@ -60,16 +105,30 @@ namespace memgraph {
 			return this;
 		}
 
+		/**
+		 * kontroluje existenci identifikatoru atributu v mnozine povolenych atributu
+		 * @param std::string name identifikator
+		 */
 		static void checkAttr(std::string name);
 
+		/**
+		 * nastavi mnozinu povolenych atributu
+		 * @param string_vector attrs mnozina povolenych atributu
+		 */
 		static void setAvailableAttrs(string_vector attrs) {
 			available_attrs = attrs;
 		}
 
+		/**
+		 * nastavi priznak odstraneni vrcholu ze struktury
+		 */
 		void remove() {
 			removed = true;
 		}
 
+		/**
+		 * vraci priznak odstraneni
+		 */
 		bool isRemoved() {
 			return removed;
 		}
