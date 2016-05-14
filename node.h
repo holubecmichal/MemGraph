@@ -26,26 +26,22 @@ namespace memgraph {
 
 		Node() { }
 
-		Node(const char *value) {
-			name = value;
-		}
-
 		Node(std::string name) {
 			this->name = name;
 		}
 
 		virtual ~Node() { }
 
-		Attribute *getAttr(const char *name);
+		Attribute *getAttr(std::string name);
 
 		const char *getName();
 
-		void setName(const char *value);
+		void setName(std::string value);
 
 		Node *setAttrs(Attributes *new_attrs);
 
 		template<typename T>
-		Node *setAttr(const char *name, T value) {
+		Node *setAttr(std::string name, T value) {
 			checkAttr(name);
 			attrs.setAttr(name, value);
 			return this;
@@ -58,7 +54,7 @@ namespace memgraph {
 		}
 
 		template<typename T>
-		Node *setHtmlAttr(const char *name, T value) {
+		Node *setHtmlAttr(std::string name, T value) {
 			checkAttr(name);
 			attrs.setHtmlAttr(name, value);
 			return this;

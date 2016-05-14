@@ -38,11 +38,11 @@ namespace memgraph {
 		Node *getFrom();
 		Node *getTo();
 
-		Attribute *getAttr(const char *name);
+		Attribute *getAttr(std::string name);
 		void setAttrs(Attributes *new_attrs);
 
 		template<typename T>
-		Edge *setAttr(const char *name, T value) {
+		Edge *setAttr(std::string name, T value) {
 			checkAttr(name);
 			attrs.setAttr(name, value);
 			return this;
@@ -55,7 +55,7 @@ namespace memgraph {
 		}
 
 		template<typename T>
-		Edge *setHtmlAttr(const char *name, T value) {
+		Edge *setHtmlAttr(std::string name, T value) {
 			checkAttr(name);
 			attrs.setHtmlAttr(name, value);
 			return this;

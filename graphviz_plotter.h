@@ -94,11 +94,11 @@ namespace memgraph {
 
 		void setOutputFormat(GraphvizPlotter::output format);
 
-		void setOutputPath(const char *path);
+		void setOutputPath(std::string path);
 
-		void setOutputName(const char *name);
+		void setOutputName(std::string name);
 
-		Graph *parseDot(const char *content);
+		Graph *parseDot(std::string content);
 
 	};
 }

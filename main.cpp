@@ -5,14 +5,15 @@
 #include "predator.h"
 
 using namespace std;
+using namespace memgraph;
 
 int main() {
 	GraphvizPlotter *plotter = new GraphvizPlotter();
 	plotter->setOutputPath("/Users/Michal/FIT/MemGraph/");
 	plotter->setOutputFormat(GraphvizPlotter::PDF);
 	plotter->setOutputName("dot_example");
-	Examples::predator_1(plotter->graph);
-
+//	Examples::forester_1(plotter->graph);
+	plotter->parseDot(Examples::predatorSMGs());
 	cout << plotter->getDot() << endl;
 	plotter->plot();
 

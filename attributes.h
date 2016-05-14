@@ -23,9 +23,9 @@ namespace memgraph {
 	private:
 		attributes_map attrs;
 
-		Attribute *insert(const char *name, Attribute *attr);
+		Attribute *insert(std::string name, Attribute *attr);
 
-		Attribute *setAttr(const char *name);
+		Attribute *setAttr(std::string name);
 
 	public:
 		Attributes() { }
@@ -37,7 +37,7 @@ namespace memgraph {
 			}
 		}
 
-		Attribute *getAttr(const char *name);
+		Attribute *getAttr(std::string name);
 
 		unsigned long size();
 
@@ -47,17 +47,17 @@ namespace memgraph {
 
 		void clear();
 
-		void erase(const char *name);
+		void erase(std::string name);
 
 		Attribute *setAttr(Attribute *attr);
 
-		Attribute *setAttr(const char *name, Attribute *attr);
+		Attribute *setAttr(std::string name, Attribute *attr);
 
 		void setAttrs(Attributes *attrs);
 
 		template<typename T>
 
-		Attribute *setAttr(const char *name, T value, bool null_attr = false) {
+		Attribute *setAttr(std::string name, T value, bool null_attr = false) {
 			Attribute *attr = getAttr(name);
 
 			if (attr != NULL) {
@@ -73,13 +73,13 @@ namespace memgraph {
 
 
 		template<typename T>
-		Attribute *setHtmlAttr(const char *name, T value) {
+		Attribute *setHtmlAttr(std::string name, T value) {
 			Attribute *attr = setAttr(name, value);
 			attr->setHtml();
 			return attr;
 		}
 
-		Attribute &operator[](const char *name) {
+		Attribute &operator[](std::string name) {
 			Attribute *attr = getAttr(name);
 
 			if (attr == NULL) {

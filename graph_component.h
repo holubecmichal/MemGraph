@@ -41,9 +41,9 @@ namespace memgraph {
 	protected:
 		GraphComponent *parent = NULL;
 
-		Node *getNodeInSubgraphs(const char *name);
+		Node *getNodeInSubgraphs(std::string name);
 
-		Node *getLocalNode(const char *name);
+		Node *getLocalNode(std::string name);
 
 		GraphComponent *getMainParent();
 
@@ -73,7 +73,7 @@ namespace memgraph {
 		// ===== GRAPH_COMPONENT METHODS =====
 		void setAttrs(Attributes *new_attrs);
 
-		GraphComponent *setAttr(const char *name, Attribute *attr) {
+		GraphComponent *setAttr(std::string name, Attribute *attr) {
 			checkAttr(name);
 			attrs.setAttr(name, attr);
 			return this;
@@ -86,32 +86,32 @@ namespace memgraph {
 		}
 
 		template<typename T>
-		GraphComponent *setAttr(const char *name, T value) {
+		GraphComponent *setAttr(std::string name, T value) {
 			checkAttr(name);
 			attrs.setAttr(name, value);
 			return this;
 		}
 
 		template<typename T>
-		GraphComponent *setHtmlAttr(const char *name, T value) {
+		GraphComponent *setHtmlAttr(std::string name, T value) {
 			checkAttr(name);
 			attrs.setHtmlAttr(name, value);
 			return this;
 		}
 
 		// ===== SUBGRAPHS METHODS ======
-		Subgraph *addSubgraph(const char *name);
+		Subgraph *addSubgraph(std::string name);
 
 		void addSubgraph(Subgraph *graph);
 
-		Subgraph *getSubgraph(const char *name);
+		Subgraph *getSubgraph(std::string name);
 
 		// ===== NODES METHODS =====
-		Node *addNode(const char *name);
+		Node *addNode(std::string name);
 
 		Node *addNode(Node *node);
 
-		Node *getNode(const char *name);
+		Node *getNode(std::string name);
 
 		// metoda zatim urcena pouze pro prekladac
 		Node *getNode(Node *node);
@@ -121,7 +121,7 @@ namespace memgraph {
 
 		Edge *addEdge(Edge *edge, Attributes *attrs);
 
-		Edge *addEdge(const char *from, const char *to);
+		Edge *addEdge(std::string from, std::string to);
 
 		Edge *addEdge(Node *from, Node *to);
 
@@ -135,12 +135,12 @@ namespace memgraph {
 
 		Edge *getEdge(Node *from, Node *to);
 
-		Edge *getEdge(const char *from, const char *to);
+		Edge *getEdge(std::string from, std::string to);
 
 		// ===== NODE ATTRIBUTES METHODS =====
 
 		template<typename T>
-		void setNodeAttr(const char *name, T value) {
+		void setNodeAttr(std::string name, T value) {
 			Node::checkAttr(name);
 			node_attrs.setAttr(name, value);
 		}
@@ -152,7 +152,7 @@ namespace memgraph {
 		// ===== EDGE ATTRIBUTES METHODS =====
 
 		template<typename T>
-		void setEdgeAttr(const char *name, T value) {
+		void setEdgeAttr(std::string name, T value) {
 			Edge::checkAttr(name);
 			edge_attrs.setAttr(name, value);
 		}
@@ -174,7 +174,7 @@ namespace memgraph {
 
 		Attributes *getAttrs() { return &attrs; }
 
-		Attribute *getAttr(const char *name) { return attrs.getAttr(name); }
+		Attribute *getAttr(std::string name) { return attrs.getAttr(name); }
 
 		static void checkAttr(std::string name);
 
@@ -198,7 +198,7 @@ namespace memgraph {
 
 		const char *getName();
 
-		void setName(const char *value);
+		void setName(std::string value);
 	};
 }
 

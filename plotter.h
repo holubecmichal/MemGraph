@@ -57,9 +57,9 @@ namespace memgraph {
 
 		virtual void plot() = 0;
 
-		virtual void setOutputPath(const char *path) = 0;
+		virtual void setOutputPath(std::string path) = 0;
 
-		virtual void setOutputName(const char *name) = 0;
+		virtual void setOutputName(std::string name) = 0;
 
 	};
 }

@@ -5,7 +5,7 @@
 #include "attributes.h"
 
 namespace memgraph {
-	Attribute *Attributes::insert(const char *name, Attribute *attr) {
+	Attribute *Attributes::insert(std::string name, Attribute *attr) {
 		Attribute *attribute = getAttr(name);
 
 		if (attribute != NULL) {
@@ -16,7 +16,7 @@ namespace memgraph {
 		return attr;
 	}
 
-	Attribute *Attributes::setAttr(const char *name, Attribute *attribute) {
+	Attribute *Attributes::setAttr(std::string name, Attribute *attribute) {
 		switch (attribute->getType()) {
 			case Attribute::type_int:
 				return setAttr(name, attribute->getIValue());
@@ -31,7 +31,7 @@ namespace memgraph {
 		}
 	}
 
-	Attribute *Attributes::setAttr(const char *name) {
+	Attribute *Attributes::setAttr(std::string name) {
 		return setAttr(name, false, true);
 	}
 
@@ -39,7 +39,7 @@ namespace memgraph {
 		return setAttr(attr->getName().c_str(), attr);
 	}
 
-	Attribute *Attributes::getAttr(const char *name) {
+	Attribute *Attributes::getAttr(std::string name) {
 		attributes_it it;
 
 		it = attrs.find(name);
@@ -71,7 +71,7 @@ namespace memgraph {
 		attrs.clear();
 	}
 
-	void Attributes::erase(const char *name) {
+	void Attributes::erase(std::string name) {
 		Attribute *attr = getAttr(name);
 
 		if (attr != NULL) {

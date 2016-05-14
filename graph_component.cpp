@@ -11,8 +11,10 @@ namespace memgraph {
 
 // ===== GRAPH_COMPONENT CLASS =====
 
-	Node *GraphComponent::addNode(const char *name) {
-		checkNullObject(name);
+	Node *GraphComponent::addNode(std::string name) {
+		if(name.length() == 0) {
+			throw "Node: node name is empty";
+		}
 		Node *node = getNode(name);
 
 		if (node == NULL) {
@@ -37,7 +39,7 @@ namespace memgraph {
 		return node;
 	}
 
-	Node *GraphComponent::getNode(const char *name) {
+	Node *GraphComponent::getNode(std::string name) {
 		Node *node = getLocalNode(name);
 
 		if (node != NULL) {
@@ -54,7 +56,7 @@ namespace memgraph {
 		}
 	}
 
-	Node *GraphComponent::getLocalNode(const char *name) {
+	Node *GraphComponent::getLocalNode(std::string name) {
 		nodes_it it;
 
 		it = nodes.find(name);
@@ -75,7 +77,7 @@ namespace memgraph {
 		}
 	}
 
-	Node *GraphComponent::getNodeInSubgraphs(const char *name) {
+	Node *GraphComponent::getNodeInSubgraphs(std::string name) {
 		if (subgraphs.empty()) {
 			return NULL;
 		}
@@ -112,28 +114,21 @@ namespace memgraph {
 		return 0;
 	}
 
-	Edge *GraphComponent::addEdge(const char *from, const char *to) {
-		checkNullObject(from);
-		checkNullObject(to);
-
-		Node *From = NULL;
-		Node *To = NULL;
-
-		if (from != NULL) {
-			From = getNode(from);
-
-			if (From == NULL) {
-				From = addNode(from);
-			}
+	Edge *GraphComponent::addEdge(std::string from, std::string to) {
+		if(from.length() == 0 || to.length() == 0) {
+			throw "Edge: some of node is empty";
 		}
 
-		if (to != NULL) {
-			To = getNode(to);
-
-			if (To == NULL) {
-				To = addNode(to);
-			}
+		Node *From = getNode(from);
+		if (From == NULL) {
+			From = addNode(from);
 		}
+
+		Node *To = getNode(to);
+		if (To == NULL) {
+			To = addNode(to);
+		}
+
 
 		Edge *edge = new Edge();
 		insertEdge(edge);
@@ -190,39 +185,32 @@ namespace memgraph {
 			Node *From = edge->getFrom();
 			Node *To = edge->getTo();
 
-			if ((From == NULL && from == NULL && To == NULL && to == NULL) ||
-			    (From != NULL && From == from && To == NULL && to == NULL) ||
-			    (From == NULL && from == NULL && To != NULL && To == to) ||
-			    (From != NULL && From == from && To != NULL && To == to)) {
-
-				return edge;
-
+			if (From != NULL && To != NULL) {
+				if(From == from && To == to) {
+					return edge;
+				}
 			}
 		}
 
 		return NULL;
 	}
 
-	Edge *GraphComponent::getEdge(const char *from, const char *to) {
+	Edge *GraphComponent::getEdge(std::string from, std::string to) {
 		for (auto edge : edges) {
 			Node *From = edge->getFrom();
 			Node *To = edge->getTo();
 
-			if (
-					(From == NULL && from == NULL && To == NULL && to == NULL) ||
-					(From != NULL && From->getName() == from && To == NULL && to == NULL) ||
-					(From == NULL && from == NULL && To != NULL && To->getName() == to) ||
-					(From != NULL && From->getName() == from && To != NULL && To->getName() == to)) {
-
-				return edge;
-
+			if (From != NULL && To != NULL) {
+				if(From->getName() == from && To->getName() == to) {
+					return edge;
+				}
 			}
 		}
 
 		return NULL;
 	}
 
-	Subgraph *GraphComponent::addSubgraph(const char *name) {
+	Subgraph *GraphComponent::addSubgraph(std::string name) {
 		Subgraph *subgraph = getSubgraph(name);
 
 		if (subgraph == NULL) {
@@ -242,7 +230,7 @@ namespace memgraph {
 		}
 	}
 
-	Subgraph *GraphComponent::getSubgraph(const char *name) {
+	Subgraph *GraphComponent::getSubgraph(std::string name) {
 		subgraphs_it it;
 
 		it = subgraphs.find(name);
@@ -258,7 +246,7 @@ namespace memgraph {
 		return name.c_str();
 	}
 
-	void Subgraph::setName(const char *value) {
+	void Subgraph::setName(std::string value) {
 		name = value;
 	}
 

@@ -24,7 +24,7 @@ namespace memgraph {
 		return to;
 	}
 
-	Attribute *Edge::getAttr(const char *name) {
+	Attribute *Edge::getAttr(std::string name) {
 		return attrs.getAttr(name);
 	}
 

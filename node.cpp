@@ -7,7 +7,7 @@
 namespace memgraph {
 	string_vector Node::available_attrs;
 
-	void Node::setName(const char *value) {
+	void Node::setName(std::string value) {
 		name = value;
 	}
 
@@ -15,7 +15,7 @@ namespace memgraph {
 		return name.c_str();
 	}
 
-	Attribute *Node::getAttr(const char *name) {
+	Attribute *Node::getAttr(std::string name) {
 		return attrs.getAttr(name);
 	}
 

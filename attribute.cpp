@@ -66,7 +66,7 @@ namespace memgraph {
 		return false;
 	}
 
-	void Attribute::setName(const char *name) {
+	void Attribute::setName(std::string name) {
 		this->name = name;
 	}
 

@@ -38,10 +38,10 @@ namespace memgraph {
 	public:
 		Attribute() : type(type_null), name("") { };
 		template <typename T>
-		Attribute(const char *name, T value) : type(type_null), name(name), html_attr(false) {
+		Attribute(std::string name, T value) : type(type_null), name(name), html_attr(false) {
 			setValue(value);
 		}
-		Attribute(const char *name)	: type(type_null), name(name), html_attr(false) { }
+		Attribute(std::string name)	: type(type_null), name(name), html_attr(false) { }
 
 		void setValue(int value)          { i_value = value; type = type_int; removed = false; }
 		void setValue(double value)       { d_value = value; type = type_double; removed = false; }
@@ -56,7 +56,7 @@ namespace memgraph {
 
 		std::string getValue();
 		Attribute::attr_type getType();
-		void setName(const char *name);
+		void setName(std::string name);
 		std::string getName();
 
 		template <typename T>

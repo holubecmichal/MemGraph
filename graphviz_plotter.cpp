@@ -57,16 +57,16 @@ namespace memgraph {
 		return format;
 	}
 
-	void GraphvizPlotter::setOutputPath(const char *path) {
+	void GraphvizPlotter::setOutputPath(std::string path) {
 		this->path = path;
 	}
 
-	void GraphvizPlotter::setOutputName(const char *name) {
+	void GraphvizPlotter::setOutputName(std::string name) {
 		this->name = name;
 	}
 
-	Graph *GraphvizPlotter::parseDot(const char *content) {
-		g_graph = agmemread(content);
+	Graph *GraphvizPlotter::parseDot(std::string content) {
+		g_graph = agmemread(content.c_str());
 
 		if (g_graph) {
 			parse();
