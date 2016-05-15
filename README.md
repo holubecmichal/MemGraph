@@ -112,7 +112,7 @@ a knihovnu MemGraph
 
 	git clone https://github.com/Moouseer/MemGraph.git
 	
-Nástroj Predator pro svoji korektní funkci potřebuje závisloti překladače GCC. Níže jsou uvedeny příkazy pro doinstalování závislostí pro GCC 4.9
+Nástroj Predator pro svoji korektní funkci potřebuje závisloti překladače GCC. Níže jsou uvedeny příkazy pro doinstalování závislostí pro GCC 4.9 systému Ubuntu.
 
 	sudo apt-get install g++-4.9-multilib
 	sudo apt-get install gcc-4.9-plugin-dev
@@ -123,7 +123,7 @@ Nyní nainstalujeme závistlosti knihovny MemGraph
 
 	sudo apt-get install libgraphviz-dev
 		
-Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny (CMakeFiles, symplot.cc, ...). 
+Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny MemGraph (CMakeFiles, symplot.cc, ...). 
 
 	cd MemGraph/
 	
