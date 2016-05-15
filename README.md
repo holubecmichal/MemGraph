@@ -97,31 +97,42 @@ Výsledek grafického výstupu reprezentuje níže uvedený obrázek
 Je vhodné dodat, že tuto knihovnu není nutné použít pouze v návaznosti na verifikační nástroje Predator a Forester. Díky univerzálnosti datového modelu je možné definovat jakékoli grafové struktury.
 
 ## Závislosti knihovny
-Knihovna je určena především pro distribuce systému Linux, respektive Ubuntu. Nicméně je otestována a plně funkční také pod OSX El Capitan. Pod os Windows 7 byla knihovna pro účely testování pouze přeložena a sestavena. Pro správnou funkčnost knihovny je nutné mít v systému Linux dostupné tyto nástroje a knihovny (v této konfiguraci otestováno):
+Knihovna je určena především pro distribuce systému Linux a testována byla pod systémem Linux Ubuntu 14.04 LTS. Nicméně je otestována a plně funkční také pod OSX El Capitan. Pod Windows 7 byla knihovna pro účely testování pouze přeložena a úspěšně sestavena. Pro správnou funkčnost knihovny je nutné mít v systému Linux dostupné následující nástroje a knihovny (v této konfiguraci otestováno).
+
+Pro správnou funkčnost nástroje Predator
 
 * GCC 4.9.3
+* g++-4.9-multilib
+* gcc-4.9-plugin-dev
+* libboost-all-dev
 * CMake 2.8
+
+Pro správnou funkčnost knihovny MemGraph
+
 * libgraphviz-dev
 
 ## Nasazení na verifikační nástroj Predator
-Vnořte se do složky, do které chcete stáhnout verifikační nástroj Predator a knihovnu MemGraph. Následně stáhněte nástroj Predator
+V první řadě doinstalujeme všchny potřebné knihovny a nástroje pro korektní funkčnost verifikačního nástroje Pedator
+
+	sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+	sudo apt-get update
+	sudo apt-get install gcc-4.9 g++-4.9
+	sudo apt-get install g++-4.9-multilib
+	sudo apt-get install gcc-4.9-plugin-dev
+	sudo apt-get install libboost-all-dev
+	sudo apt-get install cmake
+
+a knihovnu Graphviz pro správnou funkci knihovny MemGraph
+
+	sudo apt-get install libgraphviz-dev
+	
+Nyní se vnořte do složky, do které chcete stáhnout verifikační nástroj Predator a knihovnu MemGraph. Následně stáhněte nástroj Predator
 
 	git clone https://github.com/kdudka/predator.git
 	
 a knihovnu MemGraph 
 
 	git clone https://github.com/Moouseer/MemGraph.git
-	
-Nástroj Predator pro svoji korektní funkci potřebuje závisloti překladače GCC. Níže jsou uvedeny příkazy pro doinstalování závislostí pro GCC 4.9 systému Ubuntu.
-
-	sudo apt-get install g++-4.9-multilib
-	sudo apt-get install gcc-4.9-plugin-dev
-	sudo apt-get install libboost-all-dev
-	sudo apt-get install cmake
-
-Nyní nainstalujeme závistlosti knihovny MemGraph
-
-	sudo apt-get install libgraphviz-dev
 		
 Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny MemGraph (CMakeFiles, symplot.cc, ...). 
 
@@ -138,9 +149,9 @@ Nástroj Predator přeložíme a sestavíme společně s knihovnou MemGraph
 	cd ../predator/
 	./switch-host-gcc.sh /usr/bin/gcc-4.9
 	
-Po překladu a sestavení frameworku Code Listener je spuštěn překlad a sestavení knihovny MemGraph a následně překlad a sestavení verifikačního nástroje Predator. Po překladu a sestavení nástroje Predator je spuštěna sada 849 testů. Je nutné říci, že při sestavení s knihovnou MemGraph neprojdou celkem tři testy. Tyto testy nejsou dokončeny a tak se testovací skript zasekne u 846 testu a čeká na výsledky. Toto čekání je nutné přerušit pomocí zkratky ctrl + c. 
+Po překladu a sestavení frameworku Code Listener je spuštěn překlad a sestavení knihovny MemGraph a následně překlad a sestavení verifikačního nástroje Predator. Po překladu a sestavení nástroje Predator je spuštěna sada 849 testů. Je nutné říci, že při sestavení s knihovnou MemGraph neprojdou celkem tři testy. Tyto testy nejsou dokončeny a tak se testovací skript zasekne u 846. testu a čeká na výsledky. Toto čekání je nutné přerušit pomocí zkratky ctrl + c. 
 
-Testy ve složce sl_build tvoří textové a grafické výstupy verifikace. Výstupy jsou tvořeny následnovně:
+Testy vytváří ve složce sl_build textové a grafické výstupy paměťových struktur verifikovaných programů. Výstupy jsou tvořeny následnovně:
 
 Predator
 
@@ -153,6 +164,7 @@ MemGraph
 * Generuje soubory s příponout png, které v názvu souboru obsahují řetězec parsed_bcPlot (načtení původního dot souboru z nástroje Predator, vložení obsahu do metody parseDot() a následné vytvoření grafu pomoci metody plot())
 * Generuje soubory s příponout png, které v názvu souboru obsahují řetězec zabstract_bcPlot (provedení vzorových transformací nad objekty SLS a DLS a vrcholu Value SMG grafu)
 
+Výstupy je možné řídit ve zdrojovém kódu nástroje Predator, v souboru symplot.cc, metodě plotHeapCore()
 	
 	
 	
