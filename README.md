@@ -34,12 +34,12 @@ Příklad tvorby datového modelu
 	Attributes node_attrs;
 	Attributes edge_attrs;
 
-	// nastaveni defaultni atributu vrcholu grafu
+	// nastaveni defaultnich atributu vrcholu grafu
 	node_attrs.setAttr("color","red");
 	node_attrs.setAttr("fontname","Courier");
 	node_attrs.setAttr("shape","box");
 
-	// nastaveni defaultni atributu hran grafu
+	// nastaveni defaultnich atributu hran grafu
 	edge_attrs.setAttr("color","blue");
 	edge_attrs.setAttr("style","dashed");
 
@@ -55,11 +55,9 @@ Příklad tvorby datového modelu
 	graph->addEdge("fit", "kazi");
 	graph->addEdge("feec", "kos");
 	
-Generování struktury DOT z definovaného datového modelu
-	
-	// DOT generujeme volanim metody getDot() na instanci tridy GraphvizPlotter
+Generování struktury DOT z definovaného datového modelu. DOT generujeme voláním metody getDot() na instanci třídy GraphvizPlotter.
 
-	// vytvoreni instance tridy GraphvizPlotter, kteremu predame definovany datovy model	
+	// vytvoreni instance tridy GraphvizPlotter, ktere predame definovany datovy model	
 	GraphvizPlotter *plotter = new GraphvizPlotter(graph);
 	
 	// volani metody getDot()
@@ -82,7 +80,7 @@ Dostaneme následující DOT strukturu
 		feec -> kos;
 	}
 	
-Pro generování vizuální reprezentace nastavíme pomocí metody setOutputPath(std::string path) cestu uložení souboru, metodou setOutputName(std::string name) jméno souboru a setOutputFormat(GraphvizPlotter::output format) výsledný formát souborů, ve kterém bude graf uložen. K dispozici jsou standardní formáty jako png, pdf, svg apod. Graf vykreslíme voláním metody plot(). Všechny tyto metody jsou veřejnými metodamy třídy GraphvizPlotter
+Pro generování vizuální reprezentace nastavíme pomocí metody setOutputPath(std::string path) cestu uložení souboru, metodou setOutputName(std::string name) jméno souboru a setOutputFormat(GraphvizPlotter::output format) výsledný formát souborů, ve kterém bude graf uložen. K dispozici jsou standardní formáty jako png, pdf, svg apod. Graf vykreslíme voláním metody plot(). Všechny tyto metody jsou veřejnými metodami třídy GraphvizPlotter
 
 	// ./example.png
 	plotter->setOutputPath("./");
@@ -94,10 +92,10 @@ Výsledek grafického výstupu reprezentuje níže uvedený obrázek
 
 ![alt text](./example.png "example.png")
 
-Je vhodné dodat, že tuto knihovnu není nutné použít pouze v návaznosti na verifikační nástroje Predator a Forester. Díky univerzálnosti datového modelu je možné definovat jakékoli grafové struktury.
+Je vhodné dodat, že tuto knihovnu není nutné použít pouze v návaznosti na verifikační nástroje Predator a Forester. Díky univerzálnosti datového modelu je možné definovat jakékoli grafové struktury a je tak možné knihovnu MemGraph použít všude tam, kde je třeba tvořit za pomocí objektového přístupu nějaký grafický výstup ve formě grafů nebo diagramů.
 
 ## Závislosti knihovny
-Knihovna je určena především pro distribuce systému Linux a testována byla pod systémem Linux Ubuntu 14.04 LTS. Nicméně je otestována a plně funkční také pod OSX El Capitan. Pod Windows 7 byla knihovna pro účely testování pouze přeložena a úspěšně sestavena. Pro správnou funkčnost knihovny je nutné mít v systému Linux dostupné následující nástroje a knihovny (v této konfiguraci otestováno).
+Knihovna je určena především pro distribuce systému Linux. Testována byla pod systémem Linux Ubuntu 14.04 LTS. Nicméně je otestována a plně funkční také pod OSX El Capitan, pod kterým byla knihovna vyvíjena. Pod Windows 7 byla knihovna pro účely testování pouze přeložena a úspěšně sestavena. Pro správnou správný chod knihovny v součinnosti s verifikačním nástrojem Predator je nutné mít v systému Linux dostupné následující nástroje a knihovny (v této konfiguraci otestováno).
 
 Pro správnou funkčnost nástroje Predator
 
@@ -122,7 +120,7 @@ V první řadě doinstalujeme všchny potřebné knihovny a nástroje pro korekt
 	sudo apt-get install libboost-all-dev
 	sudo apt-get install cmake
 
-a knihovnu Graphviz pro správnou funkci knihovny MemGraph
+a knihovnu Graphviz pro správnou funkci knihovny MemGraph.
 
 	sudo apt-get install libgraphviz-dev
 	
@@ -130,11 +128,11 @@ Nyní se vnořte do složky, do které chcete stáhnout verifikační nástroj P
 
 	git clone https://github.com/kdudka/predator.git
 	
-a knihovnu MemGraph 
+a knihovnu MemGraph .
 
 	git clone https://github.com/Moouseer/MemGraph.git
 		
-Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny MemGraph (CMakeFiles, symplot.cc, ...). 
+Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny MemGraph (CMakeFiles, symplot.cc, zdrojové soubory pro přkeklad knihovny, ...). 
 
 	cd MemGraph/
 	
@@ -144,12 +142,12 @@ Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory
 	
 	cp -R ./predator/sl ../predator/
 
-Nástroj Predator přeložíme a sestavíme společně s knihovnou MemGraph
+Nástroj Predator přeložíme a sestavíme společně s knihovnou MemGraph.
 
 	cd ../predator/
 	./switch-host-gcc.sh /usr/bin/gcc-4.9
 	
-Po překladu a sestavení frameworku Code Listener je spuštěn překlad a sestavení knihovny MemGraph a následně překlad a sestavení verifikačního nástroje Predator. Po překladu a sestavení nástroje Predator je spuštěna sada 849 testů. Je nutné říci, že při sestavení s knihovnou MemGraph neprojdou celkem tři testy. Tyto testy nejsou dokončeny a tak se testovací skript zasekne u 846. testu a čeká na výsledky. Toto čekání je nutné přerušit pomocí zkratky ctrl + c. 
+Po překladu a sestavení frameworku Code Listener je spuštěn překlad a sestavení knihovny MemGraph a následně překlad a sestavení verifikačního nástroje Predator. Po překladu a sestavení nástroje Predator je spuštěna sada 849 testů. Je nutné říci, že při sestavení s knihovnou MemGraph neprojdou celkem tři testy. Tyto testy nejsou korektně ukončeny a tak testovacímu skriptu není poskytnut výsledek těchto testů. To má za následek uváznutí testovacího skriptu po dokončení 846. testu. Z tohoto uváznutí je možné se dostat za pomocí zkratky ctrl + c. Tím je testovací skript přerušen a sestavení nástroje Predator s knihovnou MemGraph je u konce.
 
 Testy vytváří ve složce sl_build textové a grafické výstupy paměťových struktur verifikovaných programů. Výstupy jsou tvořeny následnovně:
 
@@ -164,7 +162,7 @@ MemGraph
 * Generuje soubory s příponout png, které v názvu souboru obsahují řetězec parsed_bcPlot (načtení původního dot souboru z nástroje Predator, vložení obsahu do metody parseDot() a následné vytvoření grafu pomoci metody plot())
 * Generuje soubory s příponout png, které v názvu souboru obsahují řetězec zabstract_bcPlot (provedení vzorových transformací nad objekty SLS a DLS a vrcholu Value SMG grafu)
 
-Výstupy je možné řídit ve zdrojovém kódu nástroje Predator, v souboru symplot.cc, metodě plotHeapCore()
+Výstupy je možné řídit ve zdrojovém kódu nástroje Predator, v souboru symplot.cc, metodě plotHeapCore().
 	
 	
 	
