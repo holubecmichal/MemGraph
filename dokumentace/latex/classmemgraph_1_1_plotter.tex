@@ -1,0 +1,93 @@
+\hypertarget{classmemgraph_1_1_plotter}{}\section{memgraph\+:\+:Plotter Class Reference}
+\label{classmemgraph_1_1_plotter}\index{memgraph\+::\+Plotter@{memgraph\+::\+Plotter}}
+Inheritance diagram for memgraph\+:\+:Plotter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmemgraph_1_1_plotter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Plotter} (\hyperlink{classmemgraph_1_1_graph}{Graph} $\ast$graph)\hypertarget{classmemgraph_1_1_plotter_a5e31299b3c18b96a63f237b150482bd3}{}\label{classmemgraph_1_1_plotter_a5e31299b3c18b96a63f237b150482bd3}
+
+\item 
+std\+::string \hyperlink{classmemgraph_1_1_plotter_a7429124ab9a43b66b4d4e5e2d289ba39}{get\+Dot} ()
+\item 
+virtual void \hyperlink{classmemgraph_1_1_plotter_ae06fdcd0fba0d8a05fe843f214d96f08}{plot} ()=0
+\item 
+virtual void \hyperlink{classmemgraph_1_1_plotter_abf04b57cbd17f0a9fe03ac3c7dedc7da}{set\+Output\+Path} (std\+::string path)=0
+\item 
+virtual void \hyperlink{classmemgraph_1_1_plotter_af8baffa9e328876376e0f5c466bc4103}{set\+Output\+Name} (std\+::string name)=0
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmemgraph_1_1_graph}{Graph} $\ast$ {\bfseries graph} = N\+U\+LL\hypertarget{classmemgraph_1_1_plotter_a01b3974c5b04e781bae8daeb0fd31193}{}\label{classmemgraph_1_1_plotter_a01b3974c5b04e781bae8daeb0fd31193}
+
+\item 
+int {\bfseries ident\+\_\+step} = 0\hypertarget{classmemgraph_1_1_plotter_ac9a1549c31d345df9bab09c29e7349d4}{}\label{classmemgraph_1_1_plotter_ac9a1549c31d345df9bab09c29e7349d4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{memgraph\+::\+Plotter@{memgraph\+::\+Plotter}!get\+Dot@{get\+Dot}}
+\index{get\+Dot@{get\+Dot}!memgraph\+::\+Plotter@{memgraph\+::\+Plotter}}
+\subsubsection[{\texorpdfstring{get\+Dot()}{getDot()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string memgraph\+::\+Plotter\+::get\+Dot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_plotter_a7429124ab9a43b66b4d4e5e2d289ba39}{}\label{classmemgraph_1_1_plotter_a7429124ab9a43b66b4d4e5e2d289ba39}
+vraci strukturu grafu v D\+OT formatu \begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+\index{memgraph\+::\+Plotter@{memgraph\+::\+Plotter}!plot@{plot}}
+\index{plot@{plot}!memgraph\+::\+Plotter@{memgraph\+::\+Plotter}}
+\subsubsection[{\texorpdfstring{plot()=0}{plot()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void memgraph\+::\+Plotter\+::plot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classmemgraph_1_1_plotter_ae06fdcd0fba0d8a05fe843f214d96f08}{}\label{classmemgraph_1_1_plotter_ae06fdcd0fba0d8a05fe843f214d96f08}
+vykresleni grafu 
+
+Implemented in \hyperlink{classmemgraph_1_1_graphviz_plotter_a51cc4c238a1808013fbe6ecdb2334afe}{memgraph\+::\+Graphviz\+Plotter}.
+
+\index{memgraph\+::\+Plotter@{memgraph\+::\+Plotter}!set\+Output\+Name@{set\+Output\+Name}}
+\index{set\+Output\+Name@{set\+Output\+Name}!memgraph\+::\+Plotter@{memgraph\+::\+Plotter}}
+\subsubsection[{\texorpdfstring{set\+Output\+Name(std\+::string name)=0}{setOutputName(std::string name)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void memgraph\+::\+Plotter\+::set\+Output\+Name (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classmemgraph_1_1_plotter_af8baffa9e328876376e0f5c466bc4103}{}\label{classmemgraph_1_1_plotter_af8baffa9e328876376e0f5c466bc4103}
+nastaveni nazvu grafu urceneho k vystupu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classmemgraph_1_1_graphviz_plotter_ada06684b26c1c797307f10bc97924a11}{memgraph\+::\+Graphviz\+Plotter}.
+
+\index{memgraph\+::\+Plotter@{memgraph\+::\+Plotter}!set\+Output\+Path@{set\+Output\+Path}}
+\index{set\+Output\+Path@{set\+Output\+Path}!memgraph\+::\+Plotter@{memgraph\+::\+Plotter}}
+\subsubsection[{\texorpdfstring{set\+Output\+Path(std\+::string path)=0}{setOutputPath(std::string path)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void memgraph\+::\+Plotter\+::set\+Output\+Path (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classmemgraph_1_1_plotter_abf04b57cbd17f0a9fe03ac3c7dedc7da}{}\label{classmemgraph_1_1_plotter_abf04b57cbd17f0a9fe03ac3c7dedc7da}
+nastaveni cesty vystupu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & path \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classmemgraph_1_1_graphviz_plotter_a8d6fe8dc672a2982f7b2ad731ecbac64}{memgraph\+::\+Graphviz\+Plotter}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+plotter.\+h\item 
+plotter.\+cpp\end{DoxyCompactItemize}

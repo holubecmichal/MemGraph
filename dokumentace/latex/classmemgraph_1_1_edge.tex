@@ -1,0 +1,224 @@
+\hypertarget{classmemgraph_1_1_edge}{}\section{memgraph\+:\+:Edge Class Reference}
+\label{classmemgraph_1_1_edge}\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Edge} (\hyperlink{classmemgraph_1_1_node}{Node} $\ast$from, \hyperlink{classmemgraph_1_1_node}{Node} $\ast$to)\hypertarget{classmemgraph_1_1_edge_acc40d41d76b5a46a1892d4369d01ebad}{}\label{classmemgraph_1_1_edge_acc40d41d76b5a46a1892d4369d01ebad}
+
+\item 
+void \hyperlink{classmemgraph_1_1_edge_ad5b1d80a8fc2048caff5825302a3595d}{set\+From} (\hyperlink{classmemgraph_1_1_node}{Node} $\ast$node)
+\item 
+void \hyperlink{classmemgraph_1_1_edge_a65bc640add809d698fc52cd15210a915}{set\+To} (\hyperlink{classmemgraph_1_1_node}{Node} $\ast$node)
+\item 
+\hyperlink{classmemgraph_1_1_node}{Node} $\ast$ \hyperlink{classmemgraph_1_1_edge_a1846f19a1bbc8b965eb2a459de1c34a2}{get\+From} ()
+\item 
+\hyperlink{classmemgraph_1_1_node}{Node} $\ast$ \hyperlink{classmemgraph_1_1_edge_a90429a59ce28725688812207d6481bc9}{get\+To} ()
+\item 
+\hyperlink{classmemgraph_1_1_attribute}{Attribute} $\ast$ \hyperlink{classmemgraph_1_1_edge_aa277da934ab7b0473616e02079e438ca}{get\+Attr} (std\+::string name)
+\item 
+void \hyperlink{classmemgraph_1_1_edge_a32cbbdaa503fcd17a070a4efc5e489ce}{set\+Attrs} (\hyperlink{classmemgraph_1_1_attributes}{Attributes} $\ast$new\+\_\+attrs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classmemgraph_1_1_edge}{Edge} $\ast$ \hyperlink{classmemgraph_1_1_edge_a4326b5091c2aeaea51182844e6e35281}{set\+Attr} (std\+::string name, T value)
+\item 
+\hyperlink{classmemgraph_1_1_edge}{Edge} $\ast$ \hyperlink{classmemgraph_1_1_edge_a284135fc603ede05d24639352508687e}{set\+Attr} (\hyperlink{classmemgraph_1_1_attribute}{Attribute} $\ast$attr)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classmemgraph_1_1_edge}{Edge} $\ast$ \hyperlink{classmemgraph_1_1_edge_a8de89badd13aa6a5430319e4dc4c1ca9}{set\+Html\+Attr} (std\+::string name, T value)
+\item 
+attributes\+\_\+map $\ast$ \hyperlink{classmemgraph_1_1_edge_a9ee5408a7a73fe763716748eb120dcdf}{get\+Attrs} ()
+\item 
+void \hyperlink{classmemgraph_1_1_edge_ae8624e38151bfa3f444aec503e16282e}{remove} ()
+\item 
+bool \hyperlink{classmemgraph_1_1_edge_a701d43f4b964c683964923bffd07deca}{is\+Removed} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classmemgraph_1_1_edge_a3fecdff966fc183545782990e58ca7e3}{check\+Attr} (std\+::string name)
+\item 
+static void \hyperlink{classmemgraph_1_1_edge_a72a62ddae831bfd25bba1cbf95bb21ec}{set\+Available\+Attrs} (string\+\_\+vector attrs)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmemgraph_1_1_attributes}{Attributes} {\bfseries attrs}\hypertarget{classmemgraph_1_1_edge_a6becd400058f4a6d97dee4b6f7324cf2}{}\label{classmemgraph_1_1_edge_a6becd400058f4a6d97dee4b6f7324cf2}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!check\+Attr@{check\+Attr}}
+\index{check\+Attr@{check\+Attr}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{check\+Attr(std\+::string name)}{checkAttr(std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Edge\+::check\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classmemgraph_1_1_edge_a3fecdff966fc183545782990e58ca7e3}{}\label{classmemgraph_1_1_edge_a3fecdff966fc183545782990e58ca7e3}
+kontroluje existenci identifikatoru atributu v mnozine povolenych atributu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name identifikator \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!get\+Attr@{get\+Attr}}
+\index{get\+Attr@{get\+Attr}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{get\+Attr(std\+::string name)}{getAttr(std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Attribute} $\ast$ memgraph\+::\+Edge\+::get\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_edge_aa277da934ab7b0473616e02079e438ca}{}\label{classmemgraph_1_1_edge_aa277da934ab7b0473616e02079e438ca}
+vraci atribut hrany 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name identifikator atributu  Attribute$\ast$$\vert$\+N\+U\+LL \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!get\+Attrs@{get\+Attrs}}
+\index{get\+Attrs@{get\+Attrs}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{get\+Attrs()}{getAttrs()}}]{\setlength{\rightskip}{0pt plus 5cm}attributes\+\_\+map$\ast$ memgraph\+::\+Edge\+::get\+Attrs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_edge_a9ee5408a7a73fe763716748eb120dcdf}{}\label{classmemgraph_1_1_edge_a9ee5408a7a73fe763716748eb120dcdf}
+vraci mnozinu atributu hrany \begin{DoxyReturn}{Returns}
+attributes\+\_\+map mnozina atributu hrany 
+\end{DoxyReturn}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!get\+From@{get\+From}}
+\index{get\+From@{get\+From}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{get\+From()}{getFrom()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node} $\ast$ memgraph\+::\+Edge\+::get\+From (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_edge_a1846f19a1bbc8b965eb2a459de1c34a2}{}\label{classmemgraph_1_1_edge_a1846f19a1bbc8b965eb2a459de1c34a2}
+\begin{DoxyReturn}{Returns}
+Node$\ast$ 
+\end{DoxyReturn}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!get\+To@{get\+To}}
+\index{get\+To@{get\+To}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{get\+To()}{getTo()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node} $\ast$ memgraph\+::\+Edge\+::get\+To (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_edge_a90429a59ce28725688812207d6481bc9}{}\label{classmemgraph_1_1_edge_a90429a59ce28725688812207d6481bc9}
+\begin{DoxyReturn}{Returns}
+Node$\ast$ 
+\end{DoxyReturn}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!is\+Removed@{is\+Removed}}
+\index{is\+Removed@{is\+Removed}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{is\+Removed()}{isRemoved()}}]{\setlength{\rightskip}{0pt plus 5cm}bool memgraph\+::\+Edge\+::is\+Removed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_edge_a701d43f4b964c683964923bffd07deca}{}\label{classmemgraph_1_1_edge_a701d43f4b964c683964923bffd07deca}
+vraci priznak, zda je atribut odstraneny \begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!remove@{remove}}
+\index{remove@{remove}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{remove()}{remove()}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Edge\+::remove (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_edge_ae8624e38151bfa3f444aec503e16282e}{}\label{classmemgraph_1_1_edge_ae8624e38151bfa3f444aec503e16282e}
+oznaci atribut za odstraneny \index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!set\+Attr@{set\+Attr}}
+\index{set\+Attr@{set\+Attr}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Attr(std\+::string name, T value)}{setAttr(std::string name, T value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Edge}$\ast$ memgraph\+::\+Edge\+::set\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{T}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_edge_a4326b5091c2aeaea51182844e6e35281}{}\label{classmemgraph_1_1_edge_a4326b5091c2aeaea51182844e6e35281}
+nastavi atribut hrany 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name identifikator atributu \\
+\hline
+{\em typename} & T hodnota atributu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Edge$\ast$ ukazatel na hranu 
+\end{DoxyReturn}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!set\+Attr@{set\+Attr}}
+\index{set\+Attr@{set\+Attr}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Attr(\+Attribute $\ast$attr)}{setAttr(Attribute *attr)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Edge}$\ast$ memgraph\+::\+Edge\+::set\+Attr (
+\begin{DoxyParamCaption}
+\item[{{\bf Attribute} $\ast$}]{attr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_edge_a284135fc603ede05d24639352508687e}{}\label{classmemgraph_1_1_edge_a284135fc603ede05d24639352508687e}
+nastavi atribut hrany 
+\begin{DoxyParams}{Parameters}
+{\em Attribute$\ast$} & attr ukazatel na vkladany atribut \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Edge$\ast$ ukazatel na hranu 
+\end{DoxyReturn}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!set\+Attrs@{set\+Attrs}}
+\index{set\+Attrs@{set\+Attrs}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Attrs(\+Attributes $\ast$new\+\_\+attrs)}{setAttrs(Attributes *new\_attrs)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Edge\+::set\+Attrs (
+\begin{DoxyParamCaption}
+\item[{{\bf Attributes} $\ast$}]{new\+\_\+attrs}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_edge_a32cbbdaa503fcd17a070a4efc5e489ce}{}\label{classmemgraph_1_1_edge_a32cbbdaa503fcd17a070a4efc5e489ce}
+nastavi atributy hrany 
+\begin{DoxyParams}{Parameters}
+{\em Attributes$\ast$} & ukazatel na mnozinu atributu k vlozeni \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!set\+Available\+Attrs@{set\+Available\+Attrs}}
+\index{set\+Available\+Attrs@{set\+Available\+Attrs}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Available\+Attrs(string\+\_\+vector attrs)}{setAvailableAttrs(string\_vector attrs)}}]{\setlength{\rightskip}{0pt plus 5cm}static void memgraph\+::\+Edge\+::set\+Available\+Attrs (
+\begin{DoxyParamCaption}
+\item[{string\+\_\+vector}]{attrs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classmemgraph_1_1_edge_a72a62ddae831bfd25bba1cbf95bb21ec}{}\label{classmemgraph_1_1_edge_a72a62ddae831bfd25bba1cbf95bb21ec}
+nastavi mnozinu povolenych atributu 
+\begin{DoxyParams}{Parameters}
+{\em string\+\_\+vector} & attrs mnozina povolenych atributu \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!set\+From@{set\+From}}
+\index{set\+From@{set\+From}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{set\+From(\+Node $\ast$node)}{setFrom(Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Edge\+::set\+From (
+\begin{DoxyParamCaption}
+\item[{{\bf Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_edge_ad5b1d80a8fc2048caff5825302a3595d}{}\label{classmemgraph_1_1_edge_ad5b1d80a8fc2048caff5825302a3595d}
+
+\begin{DoxyParams}{Parameters}
+{\em Node$\ast$} & \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!set\+Html\+Attr@{set\+Html\+Attr}}
+\index{set\+Html\+Attr@{set\+Html\+Attr}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Html\+Attr(std\+::string name, T value)}{setHtmlAttr(std::string name, T value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Edge}$\ast$ memgraph\+::\+Edge\+::set\+Html\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{T}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_edge_a8de89badd13aa6a5430319e4dc4c1ca9}{}\label{classmemgraph_1_1_edge_a8de89badd13aa6a5430319e4dc4c1ca9}
+nastavi atribut hrany a atribut oznaci za H\+T\+ML 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name identifikator atributu \\
+\hline
+{\em typename} & T hodnota atributu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Edge$\ast$ ukazatel na hranu 
+\end{DoxyReturn}
+\index{memgraph\+::\+Edge@{memgraph\+::\+Edge}!set\+To@{set\+To}}
+\index{set\+To@{set\+To}!memgraph\+::\+Edge@{memgraph\+::\+Edge}}
+\subsubsection[{\texorpdfstring{set\+To(\+Node $\ast$node)}{setTo(Node *node)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Edge\+::set\+To (
+\begin{DoxyParamCaption}
+\item[{{\bf Node} $\ast$}]{node}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_edge_a65bc640add809d698fc52cd15210a915}{}\label{classmemgraph_1_1_edge_a65bc640add809d698fc52cd15210a915}
+
+\begin{DoxyParams}{Parameters}
+{\em Node$\ast$} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+edge.\+h\item 
+edge.\+cpp\end{DoxyCompactItemize}

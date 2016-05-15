@@ -1,0 +1,186 @@
+\hypertarget{classmemgraph_1_1_node}{}\section{memgraph\+:\+:Node Class Reference}
+\label{classmemgraph_1_1_node}\index{memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Node} (std\+::string name)\hypertarget{classmemgraph_1_1_node_a01141770a5ada97efa00e1cca55eeec1}{}\label{classmemgraph_1_1_node_a01141770a5ada97efa00e1cca55eeec1}
+
+\item 
+\hyperlink{classmemgraph_1_1_attribute}{Attribute} $\ast$ \hyperlink{classmemgraph_1_1_node_afe43b085debdabff8e011bcb428f32dd}{get\+Attr} (std\+::string name)
+\item 
+const char $\ast$ \hyperlink{classmemgraph_1_1_node_ad58f5abebbbdcd3b4a6887db4a6795ac}{get\+Name} ()
+\item 
+void \hyperlink{classmemgraph_1_1_node_a56a16923b309275bd4b09276a60df757}{set\+Name} (std\+::string value)
+\item 
+\hyperlink{classmemgraph_1_1_node}{Node} $\ast$ \hyperlink{classmemgraph_1_1_node_a466d57ad274a8b8e27cb3c5b94f59b6e}{set\+Attrs} (\hyperlink{classmemgraph_1_1_attributes}{Attributes} $\ast$new\+\_\+attrs)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classmemgraph_1_1_node}{Node} $\ast$ \hyperlink{classmemgraph_1_1_node_ac031d8b7539b062fa9f1a6ac3147c2ca}{set\+Attr} (std\+::string name, T value)
+\item 
+\hyperlink{classmemgraph_1_1_node}{Node} $\ast$ \hyperlink{classmemgraph_1_1_node_ac5a98da29437d07a2b1c2de642e202b9}{set\+Attr} (\hyperlink{classmemgraph_1_1_attribute}{Attribute} $\ast$attr)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{classmemgraph_1_1_node}{Node} $\ast$ \hyperlink{classmemgraph_1_1_node_a07417cf0d0ac442481f48164e1145152}{set\+Html\+Attr} (std\+::string name, T value)
+\item 
+void \hyperlink{classmemgraph_1_1_node_ac4f83ea888804eca40dc1b0145948312}{remove} ()
+\item 
+bool \hyperlink{classmemgraph_1_1_node_a300c2c5bea84064efe6b43bf0e37cf35}{is\+Removed} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classmemgraph_1_1_node_a2676d4d960560350f71794a9285f38ed}{check\+Attr} (std\+::string name)
+\item 
+static void \hyperlink{classmemgraph_1_1_node_a9d9a698625dc8ac2d3d5d8603cb7680d}{set\+Available\+Attrs} (string\+\_\+vector attrs)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmemgraph_1_1_attributes}{Attributes} {\bfseries attrs}\hypertarget{classmemgraph_1_1_node_ae14982ad961f2b8f3e6a42fe0ff6b14b}{}\label{classmemgraph_1_1_node_ae14982ad961f2b8f3e6a42fe0ff6b14b}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!check\+Attr@{check\+Attr}}
+\index{check\+Attr@{check\+Attr}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{check\+Attr(std\+::string name)}{checkAttr(std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Node\+::check\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classmemgraph_1_1_node_a2676d4d960560350f71794a9285f38ed}{}\label{classmemgraph_1_1_node_a2676d4d960560350f71794a9285f38ed}
+kontroluje existenci identifikatoru atributu v mnozine povolenych atributu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name identifikator \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!get\+Attr@{get\+Attr}}
+\index{get\+Attr@{get\+Attr}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{get\+Attr(std\+::string name)}{getAttr(std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Attribute} $\ast$ memgraph\+::\+Node\+::get\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_node_afe43b085debdabff8e011bcb428f32dd}{}\label{classmemgraph_1_1_node_afe43b085debdabff8e011bcb428f32dd}
+vraci atribut vrcholu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Attribute$\ast$ 
+\end{DoxyReturn}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{get\+Name()}{getName()}}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ memgraph\+::\+Node\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_node_ad58f5abebbbdcd3b4a6887db4a6795ac}{}\label{classmemgraph_1_1_node_ad58f5abebbbdcd3b4a6887db4a6795ac}
+vraci nazev vrcholu \index{memgraph\+::\+Node@{memgraph\+::\+Node}!is\+Removed@{is\+Removed}}
+\index{is\+Removed@{is\+Removed}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{is\+Removed()}{isRemoved()}}]{\setlength{\rightskip}{0pt plus 5cm}bool memgraph\+::\+Node\+::is\+Removed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_node_a300c2c5bea84064efe6b43bf0e37cf35}{}\label{classmemgraph_1_1_node_a300c2c5bea84064efe6b43bf0e37cf35}
+vraci priznak odstraneni \index{memgraph\+::\+Node@{memgraph\+::\+Node}!remove@{remove}}
+\index{remove@{remove}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{remove()}{remove()}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Node\+::remove (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_node_ac4f83ea888804eca40dc1b0145948312}{}\label{classmemgraph_1_1_node_ac4f83ea888804eca40dc1b0145948312}
+nastavi priznak odstraneni vrcholu ze struktury \index{memgraph\+::\+Node@{memgraph\+::\+Node}!set\+Attr@{set\+Attr}}
+\index{set\+Attr@{set\+Attr}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+Attr(std\+::string name, T value)}{setAttr(std::string name, T value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Node}$\ast$ memgraph\+::\+Node\+::set\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{T}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_node_ac031d8b7539b062fa9f1a6ac3147c2ca}{}\label{classmemgraph_1_1_node_ac031d8b7539b062fa9f1a6ac3147c2ca}
+nastavi atribut vrcholu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name identifikator atributu \\
+\hline
+{\em typename} & T hodnota \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Node$\ast$ 
+\end{DoxyReturn}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!set\+Attr@{set\+Attr}}
+\index{set\+Attr@{set\+Attr}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+Attr(\+Attribute $\ast$attr)}{setAttr(Attribute *attr)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node}$\ast$ memgraph\+::\+Node\+::set\+Attr (
+\begin{DoxyParamCaption}
+\item[{{\bf Attribute} $\ast$}]{attr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_node_ac5a98da29437d07a2b1c2de642e202b9}{}\label{classmemgraph_1_1_node_ac5a98da29437d07a2b1c2de642e202b9}
+nastavi atribut vrcholu 
+\begin{DoxyParams}{Parameters}
+{\em Attribute$\ast$} & atribut k prirazeni \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Node$\ast$ 
+\end{DoxyReturn}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!set\+Attrs@{set\+Attrs}}
+\index{set\+Attrs@{set\+Attrs}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+Attrs(\+Attributes $\ast$new\+\_\+attrs)}{setAttrs(Attributes *new\_attrs)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node} $\ast$ memgraph\+::\+Node\+::set\+Attrs (
+\begin{DoxyParamCaption}
+\item[{{\bf Attributes} $\ast$}]{new\+\_\+attrs}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_node_a466d57ad274a8b8e27cb3c5b94f59b6e}{}\label{classmemgraph_1_1_node_a466d57ad274a8b8e27cb3c5b94f59b6e}
+nastavi atributy vrcholu 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classmemgraph_1_1_attributes}{Attributes}} & $\ast$new\+\_\+attrs mnozina atributy k nastaveni \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Node$\ast$ 
+\end{DoxyReturn}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!set\+Available\+Attrs@{set\+Available\+Attrs}}
+\index{set\+Available\+Attrs@{set\+Available\+Attrs}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+Available\+Attrs(string\+\_\+vector attrs)}{setAvailableAttrs(string\_vector attrs)}}]{\setlength{\rightskip}{0pt plus 5cm}static void memgraph\+::\+Node\+::set\+Available\+Attrs (
+\begin{DoxyParamCaption}
+\item[{string\+\_\+vector}]{attrs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classmemgraph_1_1_node_a9d9a698625dc8ac2d3d5d8603cb7680d}{}\label{classmemgraph_1_1_node_a9d9a698625dc8ac2d3d5d8603cb7680d}
+nastavi mnozinu povolenych atributu 
+\begin{DoxyParams}{Parameters}
+{\em string\+\_\+vector} & attrs mnozina povolenych atributu \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!set\+Html\+Attr@{set\+Html\+Attr}}
+\index{set\+Html\+Attr@{set\+Html\+Attr}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+Html\+Attr(std\+::string name, T value)}{setHtmlAttr(std::string name, T value)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Node}$\ast$ memgraph\+::\+Node\+::set\+Html\+Attr (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{T}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classmemgraph_1_1_node_a07417cf0d0ac442481f48164e1145152}{}\label{classmemgraph_1_1_node_a07417cf0d0ac442481f48164e1145152}
+nastavi html atribut 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name identifikator \\
+\hline
+{\em typename} & T hodnota \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Node$\ast$ 
+\end{DoxyReturn}
+\index{memgraph\+::\+Node@{memgraph\+::\+Node}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!memgraph\+::\+Node@{memgraph\+::\+Node}}
+\subsubsection[{\texorpdfstring{set\+Name(std\+::string value)}{setName(std::string value)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Node\+::set\+Name (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_node_a56a16923b309275bd4b09276a60df757}{}\label{classmemgraph_1_1_node_a56a16923b309275bd4b09276a60df757}
+nastavuje nazev vrcholu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & value nazev \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+node.\+h\item 
+node.\+cpp\end{DoxyCompactItemize}

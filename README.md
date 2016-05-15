@@ -91,12 +91,13 @@ Pro generování vizuální reprezentace nastavíme pomocí metody setOutputPath
 	plotter->plot();
 	
 Výsledek grafického výstupu reprezentuje níže uvedený obrázek
+
 ![alt text](./example.png "example.png")
 
-Je nutné dodat, že tuto knihovnu není nutné použít pouze v návaznosti na verifikační nástroje Predator a Forester. Díky univerzálnosti datového modelu je možné definovat jakékoli grafové struktury.
+Je vhodné dodat, že tuto knihovnu není nutné použít pouze v návaznosti na verifikační nástroje Predator a Forester. Díky univerzálnosti datového modelu je možné definovat jakékoli grafové struktury.
 
 ## Závislosti knihovny
-Knihovna je určena především pro distribuce Linuxu, respektive Ubuntu. Nicméně je otestována a plně funkční také pod OSX El Capitan. Pod os Windows 7 byla knihovna pro účely testování pouze přeložena a sestavena. Pro správnou funkčnost knihovny je nutné mít v systému Linux dostupné tyto nástroje a knihovny (v této konfiguraci otestováno):
+Knihovna je určena především pro distribuce systému Linux, respektive Ubuntu. Nicméně je otestována a plně funkční také pod OSX El Capitan. Pod os Windows 7 byla knihovna pro účely testování pouze přeložena a sestavena. Pro správnou funkčnost knihovny je nutné mít v systému Linux dostupné tyto nástroje a knihovny (v této konfiguraci otestováno):
 
 * GCC 4.9.3
 * CMake 2.8

@@ -1,0 +1,173 @@
+Mem\+Graph je knihovna pro tvorbu grafické reprezentace stavů paměti programu. Je určena především pro verifikační nástroj \href{http://www.fit.vutbr.cz/research/groups/verifit/tools/predator/}{\tt Predator}, případně \href{http://www.fit.vutbr.cz/research/groups/verifit/tools/forester/}{\tt Forester}. Tyto dva nástroje jsou vyvíjeny výzkumnou skupinou \href{http://www.fit.vutbr.cz/research/groups/verifit/.cs}{\tt veri\+F\+IT} na fakultě informačních technologií V\+UT v Brně.
+
+Knihovna implementuje tvorbu grafových struktur a jejich následnou vizualizaci objektově orientovaným přístupem v jazyce C++(11) a je k dispozici k dalším úpravám a libovolnému použití pod licencí G\+NU G\+P\+Lv3.
+
+\subsection*{Vlastnosti knihovny}
+
+Knihovna je rozdělena na dvě části -\/ datový model a funkční část.
+
+Datový model poskytuje sadu metod pro tvorbu grafových struktur. Je inspirovaný prvky grafu, které popisuje teorie grafu -\/ hrany, vrcholy a podgrafy.
+
+Funkční část zpracovává datový model a transformuje jej do požadované podoby. V případě knohovny je možné provést transormace do struktury jazyka D\+OT, případně vytvořit vizuální reprezentaci struktury. Pro tvorbu vizuální reprezentace je použita knihovna \href{http://www.graphviz.org}{\tt Graphviz}. V datovém modelu je možné jednotlivým prvkům grafu přidávat atributy, které představují vizuální informaci pro vykreslení nástrojem Graphviz.
+
+\subsubsection*{Dostupné funkce knihovny}
+
+
+\begin{DoxyItemize}
+\item Výpis datového modelu ve struktuře D\+OT
+\item Grafický výstup datového modelu
+\item Načtení struktury D\+OT a převod do datového modelu knihovny
+\item Transformace datového modelu do jiné podoby (level-\/of-\/details některých prvků nástroje Predator -\/ pouze na ukázku)
+\end{DoxyItemize}
+
+\subsubsection*{V plánu}
+
+
+\begin{DoxyItemize}
+\item Napojení na verifikační nástroj Forester
+\item Porovnání dvou grafových struktur (izomorfismus)
+\item Vizuální styly verifikačního nástroje Predator
+\end{DoxyItemize}
+
+\subsection*{Příklad použití}
+
+Příklad tvorby datového modelu \begin{DoxyVerb}// vytvori novy graf
+Graph *graph = new Graph();
+
+// nastavi grafu atribut
+graph->setAttr("nodesep",1);
+
+Attributes node_attrs;
+Attributes edge_attrs;
+
+// nastaveni defaultni atributu vrcholu grafu
+node_attrs.setAttr("color","red");
+node_attrs.setAttr("fontname","Courier");
+node_attrs.setAttr("shape","box");
+
+// nastaveni defaultni atributu hran grafu
+edge_attrs.setAttr("color","blue");
+edge_attrs.setAttr("style","dashed");
+
+// predani atributu instanci grafu
+graph->setNodeAttrs(&node_attrs);
+graph->setEdgeAttrs(&edge_attrs);
+
+// pridani hran
+graph->addEdge("vutbr", "fit");
+graph->addEdge("vutbr", "fce");
+graph->addEdge("vutbr", "feec");
+graph->addEdge("fit", "merlin");
+graph->addEdge("fit", "kazi");
+graph->addEdge("feec", "kos");
+\end{DoxyVerb}
+
+
+Generování struktury D\+OT z definovaného datového modelu \begin{DoxyVerb}// DOT generujeme volanim metody getDot() na instanci tridy GraphvizPlotter
+
+// vytvoreni instance tridy GraphvizPlotter, kteremu predame definovany datovy model    
+GraphvizPlotter *plotter = new GraphvizPlotter(graph);
+
+// volani metody getDot()
+plotter->getDot();
+\end{DoxyVerb}
+
+
+Dostaneme následující D\+OT strukturu \begin{DoxyVerb}digraph G {
+    nodesep=1;
+
+    node [color=red,fontname=Courier,shape=box];
+
+    edge [color=blue,style=dashed];
+
+    vutbr -> fit;
+    vutbr -> fce;
+    vutbr -> feec;
+    fit -> merlin;
+    fit -> kazi;
+    feec -> kos;
+}
+\end{DoxyVerb}
+
+
+Pro generování vizuální reprezentace nastavíme pomocí metody set\+Output\+Path(std\+::string path) cestu uložení souboru, metodou set\+Output\+Name(std\+::string name) jméno souboru a set\+Output\+Format(\+Graphviz\+Plotter\+::output format) výsledný formát souborů, ve kterém bude graf uložen. K dispozici jsou standardní formáty jako png, pdf, svg apod. Graf vykreslíme voláním metody plot(). Všechny tyto metody jsou veřejnými metodamy třídy Graphviz\+Plotter \begin{DoxyVerb}// ./example.png
+plotter->setOutputPath("./");
+plotter->setOutputFormat(GraphvizPlotter::PNG);
+plotter->setOutputName("example");
+plotter->plot();
+\end{DoxyVerb}
+
+
+Výsledek grafického výstupu reprezentuje níže uvedený obrázek
+
+
+
+Je vhodné dodat, že tuto knihovnu není nutné použít pouze v návaznosti na verifikační nástroje Predator a Forester. Díky univerzálnosti datového modelu je možné definovat jakékoli grafové struktury.
+
+\subsection*{Závislosti knihovny}
+
+Knihovna je určena především pro distribuce systému Linux, respektive Ubuntu. Nicméně je otestována a plně funkční také pod O\+SX El Capitan. Pod os Windows 7 byla knihovna pro účely testování pouze přeložena a sestavena. Pro správnou funkčnost knihovny je nutné mít v systému Linux dostupné tyto nástroje a knihovny (v této konfiguraci otestováno)\+:
+
+
+\begin{DoxyItemize}
+\item G\+CC 4.\+9.\+3
+\item C\+Make 2.\+8
+\item libgraphviz-\/dev
+\end{DoxyItemize}
+
+\subsection*{Nasazení na verifikační nástroj Predator}
+
+Vnořte se do složky, do které chcete stáhnout verifikační nástroj Predator a knihovnu Mem\+Graph. Následně stáhněte nástroj Predator \begin{DoxyVerb}git clone https://github.com/kdudka/predator.git
+\end{DoxyVerb}
+
+
+a knihovnu Mem\+Graph \begin{DoxyVerb}git clone https://github.com/Moouseer/MemGraph.git
+\end{DoxyVerb}
+
+
+Nástroj Predator pro svoji korektní funkci potřebuje závisloti překladače G\+CC. Níže jsou uvedeny příkazy pro doinstalování závislostí pro G\+CC 4.\+9 \begin{DoxyVerb}sudo apt-get install g++-4.9-multilib
+sudo apt-get install gcc-4.9-plugin-dev
+sudo apt-get install libboost-all-dev
+sudo apt-get install cmake
+\end{DoxyVerb}
+
+
+Nyní nainstalujeme závistlosti knihovny Mem\+Graph \begin{DoxyVerb}sudo apt-get install libgraphviz-dev
+\end{DoxyVerb}
+
+
+Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny (C\+Make\+Files, symplot.\+cc, ...). \begin{DoxyVerb}cd MemGraph/
+
+find . -name "*.cpp" -type f -not -path "./predator/sl/Memgraph/*" -exec cp {} predator/sl/Memgraph/ \;
+
+find . -name "*.h" -type f -not -path "./predator/sl/Memgraph/*" -exec cp {} predator/sl/Memgraph/ \;
+
+cp -R ./predator/sl ../predator/
+\end{DoxyVerb}
+
+
+Nástroj Predator přeložíme a sestavíme společně s knihovnou Mem\+Graph \begin{DoxyVerb}cd ../predator/
+./switch-host-gcc.sh /usr/bin/gcc-4.9
+\end{DoxyVerb}
+
+
+Po překladu a sestavení frameworku Code Listener je spuštěn překlad a sestavení knihovny Mem\+Graph a následně překlad a sestavení verifikačního nástroje Predator. Po překladu a sestavení nástroje Predator je spuštěna sada 849 testů. Je nutné říci, že při sestavení s knihovnou Mem\+Graph neprojdou celkem tři testy. Tyto testy nejsou dokončeny a tak se testovací skript zasekne u 846 testu a čeká na výsledky. Toto čekání je nutné přerušit pomocí zkratky ctrl + c.
+
+Testy ve složce sl\+\_\+build tvoří textové a grafické výstupy verifikace. Výstupy jsou tvořeny následnovně\+:
+
+Predator
+
+
+\begin{DoxyItemize}
+\item Generuje soubory s příponou dot, které v názvu souboru neobsahují řetězec bc\+Plot
+\end{DoxyItemize}
+
+Mem\+Graph
+
+
+\begin{DoxyItemize}
+\item Generuje soubory s příponou dot, které v názvu souboru obsahují řetězec bc\+Plot (výsledek metody get\+Dot())
+\item Generuje soubory s příponout png, které v názvu souboru obsahují řetězec bc\+Plot (výsledek metody plot())
+\item Generuje soubory s příponout png, které v názvu souboru obsahují řetězec parsed\+\_\+bc\+Plot (načtení původního dot souboru z nástroje Predator, vložení obsahu do metody parse\+Dot() a následné vytvoření grafu pomoci metody plot())
+\item Generuje soubory s příponout png, které v názvu souboru obsahují řetězec zabstract\+\_\+bc\+Plot (provedení vzorových transformací nad objekty S\+LS a D\+LS a vrcholu Value S\+MG grafu) 
+\end{DoxyItemize}

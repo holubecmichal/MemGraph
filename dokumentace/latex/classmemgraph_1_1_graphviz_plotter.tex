@@ -1,0 +1,115 @@
+\hypertarget{classmemgraph_1_1_graphviz_plotter}{}\section{memgraph\+:\+:Graphviz\+Plotter Class Reference}
+\label{classmemgraph_1_1_graphviz_plotter}\index{memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}}
+Inheritance diagram for memgraph\+:\+:Graphviz\+Plotter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmemgraph_1_1_graphviz_plotter}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries output} \{ \\*
+{\bfseries P\+DF}, 
+{\bfseries P\+L\+A\+IN}, 
+{\bfseries P\+NG}, 
+{\bfseries PS}, 
+\\*
+{\bfseries P\+S2}, 
+{\bfseries S\+VG}
+ \}\hypertarget{classmemgraph_1_1_graphviz_plotter_a0f8c41a31ef9efc836725e15a516db6e}{}\label{classmemgraph_1_1_graphviz_plotter_a0f8c41a31ef9efc836725e15a516db6e}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Graphviz\+Plotter} (\hyperlink{classmemgraph_1_1_graph}{Graph} $\ast$graph)\hypertarget{classmemgraph_1_1_graphviz_plotter_aa106e9d662602d4c9d45c74cf531f57c}{}\label{classmemgraph_1_1_graphviz_plotter_aa106e9d662602d4c9d45c74cf531f57c}
+
+\item 
+void \hyperlink{classmemgraph_1_1_graphviz_plotter_a51cc4c238a1808013fbe6ecdb2334afe}{plot} ()
+\item 
+void \hyperlink{classmemgraph_1_1_graphviz_plotter_a874449a89448c46f9333533c5f96e68e}{set\+Output\+Format} (Graphviz\+Plotter\+::output format)
+\item 
+void \hyperlink{classmemgraph_1_1_graphviz_plotter_a8d6fe8dc672a2982f7b2ad731ecbac64}{set\+Output\+Path} (std\+::string path)
+\item 
+void \hyperlink{classmemgraph_1_1_graphviz_plotter_ada06684b26c1c797307f10bc97924a11}{set\+Output\+Name} (std\+::string name)
+\item 
+\hyperlink{classmemgraph_1_1_graph}{Graph} $\ast$ \hyperlink{classmemgraph_1_1_graphviz_plotter_a15916025a114984477c1677dd360772a}{parse\+Dot} (std\+::string content)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\index{memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}!parse\+Dot@{parse\+Dot}}
+\index{parse\+Dot@{parse\+Dot}!memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}}
+\subsubsection[{\texorpdfstring{parse\+Dot(std\+::string content)}{parseDot(std::string content)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Graph} $\ast$ memgraph\+::\+Graphviz\+Plotter\+::parse\+Dot (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{content}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_graphviz_plotter_a15916025a114984477c1677dd360772a}{}\label{classmemgraph_1_1_graphviz_plotter_a15916025a114984477c1677dd360772a}
+metoda pro prevod struktury D\+OT do datoveho modelu knihovny 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & struktura grafu v D\+OT \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}!plot@{plot}}
+\index{plot@{plot}!memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}}
+\subsubsection[{\texorpdfstring{plot()}{plot()}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Graphviz\+Plotter\+::plot (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classmemgraph_1_1_graphviz_plotter_a51cc4c238a1808013fbe6ecdb2334afe}{}\label{classmemgraph_1_1_graphviz_plotter_a51cc4c238a1808013fbe6ecdb2334afe}
+metoda se postara o graficky vystup datoveho modelu 
+
+Implements \hyperlink{classmemgraph_1_1_plotter_ae06fdcd0fba0d8a05fe843f214d96f08}{memgraph\+::\+Plotter}.
+
+\index{memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}!set\+Output\+Format@{set\+Output\+Format}}
+\index{set\+Output\+Format@{set\+Output\+Format}!memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}}
+\subsubsection[{\texorpdfstring{set\+Output\+Format(\+Graphviz\+Plotter\+::output format)}{setOutputFormat(GraphvizPlotter::output format)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Graphviz\+Plotter\+::set\+Output\+Format (
+\begin{DoxyParamCaption}
+\item[{Graphviz\+Plotter\+::output}]{format}
+\end{DoxyParamCaption}
+)}\hypertarget{classmemgraph_1_1_graphviz_plotter_a874449a89448c46f9333533c5f96e68e}{}\label{classmemgraph_1_1_graphviz_plotter_a874449a89448c46f9333533c5f96e68e}
+nastaveni vystupniho formatu grafu 
+\begin{DoxyParams}{Parameters}
+{\em Graphviz\+Plotter\+::output} & format \\
+\hline
+\end{DoxyParams}
+\index{memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}!set\+Output\+Name@{set\+Output\+Name}}
+\index{set\+Output\+Name@{set\+Output\+Name}!memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}}
+\subsubsection[{\texorpdfstring{set\+Output\+Name(std\+::string name)}{setOutputName(std::string name)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Graphviz\+Plotter\+::set\+Output\+Name (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classmemgraph_1_1_graphviz_plotter_ada06684b26c1c797307f10bc97924a11}{}\label{classmemgraph_1_1_graphviz_plotter_ada06684b26c1c797307f10bc97924a11}
+nastaveni nazvu souboru grafu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & name \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classmemgraph_1_1_plotter_af8baffa9e328876376e0f5c466bc4103}{memgraph\+::\+Plotter}.
+
+\index{memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}!set\+Output\+Path@{set\+Output\+Path}}
+\index{set\+Output\+Path@{set\+Output\+Path}!memgraph\+::\+Graphviz\+Plotter@{memgraph\+::\+Graphviz\+Plotter}}
+\subsubsection[{\texorpdfstring{set\+Output\+Path(std\+::string path)}{setOutputPath(std::string path)}}]{\setlength{\rightskip}{0pt plus 5cm}void memgraph\+::\+Graphviz\+Plotter\+::set\+Output\+Path (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classmemgraph_1_1_graphviz_plotter_a8d6fe8dc672a2982f7b2ad731ecbac64}{}\label{classmemgraph_1_1_graphviz_plotter_a8d6fe8dc672a2982f7b2ad731ecbac64}
+nastaveni cesty vytupu grafu 
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & path \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classmemgraph_1_1_plotter_abf04b57cbd17f0a9fe03ac3c7dedc7da}{memgraph\+::\+Plotter}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+graphviz\+\_\+plotter.\+h\item 
+graphviz\+\_\+plotter.\+cpp\end{DoxyCompactItemize}

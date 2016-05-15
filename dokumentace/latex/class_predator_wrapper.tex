@@ -1,0 +1,152 @@
+\hypertarget{class_predator_wrapper}{}\section{Predator\+Wrapper Class Reference}
+\label{class_predator_wrapper}\index{Predator\+Wrapper@{Predator\+Wrapper}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ {\bfseries O\+FF}, 
+{\bfseries ON}
+ \}\hypertarget{class_predator_wrapper_a61d00364cce75fc7a382d854f4257d48}{}\label{class_predator_wrapper_a61d00364cce75fc7a382d854f4257d48}
+
+\item 
+enum \{ {\bfseries L\+V\+L\+\_\+1}, 
+{\bfseries L\+V\+L\+\_\+2}
+ \}\hypertarget{class_predator_wrapper_ae5a53861863c32fa8ee1e8ee4de26890}{}\label{class_predator_wrapper_ae5a53861863c32fa8ee1e8ee4de26890}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+edges\+\_\+vect \hyperlink{class_predator_wrapper_a4d32b122f86c58e302f45190eab5a2e7}{get\+Has\+Values\+Edges} ()
+\item 
+edges\+\_\+vect \hyperlink{class_predator_wrapper_af70488f448d34932749c825114de84bb}{get\+Points\+To\+Edges} ()
+\item 
+nodes\+\_\+vect \hyperlink{class_predator_wrapper_adbdd4a3157c1edadbe011754ab96591b}{get\+Values\+Nodes} ()
+\item 
+subgraphs\+\_\+vect \hyperlink{class_predator_wrapper_a2069f3a0e9181fafefd77ae6c04936d1}{get\+S\+L\+S\+Subgraphs} ()
+\item 
+subgraphs\+\_\+vect \hyperlink{class_predator_wrapper_a540422efe75d09ca52592a75f5695704}{get\+D\+L\+S\+Subgraphs} ()
+\item 
+void \hyperlink{class_predator_wrapper_aabc16bb75100e3550b57c4973e6a39ba}{abstract\+Values} (int lvl)
+\item 
+void \hyperlink{class_predator_wrapper_a08b997b083b4d396469485c975bc8a44}{abstract\+S\+LS} (int lvl)
+\item 
+void \hyperlink{class_predator_wrapper_a0c28fb703ccf3cb8241920a677eb3496}{abstract\+D\+LS} (int lvl)
+\item 
+{\bfseries Predator\+Wrapper} (\hyperlink{classmemgraph_1_1_plotter}{Plotter} $\ast$plotter)\hypertarget{class_predator_wrapper_a2d4a351b6629c6451c61e01f85517111}{}\label{class_predator_wrapper_a2d4a351b6629c6451c61e01f85517111}
+
+\item 
+void \hyperlink{class_predator_wrapper_af9d8739a35a2221534bc20b1f2949aba}{plot\+Offset} (bool status=ON)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmemgraph_1_1_plotter}{Plotter} $\ast$ {\bfseries plotter}\hypertarget{class_predator_wrapper_ac0966d0a511ca03bf99c89a5c1c61db7}{}\label{class_predator_wrapper_ac0966d0a511ca03bf99c89a5c1c61db7}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!abstract\+D\+LS@{abstract\+D\+LS}}
+\index{abstract\+D\+LS@{abstract\+D\+LS}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{abstract\+D\+L\+S(int lvl)}{abstractDLS(int lvl)}}]{\setlength{\rightskip}{0pt plus 5cm}void Predator\+Wrapper\+::abstract\+D\+LS (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_a0c28fb703ccf3cb8241920a677eb3496}{}\label{class_predator_wrapper_a0c28fb703ccf3cb8241920a677eb3496}
+dle predane urovne nastavi detaily k vykresleni vsem podgrafum typu D\+LS 
+\begin{DoxyParams}{Parameters}
+{\em int} & lvl level-\/of-\/details \\
+\hline
+\end{DoxyParams}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!abstract\+S\+LS@{abstract\+S\+LS}}
+\index{abstract\+S\+LS@{abstract\+S\+LS}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{abstract\+S\+L\+S(int lvl)}{abstractSLS(int lvl)}}]{\setlength{\rightskip}{0pt plus 5cm}void Predator\+Wrapper\+::abstract\+S\+LS (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_a08b997b083b4d396469485c975bc8a44}{}\label{class_predator_wrapper_a08b997b083b4d396469485c975bc8a44}
+dle predane urovne nastavi detaily k vykresleni vsem podgrafum typu S\+LS 
+\begin{DoxyParams}{Parameters}
+{\em int} & lvl level-\/of-\/details \\
+\hline
+\end{DoxyParams}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!abstract\+Values@{abstract\+Values}}
+\index{abstract\+Values@{abstract\+Values}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{abstract\+Values(int lvl)}{abstractValues(int lvl)}}]{\setlength{\rightskip}{0pt plus 5cm}void Predator\+Wrapper\+::abstract\+Values (
+\begin{DoxyParamCaption}
+\item[{int}]{lvl}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_aabc16bb75100e3550b57c4973e6a39ba}{}\label{class_predator_wrapper_aabc16bb75100e3550b57c4973e6a39ba}
+dle predane urovne nastavi detaily k vykresleni vsem vrcholum typu Value 
+\begin{DoxyParams}{Parameters}
+{\em int} & lvl level-\/of-\/details \\
+\hline
+\end{DoxyParams}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!get\+D\+L\+S\+Subgraphs@{get\+D\+L\+S\+Subgraphs}}
+\index{get\+D\+L\+S\+Subgraphs@{get\+D\+L\+S\+Subgraphs}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{get\+D\+L\+S\+Subgraphs()}{getDLSSubgraphs()}}]{\setlength{\rightskip}{0pt plus 5cm}subgraphs\+\_\+vect Predator\+Wrapper\+::get\+D\+L\+S\+Subgraphs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_a540422efe75d09ca52592a75f5695704}{}\label{class_predator_wrapper_a540422efe75d09ca52592a75f5695704}
+vraci vsechny D\+LS komponenty grafoveho prostoru \begin{DoxyReturn}{Returns}
+nodes\+\_\+vect vektor D\+LS podgrafu 
+\end{DoxyReturn}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!get\+Has\+Values\+Edges@{get\+Has\+Values\+Edges}}
+\index{get\+Has\+Values\+Edges@{get\+Has\+Values\+Edges}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{get\+Has\+Values\+Edges()}{getHasValuesEdges()}}]{\setlength{\rightskip}{0pt plus 5cm}edges\+\_\+vect Predator\+Wrapper\+::get\+Has\+Values\+Edges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_a4d32b122f86c58e302f45190eab5a2e7}{}\label{class_predator_wrapper_a4d32b122f86c58e302f45190eab5a2e7}
+vraci vsechny has\+Value hrany grafoveho prostoru \begin{DoxyReturn}{Returns}
+edges\+\_\+vect vektor vsech has\+Value hran 
+\end{DoxyReturn}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!get\+Points\+To\+Edges@{get\+Points\+To\+Edges}}
+\index{get\+Points\+To\+Edges@{get\+Points\+To\+Edges}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{get\+Points\+To\+Edges()}{getPointsToEdges()}}]{\setlength{\rightskip}{0pt plus 5cm}edges\+\_\+vect Predator\+Wrapper\+::get\+Points\+To\+Edges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_af70488f448d34932749c825114de84bb}{}\label{class_predator_wrapper_af70488f448d34932749c825114de84bb}
+vraci vsechny points\+To hrany grafoveho prostoru \begin{DoxyReturn}{Returns}
+edges\+\_\+vect vektor vsech has\+Value hran 
+\end{DoxyReturn}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!get\+S\+L\+S\+Subgraphs@{get\+S\+L\+S\+Subgraphs}}
+\index{get\+S\+L\+S\+Subgraphs@{get\+S\+L\+S\+Subgraphs}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{get\+S\+L\+S\+Subgraphs()}{getSLSSubgraphs()}}]{\setlength{\rightskip}{0pt plus 5cm}subgraphs\+\_\+vect Predator\+Wrapper\+::get\+S\+L\+S\+Subgraphs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_a2069f3a0e9181fafefd77ae6c04936d1}{}\label{class_predator_wrapper_a2069f3a0e9181fafefd77ae6c04936d1}
+vraci vsechny S\+LS komponenty grafoveho prostoru \begin{DoxyReturn}{Returns}
+subgraphs\+\_\+vect vektor S\+LS podgrafu 
+\end{DoxyReturn}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!get\+Values\+Nodes@{get\+Values\+Nodes}}
+\index{get\+Values\+Nodes@{get\+Values\+Nodes}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{get\+Values\+Nodes()}{getValuesNodes()}}]{\setlength{\rightskip}{0pt plus 5cm}nodes\+\_\+vect Predator\+Wrapper\+::get\+Values\+Nodes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_adbdd4a3157c1edadbe011754ab96591b}{}\label{class_predator_wrapper_adbdd4a3157c1edadbe011754ab96591b}
+vraci vsechny Value vrcholu grafoveho prostoru \begin{DoxyReturn}{Returns}
+nodes\+\_\+vect vektor Value vrcholu 
+\end{DoxyReturn}
+\index{Predator\+Wrapper@{Predator\+Wrapper}!plot\+Offset@{plot\+Offset}}
+\index{plot\+Offset@{plot\+Offset}!Predator\+Wrapper@{Predator\+Wrapper}}
+\subsubsection[{\texorpdfstring{plot\+Offset(bool status=\+O\+N)}{plotOffset(bool status=ON)}}]{\setlength{\rightskip}{0pt plus 5cm}void Predator\+Wrapper\+::plot\+Offset (
+\begin{DoxyParamCaption}
+\item[{bool}]{status = {\ttfamily ON}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_predator_wrapper_af9d8739a35a2221534bc20b1f2949aba}{}\label{class_predator_wrapper_af9d8739a35a2221534bc20b1f2949aba}
+vykresli$\vert$nevykresli offset label hrany 
+\begin{DoxyParams}{Parameters}
+{\em bool} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+predator\+\_\+wrapper.\+h\item 
+predator\+\_\+wrapper.\+cpp\end{DoxyCompactItemize}
