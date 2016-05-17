@@ -1,3 +1,13 @@
+/////////////////////////////////////////////////////////////////////////
+//
+// Bakalářská práce
+// Vizualizace datových struktur pro verifikační nástroje
+// Michael Holubec
+// GNU GPLv3
+//
+//////////////////////////////////////////////////////////////////////////
+
+
 #include <iostream>
 #include <fstream>
 #include "graphviz_plotter.h"
@@ -11,15 +21,15 @@ int main() {
 	GraphvizPlotter *plotter = new GraphvizPlotter();
 	plotter->setOutputPath("/Users/Michal/FIT/MemGraph/");
 	plotter->setOutputFormat(GraphvizPlotter::PDF);
-	plotter->setOutputName("dot_example");
-//	Examples::predator_2(plotter->graph);
+	plotter->setOutputName("subgraph");
 
-	plotter->parseDot(Examples::predatorTransformExample());
+	Examples::stdSubGraph(plotter->graph);
+
+
 	cout << plotter->getDot() << endl;
 	plotter->plot();
 
 	delete plotter;
-
 
 	return 0;
 }

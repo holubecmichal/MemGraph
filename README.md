@@ -110,7 +110,7 @@ Pro správnou funkčnost knihovny MemGraph
 * libgraphviz-dev
 
 ## Nasazení na verifikační nástroj Predator
-V první řadě doinstalujeme všchny potřebné knihovny a nástroje pro korektní funkčnost verifikačního nástroje Pedator
+V první řadě doinstalujeme všechny potřebné knihovny a nástroje pro korektní funkčnost verifikačního nástroje Pedator
 
 	sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 	sudo apt-get update
@@ -132,7 +132,7 @@ a knihovnu MemGraph .
 
 	git clone https://github.com/Moouseer/MemGraph.git
 		
-Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny MemGraph (CMakeFiles, symplot.cc, zdrojové soubory pro přkeklad knihovny, ...). 
+Nahradíme některé nezbytné soubory z repozitáře nástroje Predator soubory knihovny MemGraph (CMakeFiles, symplot.cc, zdrojové soubory pro překlad knihovny, ...). 
 
 	cd MemGraph/
 	
@@ -147,7 +147,7 @@ Nástroj Predator přeložíme a sestavíme společně s knihovnou MemGraph.
 	cd ../predator/
 	./switch-host-gcc.sh /usr/bin/gcc-4.9
 	
-Po překladu a sestavení frameworku Code Listener je spuštěn překlad a sestavení knihovny MemGraph a následně překlad a sestavení verifikačního nástroje Predator. Po překladu a sestavení nástroje Predator je spuštěna sada 849 testů. Je nutné říci, že při sestavení s knihovnou MemGraph neprojdou celkem tři testy. Tyto testy nejsou korektně ukončeny a tak testovacímu skriptu není poskytnut výsledek těchto testů. To má za následek uváznutí testovacího skriptu po dokončení 846. testu. Z tohoto uváznutí je možné se dostat za pomocí zkratky ctrl + c. Tím je testovací skript přerušen a sestavení nástroje Predator s knihovnou MemGraph je u konce.
+Po překladu a sestavení frameworku Code Listener je spuštěn překlad a sestavení knihovny MemGraph a následně překlad a sestavení verifikačního nástroje Predator. Po překladu a sestavení nástroje Predator je spuštěna sada 849 testů. Je nutné říci, že při sestavení s knihovnou MemGraph neprojdou celkem tři testy. Tyto testy nejsou korektně ukončeny a tak testovacímu skriptu není poskytnut výsledek těchto testů. To má za následek uváznutí testovacího skriptu po dokončení 846. testu. Z tohoto uváznutí je možné se dostat za pomocí klávesové zkratky ctrl + c. Tím je testovací skript přerušen a sestavení nástroje Predator s knihovnou MemGraph je u konce.
 
 Testy vytváří ve složce sl_build textové a grafické výstupy paměťových struktur verifikovaných programů. Výstupy jsou tvořeny následnovně:
 
@@ -162,7 +162,7 @@ MemGraph
 * Generuje soubory s příponout png, které v názvu souboru obsahují řetězec parsed_bcPlot (načtení původního dot souboru z nástroje Predator, vložení obsahu do metody parseDot() a následné vytvoření grafu pomoci metody plot())
 * Generuje soubory s příponout png, které v názvu souboru obsahují řetězec zabstract_bcPlot (provedení vzorových transformací nad objekty SLS a DLS a vrcholu Value SMG grafu)
 
-Výstupy je možné řídit ve zdrojovém kódu nástroje Predator, v souboru symplot.cc, metodě plotHeapCore().
+Výstupy je možné řídit ve zdrojovém kódu nástroje Predator, v souboru symplot.cc, v metodě plotHeapCore().
 	
 	
 	

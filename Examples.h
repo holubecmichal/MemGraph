@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////////////
+//
+// Bakalářská práce
+// Vizualizace datových struktur pro verifikační nástroje
+// Michael Holubec
+// GNU GPLv3
+//
+//////////////////////////////////////////////////////////////////////////
+
 //
 // Created by Michael Holubec on 10.03.16.
 //
@@ -1523,14 +1532,42 @@ digraph G {
 	static void stdSubGraph(Graph *graph) {
 		graph->setType(std_graph);
 
-		graph->addNode("A")->setAttr("label","a");
 		graph->addNode("B")->setAttr("label","b");
 		graph->addNode("C")->setAttr("label","c");
 		graph->addNode("D")->setAttr("label","d");
 
-		graph->addEdge("A","B");
 		graph->addEdge("B","C");
 		graph->addEdge("B","D");
+	}
+
+	static const char *debugTransform() {
+		return "digraph \"01-before-fast-forward-0000\" {\n"
+				"\tlabel=<<FONT POINT-SIZE=\"18\">01-before-fast-forward-0000</FONT>>;\n"
+				"\tclusterrank=local;\n"
+				"\tlabelloc=t;\n"
+				"subgraph \"cluster1\" {\n"
+				"\trank=same;\n"
+				"\tlabel=\"DLS 2+, head [+0], next [+0], prev [+4]\";\n"
+				"\tcolor=orange;\n"
+				"\tfontcolor=orange;\n"
+				"\tbgcolor=white;\n"
+				"\tpenwidth=3.0;\n"
+				"\tstyle=dashed;\n"
+				"\t\"214\" [shape=box, color=orange, fontcolor=orange, label=\"#214 [SC_ON_HEAP, size = 8 B]\"];\n"
+				"\t\"215\" [shape=box, color=red, fontcolor=red, penwidth=3.0, style=dashed, label=\".next #215\"];\n"
+				"\t\"214\" -> \"215\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+				"\t\"216\" [shape=box, color=orange, fontcolor=orange, penwidth=3.0, style=dashed, label=\".prev #216\"];\n"
+				"\t\"214\" -> \"216\" [color=black, fontcolor=black, label=\"[+4]\"];\n"
+				"}\n"
+				"\t\"227\" [shape=box, color=blue, fontcolor=blue, label=\"CL#2013:dll [obj = #227] field#229\"];\n"
+				"\t\"217\" [shape=ellipse, penwidth=2, fontcolor=chartreuse2, label=\"#217 [off = 0, TS_FIRST, obj = #214]\"];\n"
+				"\t\"217\" -> \"214\" [color=black, fontcolor=black, label=\"[+0]\"];\n"
+				"\t\"lonely2\" [shape=plaintext, fontcolor=blue, label=\"NULL\"];\n"
+				"\t\"215\" -> \"lonely2\" [color=blue, fontcolor=blue];\n"
+				"\t\"lonely3\" [shape=plaintext, fontcolor=blue, label=\"NULL\"];\n"
+				"\t\"216\" -> \"lonely3\" [color=blue, fontcolor=blue];\n"
+				"\t\"227\" -> \"217\" [color=blue, fontcolor=blue];\n"
+				"}";
 	}
 };
 
