@@ -4,7 +4,7 @@
 // Bakalářská práce
 // Vizualizace datových struktur pro verifikační nástroje
 // Michael Holubec
-// GNU GPLv3
+// GNU LGPLv3
 //
 //////////////////////////////////////////////////////////////////////////
 
