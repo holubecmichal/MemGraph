@@ -1,7 +1,7 @@
 # MemGraph #
 MemGraph je knihovna pro tvorbu grafické reprezentace stavů paměti programu. Je určena především pro verifikační nástroj [Predator](http://www.fit.vutbr.cz/research/groups/verifit/tools/predator/), případně [Forester](http://www.fit.vutbr.cz/research/groups/verifit/tools/forester/). Tyto dva nástroje jsou vyvíjeny výzkumnou skupinou [veriFIT](http://www.fit.vutbr.cz/research/groups/verifit/.cs) na fakultě informačních technologií VUT v Brně.
 
-Knihovna implementuje tvorbu grafových struktur a jejich následnou vizualizaci objektově orientovaným přístupem v jazyce C++(11) a je k dispozici k dalším úpravám a libovolnému použití pod licencí GNU GPLv3.
+Knihovna implementuje tvorbu grafových struktur a jejich následnou vizualizaci objektově orientovaným přístupem v jazyce C++(11) a je k dispozici k dalším úpravám a libovolnému použití pod licencí GNU LGPLv3.
 
 ## Vlastnosti knihovny ##
 Knihovna je rozdělena na dvě části - datový model a funkční část.
